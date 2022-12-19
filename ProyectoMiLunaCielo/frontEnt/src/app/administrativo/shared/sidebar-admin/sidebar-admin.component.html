@@ -1,0 +1,374 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+    <img
+      src="assets/dist/img/logoOficial.jpg"
+      alt="AdminLTE Logo"
+      class="brand-image img-circle elevation-3"
+      style="opacity: 0.8"
+    />
+    <span class="brand-text font-weight-light">MI LUNA CIELO</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img
+          src="assets/dist/img/user2-160x160.jpg"
+          class="img-circle elevation-2"
+          alt="User Image"
+        />
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">Fernando</a>
+      </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input
+          class="form-control form-control-sidebar"
+          type="search"
+          placeholder="Buscar:"
+          aria-label="Search"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+        <!--  <li class="nav-item menu-open"> -->
+        <li class="nav-item">
+          <a
+            [routerLink]="['/admin/home']"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i class="nav-icon fas fa-home"></i>
+            <p>PANEL DE CONTROL</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              INVENTARIO / ALMACÉN
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <!--  <a
+                [routerLink]="['/admin/registroInventario', 'muebles']"
+                routerLinkActive="active"
+                class="nav-link"
+              > -->
+              <a
+                href="/admin/registroInventario/muebles"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-couch nav-icon"></i>
+                <p>Muebles y enseres</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--               <a
+                [routerLink]="['/admin/registroInventario', 'maquinaria']"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+               -->
+              <a
+                href="/admin/registroInventario/maquinaria"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-industry nav-icon"></i>
+                <p>Maquinaria y equipos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--               <a
+                [routerLink]="[
+                  '/admin/registroInventario',
+                  'equiposComputacion'
+                ]"
+                routerLinkActive="active"
+                class="nav-link"
+              > -->
+              <a
+                href="
+                /admin/registroInventario/equiposComputacion"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-desktop nav-icon"></i>
+                <p>Equipos de computación</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--      <a
+                [routerLink]="[
+                  '/admin/registroInventario',
+                  'equiposComunicacion'
+                ]"
+                routerLinkActive="active"
+                class="nav-link"
+              > -->
+              <a
+                href="/admin/registroInventario/equiposComunicacion
+              "
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-phone nav-icon"></i>
+                <p>Equipos de comunicación</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--  <a
+                [routerLink]="[
+                  '/admin/registroInventario',
+                  'materialEscritorio'
+                ]"
+                routerLinkActive="active"
+                class="nav-link"
+              > -->
+              <a
+                href="/admin/registroInventario/materialEscritorio
+              "
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-pencil-ruler nav-icon"></i>
+                <p>Material de escritorio</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--               <a
+                [routerLink]="['/admin/registroInventario', 'cocina']"
+                routerLinkActive="active"
+                class="nav-link"
+              > -->
+              <a
+                href="/admin/registroInventario/cocina"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-utensils nav-icon"></i>
+                <p>Activos fijos cocina</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <!--          <a
+                [routerLink]="['/admin/registroInventario', 'activosFijos']"
+                routerLinkActive="active"
+                class="nav-link"
+              > -->
+              <a
+                href="/admin/registroInventario/activosFijos"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="fas fa-home nav-icon"></i>
+                <p>Activos fijos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!--    <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Widgets
+              <span class="right badge badge-danger">New</span>
+            </p>
+          </a>
+        </li> -->
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              PERSONAL
+              <!-- <i class="fas fa-users right"></i> -->
+              <i class="fas fa-angle-left right"></i>
+              <span class="badge badge-info right">2</span>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                [routerLink]="['/admin/registroUsuarios']"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Registro de usuarios</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/admin/listadoUsuarios']"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listado de usuarios</p>
+              </a>
+            </li>
+            <!--  <li class="nav-item">
+              <a href="pages/layout/boxed.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Registro de ventas</p>
+              </a>
+            </li> -->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              ORDEN DE TRABAJO
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a
+                [routerLink]="['/admin/registroOrden']"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="far fa-plus-square nav-icon"></i>
+                <p>Nueva orden</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/charts/flot.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listado de pedidos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/admin/misTrabajos']"
+                routerLinkActive="active"
+                class="nav-link"
+              >
+                <i class="far fa-plus-square nav-icon"></i>
+                <p>Mis trabajos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tree"></i>
+            <p>
+              VENTAS
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="pages/UI/general.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Nueva venta</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/UI/icons.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listado de ventas</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              SEGUIMIENTO DE PERSONAL
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="pages/forms/general.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Seguimiento</p>
+              </a>
+            </li>
+            <!--   <li class="nav-item">
+              <a href="pages/forms/advanced.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p></p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/forms/editors.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Editors</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/forms/validation.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Validation</p>
+              </a>
+            </li> -->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-table"></i>
+            <p>
+              REPORTES
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <!--       <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="pages/tables/simple.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Simple Tables</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/tables/data.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>DataTables</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pages/tables/jsgrid.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>jsGrid</p>
+              </a>
+            </li>
+          </ul> -->
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

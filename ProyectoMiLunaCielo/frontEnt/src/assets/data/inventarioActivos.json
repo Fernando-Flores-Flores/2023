@@ -1,0 +1,68 @@
+{
+  "listaDatos": [
+    {
+      "cantidad": 1,
+      "codigo": "OTR-01",
+      "oficina": "GERENCIA",
+      "equipo": "CUADRO",
+      "observaciones": "GRANDE FULL COLOR CON BASTIDOR",
+      "area": "GERENCIA"
+    },
+    {
+      "cantidad": 4,
+      "codigo": "OTR-02",
+      "oficina": "GERENCIA",
+      "equipo": "ESTABILIZADOR",
+      "observaciones": "DE 5000 WATS",
+      "area": "GERENCIA"
+    },
+    {
+      "cantidad": 3,
+      "codigo": "OTR-03",
+      "oficina": "GERENCIA",
+      "equipo": "VENTILADOR",
+      "observaciones": "SEMI NUEVO EN BUEN ESTADO",
+      "area": "GERENCIA"
+    },
+    {
+      "cantidad": 7,
+      "codigo": "OTR-04",
+      "oficina": "DISEÑO",
+      "equipo": "CANASTO",
+      "observaciones": "PARA LA BASURA GRANDE DE PLASTICO COLOR BLANCO",
+      "area": "DISEÑO"
+    },
+    {
+      "cantidad": 3,
+      "codigo": "OTR-05",
+      "oficina": "PRODUCCION",
+      "equipo": "CARRITO",
+      "observaciones": "COLOR VERDE ",
+      "area": "PRODUCCION"
+    },
+    {
+      "cantidad": 2,
+      "codigo": "OTR-06",
+      "oficina": "PRODUCCION",
+      "equipo": "CARRITO",
+      "observaciones": "COLOR ROJO ",
+      "area": "PRODUCCION"
+    },
+    {
+      "cantidad": 1,
+      "codigo": "OTR-07",
+      "oficina": "PRODUCCION",
+      "equipo": "CARRITO",
+      "observaciones": "COLOR VERDE ",
+      "area": "PRODUCCION"
+    },
+    {
+      "cantidad": 1,
+      "codigo": "OTR-08",
+      "oficina": "DISEÑO",
+      "equipo": "ORGANIZADOR",
+      "observaciones": "COLOR VERDE",
+      "area": "DISEÑO"
+    }
+  ]
+}

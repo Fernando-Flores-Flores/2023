@@ -1,0 +1,110 @@
+.box {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caja {
+  width: 600px;
+  /* height: 650px; */
+  border: 3px solid black;
+  border-radius: 20px;
+  box-shadow: 10px 10px 35px #bababa;
+  background: #0e0d26bb;
+}
+
+section {
+  background-image: url(../../../../assets/dist/img/LunaCielo/LogoLargo.jpg);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.field {
+  height: 50px;
+  width: 90%;
+  display: flex;
+  background: rgba(255, 255, 255, 0.94);
+  margin: auto;
+}
+.field span {
+  color: #0e0d26bb;
+  width: 40px;
+  line-height: 45px;
+  text-align: center;
+}
+.field input {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #222;
+  font-size: 19px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+.space {
+  margin-top: 40px;
+}
+.show {
+ // position: absolute;
+  right: 13px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  display: none;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+.pass-key:valid ~ .show {
+  display: block;
+}
+.pass {
+  text-align: left;
+  margin: 10px 0;
+}
+.pass a {
+  color: white;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+.pass:hover a {
+  text-decoration: underline;
+}
+.field input[type="submit"] {
+  background: #44195a;
+  border: 1px solid #ffffff;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+.field input[type="submit"]:hover {
+  background: #082234;
+  color: white;
+
+}
+.login {
+  color: white;
+  margin: 20px 0;
+  font-family: "Poppins", sans-serif;
+}
+.links {
+  display: flex;
+  cursor: pointer;
+  color: white;
+  margin: 0 0 20px 0;
+}
+
+.logoImagen {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  //box-shadow: 20px 20px 20px 20px #ffbf86d3;
+/*   box-shadow: rgba(141, 141, 255, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.3) 0px 30px 60px -30px, #ffbf86d3 0px -2px 6px 0px inset; */
+box-shadow: rgba(255, 241, 241, 0.556) 0px 19px 38px, rgba(255, 224, 158, 0.512) 0px 15px 12px;
+}

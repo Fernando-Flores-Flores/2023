@@ -1,0 +1,44 @@
+{
+  "listaDatos": [
+    {
+      "id": 1,
+      "nombres": "Fernando",
+      "apellidoPaterno": "Flores",
+      "apellidoMaterno": "Flores",
+      "email": "nassflores@gmail.com",
+      "celular": "65610080",
+      "rol": "admin",
+      "estado": true
+    },
+    {
+      "id": 2,
+      "nombres": "Juan",
+      "apellidoPaterno": "Morales",
+      "apellidoMaterno": "Perez",
+      "email": "joanperez@gamil.com",
+      "celular": "61204899",
+      "rol": "produccion",
+      "estado": true
+    },
+    {
+      "id": 3,
+      "nombres": "Daniela",
+      "apellidoPaterno": "Revollo",
+      "apellidoMaterno": "Orutño",
+      "email": "ventas",
+      "celular": "78965201",
+      "rol": "ventas",
+      "estado": true
+    },
+    {
+      "id": 4,
+      "nombres": "Andres",
+      "apellidoPaterno": "Revollo",
+      "apellidoMaterno": "",
+      "email": "revolloAndres@gmail.com",
+      "celular": "61002596",
+      "rol": "admin",
+      "estado": true
+    }
+  ]
+}

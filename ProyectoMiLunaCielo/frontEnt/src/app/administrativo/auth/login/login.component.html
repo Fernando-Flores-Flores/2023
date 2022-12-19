@@ -1,0 +1,43 @@
+<section>
+  <div class="box">
+    <div class="caja">
+      <form action="#">
+        <div class="mx-auto text-center">
+          <img
+            src="assets\dist\img\LunaCielo\logo.jpg"
+            alt=""
+            class="logoImagen space"
+          />
+        </div>
+        <div class="field space">
+          <span class="fa fa-user"></span>
+          <input type="text" placeholder="Usuario" />
+        </div>
+        <div class="field space">
+          <span class="fa fa-lock"></span>
+          <input
+            type="password"
+            id="password"
+            class="pass-key"
+            placeholder="Contraseña"
+          />
+          <span class="show" (click)="mostrarContrasena()">
+            <i class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+        <div class="pass">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="field">
+          <input
+            type="submit"
+            value="INICIO DE SESIÓN"
+            [routerLink]="['/admin']"
+            routerLinkActive="router-link-active"
+          />
+        </div>
+      </form>
+      <br />
+    </div>
+  </div>
+</section>

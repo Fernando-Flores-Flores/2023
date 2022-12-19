@@ -1,0 +1,207 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <!--       <h3 class="card-title font-weight-bold">
+       -->
+            <div class="row">
+              <div class="col-md-6 col-lg-6 col-xl-6">
+               <!--  <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
+             -->
+             <h3 class="card-title font-weight-bold">REPORTE 03</h3>
+
+            </div>
+              <div class="col-md-6 col-lg-6 col-xl-6 text-right">
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-toggle="modal"
+                  data-target=".bd-example-modal-xl"
+                >
+                  <i class="fas fa-download"></i> Descargar
+                </button>
+              </div>
+            </div>
+            <!--       </h3>
+       -->
+          </div>
+          <div class="col-12">
+            <div class="card-body">
+              <table
+                datatable
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+                class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10 table-striped row-border hover"
+              >
+                <thead class="fondo-cafe">
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Código</th>
+                    <th>Oficina</th>
+                    <th>Equipo</th>
+                    <th>Observaciones</th>
+                    <th>Area</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listaUsuarios; let i = index">
+                    <td>
+                      {{ item.cantidad }}
+                    </td>
+                    <td>
+                      {{ item.codigo }}
+                    </td>
+                    <td>{{ item.oficina }}</td>
+                    <td>{{ item.equipo }}</td>
+                    <td>{{ item.observaciones }}</td>
+                    <td>{{ item.area }}</td>
+                    <td class="py-1 text-center">
+                      <button
+                        class="btn-sm btn-success mx-auto font-size-10"
+                        type="button"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </td>
+                    <td class="py-1 text-center">
+                      <button
+                        class="btn-sm btn-danger mx-auto font-size-10"
+                        type="button"
+                      >
+                        <i class="fas fa-eraser"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Extra large modal -->
+<div
+  class="modal fade bd-example-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titulo" id="exampleModalLongTitle">
+          {{ titulo }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card text-dark bg-info mb-3">
+        <div class="card-header text-center">
+          INGRESE LA INFORMACIÓN DEL {{ titulo }}
+        </div>
+        <div class="card-body">
+          <!--  <h5 class="card-title">Info card title</h5> -->
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                  >Cantidad:</span
+                >
+                <input
+                  autofocus
+                  type="text"
+                  class="form-control"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                  >Código:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                  >Oficina:
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                  >Equipo:
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                  >Observaciones:
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"
+                  >Area:
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default"
+                />
+              </div>
+            </div>
+            <div class="col-12 text-center footer-button">
+              <button class="btn btn-outline-primary">
+                <i class="fas fa-user-alt"></i> Registrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
