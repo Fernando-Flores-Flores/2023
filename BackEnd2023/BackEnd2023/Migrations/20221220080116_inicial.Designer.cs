@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEnd2023.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221219211232_primero")]
-    partial class primero
+    [Migration("20221220080116_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,9 @@ namespace BackEnd2023.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("PersonaId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("idPersona")
                         .HasColumnType("integer");
 
@@ -100,7 +103,20 @@ namespace BackEnd2023.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PersonaId");
+
                     b.ToTable("bd_Usuario");
+                });
+
+            modelBuilder.Entity("BackEnd2023.Entidades.usuario", b =>
+                {
+                    b.HasOne("BackEnd2023.Entidades.persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("PersonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
                 });
 #pragma warning restore 612, 618
         }

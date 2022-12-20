@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEnd2023.Migrations
 {
-    public partial class primero : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,24 +49,36 @@ namespace BackEnd2023.Migrations
                     usuarioNombre = table.Column<string>(type: "text", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
                     idRol = table.Column<int>(type: "integer", nullable: false),
-                    idPersona = table.Column<int>(type: "integer", nullable: false)
+                    idPersona = table.Column<int>(type: "integer", nullable: false),
+                    PersonaId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_bd_Usuario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_bd_Usuario_bd_Persona_PersonaId",
+                        column: x => x.PersonaId,
+                        principalTable: "bd_Persona",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_bd_Usuario_PersonaId",
+                table: "bd_Usuario",
+                column: "PersonaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "bd_Persona");
-
-            migrationBuilder.DropTable(
                 name: "bd_Role");
 
             migrationBuilder.DropTable(
                 name: "bd_Usuario");
+
+            migrationBuilder.DropTable(
+                name: "bd_Persona");
         }
     }
 }
