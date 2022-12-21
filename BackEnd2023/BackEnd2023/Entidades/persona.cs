@@ -3,6 +3,7 @@
     public class persona
     {
         public int Id { get; set; }
+        public long idUsuario { get; set; }
         public string ci_persona { get; set; }
         public string a_paterno { get; set; }
         public string a_materno { get; set; }

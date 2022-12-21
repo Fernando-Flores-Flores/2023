@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ujhwFMKqEk3I6erO5hGTabHiUpDYBBk47aTy4LcM7L2rk1ghfQC48pqQefH+f6f/q3WvIvdARiteI3iOPvJL0g==",
+  "dgSpecHash": "0kV4AYhoRwGPKnWBlYQeCOTI9YBQrO0bQIPb9/gs5bLVXvD5TOyizeidyn4xeYJuYLKqQR1KijhL3U4PNsmvvg==",
   "success": true,
-  "projectFilePath": "D:\\UMSA\\CursoNet\\CursoNet\\CursoNet.csproj",
+  "projectFilePath": "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fernando.flores\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\fernando.flores\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

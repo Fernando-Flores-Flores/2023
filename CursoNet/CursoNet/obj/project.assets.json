@@ -1080,11 +1080,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\UMSA\\CursoNet\\CursoNet\\CursoNet.csproj",
+      "projectUniqueName": "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj",
       "projectName": "CursoNet",
-      "projectPath": "D:\\UMSA\\CursoNet\\CursoNet\\CursoNet.csproj",
+      "projectPath": "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj",
       "packagesPath": "C:\\Users\\fernando.flores\\.nuget\\packages\\",
-      "outputPath": "D:\\UMSA\\CursoNet\\CursoNet\\obj\\",
+      "outputPath": "D:\\2023\\2023\\CursoNet\\CursoNet\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\fernando.flores\\AppData\\Roaming\\NuGet\\NuGet.Config",

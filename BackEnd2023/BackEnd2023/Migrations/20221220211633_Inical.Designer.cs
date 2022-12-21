@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEnd2023.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221220080116_inicial")]
-    partial class inicial
+    [Migration("20221220211633_Inical")]
+    partial class Inical
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
