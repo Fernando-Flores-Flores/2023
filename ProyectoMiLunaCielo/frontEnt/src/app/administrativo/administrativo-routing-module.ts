@@ -8,9 +8,11 @@ import { ListadoUsuarioComponent } from "./pages/listado-usuario/listado-usuario
 import { RegistroInventariosComponent } from "./pages/registro-inventarios/registro-inventarios.component";
 import { RegistroOrdenTrabajoComponent } from "./pages/registro-orden-trabajo/registro-orden-trabajo.component";
 import { ListadoMistrabajosComponent } from "./pages/listado-mistrabajos/listado-mistrabajos.component";
+import { RegisterComponent } from "./auth/register/register.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
+  { path: "registro", component: RegisterComponent },
   {
     path: "admin",
     component: PagesComponent,
@@ -21,6 +23,7 @@ const routes: Routes = [
       { path: "registroOrden", component: RegistroOrdenTrabajoComponent },
       { path: "misTrabajos", component: ListadoMistrabajosComponent },
       { path: "registroInventario/:parametro", component: RegistroInventariosComponent },
+
 
       /*       { path: "prueba1", component: Prueba1Component },
       { path: "prueba2", component: Prueba2Component }, */

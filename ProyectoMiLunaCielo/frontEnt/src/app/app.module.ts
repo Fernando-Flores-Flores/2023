@@ -20,7 +20,7 @@ import { DataTablesModule } from "angular-datatables";
     PaginaWebModule,DataTablesModule
   ],
   exports:[
-    RouterModule
+    RouterModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

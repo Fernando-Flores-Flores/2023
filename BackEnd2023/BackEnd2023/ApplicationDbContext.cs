@@ -1,9 +1,10 @@
 ﻿using BackEnd2023.Entidades;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd2023
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions options):base(options)
         {
@@ -25,6 +26,10 @@ namespace BackEnd2023
             {
                 throw new Exception(e.Message, e.InnerException);
             }
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
     }
 }

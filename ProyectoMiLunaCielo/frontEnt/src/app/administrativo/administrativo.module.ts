@@ -14,6 +14,10 @@ import { DataTablesModule } from 'angular-datatables';
 import { RegistroInventariosComponent } from './pages/registro-inventarios/registro-inventarios.component';
 import { RegistroOrdenTrabajoComponent } from './pages/registro-orden-trabajo/registro-orden-trabajo.component';
 import { ListadoMistrabajosComponent } from './pages/listado-mistrabajos/listado-mistrabajos.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { FormularioAutenticacionComponent } from './auth/formulario-autenticacion/formulario-autenticacion.component';
+import { UtilitariosModule } from "../utilitarios/utilitarios.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -28,7 +32,10 @@ import { ListadoMistrabajosComponent } from './pages/listado-mistrabajos/listado
     RegistroInventariosComponent,
     RegistroOrdenTrabajoComponent,
     ListadoMistrabajosComponent,
+    RegisterComponent,
+    FormularioAutenticacionComponent,
   ],
-  imports: [CommonModule, RouterModule,DataTablesModule],
+  imports: [CommonModule, RouterModule,DataTablesModule,UtilitariosModule,  FormsModule,
+    ReactiveFormsModule],
 })
 export class AdministrativoModule {}

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { PagesWebComponent } from "./pages-web/pages-web.component";
 
 const routes: Routes = [
-  { path: "pagina", component: PagesWebComponent },
+  { path: "", component: PagesWebComponent },
   /*  {
     path: "",
     component: PagesComponent,
