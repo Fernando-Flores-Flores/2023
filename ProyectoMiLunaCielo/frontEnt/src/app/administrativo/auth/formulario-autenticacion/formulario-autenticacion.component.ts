@@ -33,4 +33,13 @@ export class FormularioAutenticacionComponent implements OnInit {
     }
     return response;
   }
+
+  mostrarContrasena() {
+    var tipo: any = document.getElementById('password');
+    if (tipo.type == 'password') {
+      tipo.type = 'text';
+    } else {
+      tipo.type = 'password';
+    }
+  }
 }

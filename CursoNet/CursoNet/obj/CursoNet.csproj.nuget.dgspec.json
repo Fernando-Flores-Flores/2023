@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj": {}
+    "D:\\UMSA 2023\\CursoNet\\CursoNet\\CursoNet.csproj": {}
   },
   "projects": {
-    "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj": {
+    "D:\\UMSA 2023\\CursoNet\\CursoNet\\CursoNet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj",
+        "projectUniqueName": "D:\\UMSA 2023\\CursoNet\\CursoNet\\CursoNet.csproj",
         "projectName": "CursoNet",
-        "projectPath": "D:\\2023\\2023\\CursoNet\\CursoNet\\CursoNet.csproj",
+        "projectPath": "D:\\UMSA 2023\\CursoNet\\CursoNet\\CursoNet.csproj",
         "packagesPath": "C:\\Users\\fernando.flores\\.nuget\\packages\\",
-        "outputPath": "D:\\2023\\2023\\CursoNet\\CursoNet\\obj\\",
+        "outputPath": "D:\\UMSA 2023\\CursoNet\\CursoNet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\fernando.flores\\AppData\\Roaming\\NuGet\\NuGet.Config",

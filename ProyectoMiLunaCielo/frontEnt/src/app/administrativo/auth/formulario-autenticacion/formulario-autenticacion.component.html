@@ -1,7 +1,4 @@
-<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
-
-<h3>{{accion}}</h3>
-<section class="container">
+<!-- <section class="container">
   <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
     <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
@@ -40,24 +37,72 @@
         <button class="btn btn-danger" routerLink="/">Cancelar</button>
       </div>
     </div>
-
-    <!--   <div class="row">
-      <div class="col-12">
-        <label for="idEmail">Correo electrónico</label>
-        <input name="idEmail" formControlName="email" >
-        <span>{{obtenerMensajeErrorEmail()}}</span>
-      </div>
-      <div class="col-12">
-        <label for="idPassword">Contraseña</label>
-        <input name="idPassword" formControlName="password" >
-        <span>El campo contraseña es requerido.</span>
-      </div>
-      <div class="col-6">
-        <button class="btn btn-primary" [disabled]="form.invalid">{{accion}} </button>
-      </div>
-      <div class="col-6">
-        <button class="btn btn-danger" routerLink="/">Cancelar </button>
-      </div>
-    </div> -->
   </form>
+</section> -->
+<!-- -->
+
+<section>
+  <div class="box">
+    <div class="caja">
+      <h3 class="tituloCaja">{{accion}}</h3>
+      <form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
+        <div class="mx-auto text-center">
+          <img
+            src="assets\dist\img\LunaCielo\logo.jpg"
+            alt=""
+            class="logoImagen space"
+          />
+        </div>
+        <div class="field space">
+          <span class="fa fa-user"></span>
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail3"
+            formControlName="email"
+            placeholder="Email"
+            placeholder="Usuario"
+          />
+          <!--      <span>{{obtenerMensajeErrorEmail()}}</span> -->
+        </div>
+        <div class="field space">
+          <span class="fa fa-lock"></span>
+          <input
+            type="password"
+            class="pass-key"
+            id="password"
+            placeholder="Contraseña"
+            formControlName="password"
+          />
+
+          <span class="show" (click)="mostrarContrasena()">
+            <i class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+        <app-mostrar-errores
+          [errores]="errores"
+          class="p-5"
+          *ngIf="errores != []"
+        ></app-mostrar-errores>
+        <div class="pass">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="pass" *ngIf="accion == 'INICIO DE SESIÓN'">
+          <a routerLink="/registro">Regístrate aquí</a>
+        </div>
+        <div class="field">
+          <button class="btn btn-primary w-100" [disabled]="form.invalid">
+            {{accion}}
+          </button>
+        </div>
+      </form>
+
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-danger" routerLink="/">Cancelar</button>
+    </div>
+  </div>
 </section>

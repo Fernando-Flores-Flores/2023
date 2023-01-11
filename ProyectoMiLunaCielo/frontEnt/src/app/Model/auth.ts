@@ -40,3 +40,7 @@ export function parsearErroresAPI(response: any): string[] {
 
   return resultado;
 }
+export interface usuarioDTO{
+  id:string;
+  email:string;
+}

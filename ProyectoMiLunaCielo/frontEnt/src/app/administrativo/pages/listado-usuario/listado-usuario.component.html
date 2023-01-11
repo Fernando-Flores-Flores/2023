@@ -8,7 +8,7 @@
               LISTADO DE USUARIOS REGISTRADOS
             </h3>
           </div>
-  <!--         <div class="card-body">
+          <!--<div class="card-body">
             <table
               class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10"
             >
@@ -64,41 +64,43 @@
             >
               <thead class="fondo-cafe">
                 <tr>
-                  <th>Id</th>
-                  <th>Nombre completo</th>
-                  <th>Email</th>
-                  <th>Celular</th>
+                  <th>#</th>
+                  <!--<th>Nombre completo</th>
+                  <th>Email</th>-->
+                  <!--   <th>Celular</th> -->
                   <th>Rol</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
+                  <th>Hacer Admin</th>
+                  <th>Remover Admin</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of listaUsuarios; let i = index">
                   <td>
-                    {{ item.id }}
+                    {{i}}
                   </td>
-                  <td>
-                    {{ item.nombres }} {{ item.apellidoPaterno }}
-                    {{ item.apellidoMaterno }}
-                  </td>
+                  <!--                 <td>
+                    {{ item.nombres }} {{ item.apellidoPaterno }} {{
+                    item.apellidoMaterno }}
+                  </td> -->
                   <td>{{ item.email }}</td>
-                  <td>{{ item.celular }}</td>
-                  <td>{{ item.rol }}</td>
+                  <!--      <td>{{ item.celular }}</td>
+                  <td>{{ item.rol }}</td> -->
                   <td class="py-1 text-center">
                     <button
                       class="btn-sm btn-success mx-auto font-size-10"
                       type="button"
+                      (click)="hacerAdmin(item.id)"
                     >
-                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-edit"></i>Hacer admin
                     </button>
                   </td>
                   <td class="py-1 text-center">
                     <button
                       class="btn-sm btn-danger mx-auto font-size-10"
                       type="button"
+                      (click)="removerAdmin(item.id)"
                     >
-                      <i class="fas fa-eraser"></i>
+                      <i class="fas fa-eraser"></i> Remover admin
                     </button>
                   </td>
                 </tr>

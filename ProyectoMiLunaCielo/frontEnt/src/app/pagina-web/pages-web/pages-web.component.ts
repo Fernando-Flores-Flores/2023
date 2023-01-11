@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/administrativo/service/login.service';
 
 @Component({
   selector: 'app-pages-web',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesWebComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
+    alert("Esta logeado : "+ !this.loginService.estalogeado());
+    if (this.loginService.estalogeado()) {
+      this.router.navigate(['/admin/home']);
+    }
   }
-
 }
