@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 import { respuestaAutenticacion } from '../../Model/auth';
 import { Router } from '@angular/router';
-
+import { lastValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,6 +19,10 @@ export class LoginService {
       language: {
         url: '../../../../assets/data/cdn-datatables.json',
       },
+      // scrollX: true,
+      processing: true,
+      deferRender: true,
+      destroy: true,
     };
   }
 
@@ -94,17 +98,39 @@ export class LoginService {
     params = params.append('recordsPorPagina', recordsPorPagina.toString());
     return this.HttpClient.get<usuarioDTO[]>(`${this.apiURL}/listadoUsuarios`, {
       observe: 'response',
-      params
+      params,
     });
   }
 
-  hacerAdmin(usuarioId: string){
+  asignarRol(usuarioId: string, rol: string) {
     const headers = new HttpHeaders('Content-Type: application/json');
-    return this.HttpClient.post(`${this.apiURL}/hacerAdmin`, JSON.stringify(usuarioId), {headers});
+    let params = new HttpParams();
+    params = params.append('rol', rol.toString());
+    return this.HttpClient.post(
+      `${this.apiURL}/asignarRol`,
+      JSON.stringify(usuarioId),
+      { headers, params }
+    );
   }
 
-  removerAdmin(usuarioId: string){
+  async asignarRolJS(usuarioId: string, rol: string) {
     const headers = new HttpHeaders('Content-Type: application/json');
-    return this.HttpClient.post(`${this.apiURL}/removerAdmin`, JSON.stringify(usuarioId), {headers});
+    let params = new HttpParams();
+    params = params.append('rol', rol.toString());
+    return await lastValueFrom(
+      this.HttpClient.post<any>(
+        `${this.apiURL}/asignarRol`,
+        JSON.stringify(usuarioId),
+        { headers, params }
+      )
+    );
+  }
+  removerAdmin(usuarioId: string) {
+    const headers = new HttpHeaders('Content-Type: application/json');
+    return this.HttpClient.post(
+      `${this.apiURL}/removerAdmin`,
+      JSON.stringify(usuarioId),
+      { headers }
+    );
   }
 }

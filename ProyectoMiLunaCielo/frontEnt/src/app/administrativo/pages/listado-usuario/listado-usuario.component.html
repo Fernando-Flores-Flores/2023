@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div class="card">
+        <div class="card" *ngIf="listaUsuarios">
           <div class="card-header">
             <h3 class="card-title font-weight-bold">
               LISTADO DE USUARIOS REGISTRADOS
@@ -68,9 +68,10 @@
                   <!--<th>Nombre completo</th>
                   <th>Email</th>-->
                   <!--   <th>Celular</th> -->
+                  <th>Email</th>
                   <th>Rol</th>
-                  <th>Hacer Admin</th>
-                  <th>Remover Admin</th>
+                  <th>Cambiar rol</th>
+                  <!--     <th>Remover Admin</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -83,18 +84,35 @@
                     item.apellidoMaterno }}
                   </td> -->
                   <td>{{ item.email }}</td>
-                  <!--      <td>{{ item.celular }}</td>
-                  <td>{{ item.rol }}</td> -->
+                  <td>
+                    <p class="" *ngFor="let item2 of item.claims ">
+                      {{item2.value }}
+                    </p>
+                  </td>
+                  <!--<td>{{ item.rol }}</td> -->
                   <td class="py-1 text-center">
-                    <button
+                    <!--   <button
                       class="btn-sm btn-success mx-auto font-size-10"
                       type="button"
                       (click)="hacerAdmin(item.id)"
                     >
                       <i class="fas fa-edit"></i>Hacer admin
-                    </button>
+                    </button> -->
+                    <select
+                      class="form-control"
+                      (change)="cambiarRol(item)"
+                      [(ngModel)]="rol"
+                    >
+                      <option value="" disabled selected
+                        >Seleccione rol a asignar:</option
+                      >
+                      <option value="prod">Producción</option>
+                      <option value="ventas">Ventas</option>
+                      <option value="admin">Administrador</option>
+                      <option value="user">Usuario</option>
+                    </select>
                   </td>
-                  <td class="py-1 text-center">
+                  <!--  <td class="py-1 text-center">
                     <button
                       class="btn-sm btn-danger mx-auto font-size-10"
                       type="button"
@@ -102,7 +120,7 @@
                     >
                       <i class="fas fa-eraser"></i> Remover admin
                     </button>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>

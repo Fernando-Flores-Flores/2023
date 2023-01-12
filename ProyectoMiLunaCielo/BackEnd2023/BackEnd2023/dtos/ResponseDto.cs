@@ -1,4 +1,6 @@
-﻿namespace BackEnd2023.dtos
+﻿using System.Security.Claims;
+
+namespace BackEnd2023.dtos
 {
     public class ResponseDto<T>
     {
@@ -8,6 +10,7 @@
         public string? MensajeRespuesta { get; set; }
         public DateTime? fechaConsulta { get; set; } = DateTime.Now;
         public T? datos { get; set; }
+        public IList<Claim>? claims { get; set; }
         public string base64 { get; set; }
 
     }

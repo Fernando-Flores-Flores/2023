@@ -9,6 +9,8 @@ namespace BackEnd2023.dtos
         public string Id { get; set; }
         public string Email { get; set; }
 
+        //public IList<roles> Claims{get; set;  }
         public IList<roles> Claims{get; set;  }
+
     }
 }

@@ -172,17 +172,39 @@ namespace BackEnd2023.Controllers
         }
 
 
-        [HttpPost("hacerAdmin")]
-        public async Task<ActionResult> HacerAdmin([FromBody] string usuarioId)
+        [HttpPost("asignarRol")]
+        public async Task<ActionResult> asignarRol([FromBody] string usuarioId, string rol)
         {
             var usuario = await userManager.FindByIdAsync(usuarioId);
-            await userManager.AddClaimAsync(usuario, new Claim("role", "admin"));
+            var claims = await userManager.GetClaimsAsync(usuario);
+            if (claims.Count == 0)
+            {
+               await userManager.AddClaimAsync(usuario, new Claim("role", rol));
+            }
+            else
+            {
+                var nameClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+                List<Claim> claimsToRemove = new List<Claim>();
+                foreach (var claim in claims)
+                {
+                    if (claim.Type == "role")
+                    {
+                        claimsToRemove.Add(claim);
+                    }
+                }
+                await userManager.RemoveClaimsAsync(usuario, claimsToRemove);
+                await userManager.UpdateAsync(usuario);
+                await userManager.AddClaimAsync(usuario, new Claim("role", rol));
+                claims = await userManager.GetClaimsAsync(usuario);
+            }
+
             var response = new ResponseDto<long>()
             {
                 statusCode = StatusCodes.Status200OK,
                 fechaConsulta = DateTime.Now,
                 codigoRespuesta = 1001,
                 MensajeRespuesta = "CORRECTO",
+                claims = claims
             };
             return Ok(response);
 

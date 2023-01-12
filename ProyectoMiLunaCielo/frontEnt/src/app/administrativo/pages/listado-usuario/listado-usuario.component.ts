@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
-import { UsuariosService } from "../../service/usuarios.service";
-import { Subject } from "rxjs";
-import { LoginService } from "../../service/login.service";
-import { HttpResponse } from "@angular/common/http";
-import { usuarioDTO } from "src/app/Model/auth";
-import Swal from "sweetalert2";
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { UsuariosService } from '../../service/usuarios.service';
+import { Subject } from 'rxjs';
+import { LoginService } from '../../service/login.service';
+import { HttpResponse } from '@angular/common/http';
+import { usuarioDTO } from 'src/app/Model/auth';
+import Swal from 'sweetalert2';
 @Component({
-  selector: "app-listado-usuario",
-  templateUrl: "./listado-usuario.component.html",
-  styleUrls: ["./listado-usuario.component.scss"],
+  selector: 'app-listado-usuario',
+  templateUrl: './listado-usuario.component.html',
+  styleUrls: ['./listado-usuario.component.scss'],
 })
 export class ListadoUsuarioComponent implements OnDestroy, OnInit {
   constructor(
@@ -20,7 +20,7 @@ export class ListadoUsuarioComponent implements OnDestroy, OnInit {
   dtTrigger: any = new Subject<any>();
   ngOnInit(): void {
     this.dtOptions = this.loginService.dtOptions;
-/*     this.usuariosService.obtenerListaUsuarios().subscribe((resp: any) => {
+    /*     this.usuariosService.obtenerListaUsuarios().subscribe((resp: any) => {
       this.listaUsuarios = resp.listaDatos;
       this.dtTrigger.next();
     }); */
@@ -33,39 +33,77 @@ export class ListadoUsuarioComponent implements OnDestroy, OnInit {
 
   @ViewChild('table')
   //table: MatTable<any>;
+  //usuarios: usuarioDTO[] | null;
+  usuarios: any;
 
-  usuarios: usuarioDTO[] | null;
   columnasAMostrar = ['nombre', 'acciones'];
-  cantidadTotalRegistros:any;
+  cantidadTotalRegistros: any;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 100;
+  rol: string = '';
+  async cargarRegistros(pagina: number, cantidadElementosAMostrar: any) {
+    await this.loginService
+      .obtenerUsuarios(pagina, cantidadElementosAMostrar)
+      .subscribe(
+        (respuesta: any) => {
+          this.cantidadTotalRegistros = respuesta.headers.get(
+            'cantidadTotalRegistros'
+          );
+          console.log('LISTA');
 
+          this.listaUsuarios = respuesta.body.datos;
 
-  cargarRegistros(pagina: number, cantidadElementosAMostrar:any){
-    this.loginService.obtenerUsuarios(pagina, cantidadElementosAMostrar)
-    .subscribe((respuesta: HttpResponse<usuarioDTO[]>) => {
-      this.usuarios = respuesta.body;
-      this.cantidadTotalRegistros = respuesta.headers.get("cantidadTotalRegistros");
-      console.log(respuesta);
-      this.listaUsuarios = respuesta.body;
-      this.dtTrigger.next();
-    }, error => console.error(error));
+          console.log(this.listaUsuarios);
+          this.dtTrigger.next();
+        },
+        (error) => console.error(error)
+      );
   }
 
-/*   actualizarPaginacion(datos: PageEvent){
+  /*   actualizarPaginacion(datos: PageEvent){
     this.paginaActual = datos.pageIndex + 1;
     this.cantidadRegistrosAMostrar = datos.pageSize;
     this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
   } */
 
-  hacerAdmin(usuarioId: string){
-    console.log(usuarioId);
-    this.loginService.hacerAdmin(usuarioId)
-    .subscribe(() => Swal.fire('Exitoso', 'La operación se ha realizado', 'success'));
+  async asignarRol(usuarioId: string, rol: string) {
+    try {
+      let res: any = await this.loginService.asignarRolJS(usuarioId, rol);
+      if (res.statusCode == 200) {
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+
+        Swal.fire({
+          icon: 'success',
+          title: res.mensajeRespuesta,
+          text: 'La operación se ha realizado',
+          confirmButtonText: 'Entiendo',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      } else {
+      }
+    } catch (error: any) {
+      console.error(error);
+      Swal.fire('Ocurrió un error', 'La operación se ha realizado', 'success');
+    }
   }
 
-  removerAdmin(usuarioId: string){
-    this.loginService.removerAdmin(usuarioId)
-    .subscribe(() => Swal.fire('Exitoso', 'La operación se ha realizado', 'success'));
+  removerAdmin(usuarioId: string) {
+    this.loginService.removerAdmin(usuarioId).subscribe(
+      (resp: any) => {
+        Swal.fire('Exitoso', 'La operación se ha realizado', 'success');
+        console.log(resp);
+
+        this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+  cambiarRol(item: any) {
+    this.asignarRol(item.id, this.rol);
   }
 }

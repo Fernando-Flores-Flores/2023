@@ -12,7 +12,7 @@ export class PagesWebComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
-    alert("Esta logeado : "+ !this.loginService.estalogeado());
+    //alert("Esta logeado : "+ !this.loginService.estalogeado());
     if (this.loginService.estalogeado()) {
       this.router.navigate(['/admin/home']);
     }

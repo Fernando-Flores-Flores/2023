@@ -43,4 +43,5 @@ export function parsearErroresAPI(response: any): string[] {
 export interface usuarioDTO{
   id:string;
   email:string;
+  claims:any[];
 }

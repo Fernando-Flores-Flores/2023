@@ -19,9 +19,7 @@ export class RegisterComponent implements OnInit {
       (resp: any) => {
         console.log(resp);
         this.loginService.guardarToken(resp);
-        Swal.fire({});
-
-        Swal.fire({
+         Swal.fire({
           icon: 'success',
           title: 'Registro realizado correctamente',
           text: 'Puedes iniciar sesión con las credenciales ingresadas',
