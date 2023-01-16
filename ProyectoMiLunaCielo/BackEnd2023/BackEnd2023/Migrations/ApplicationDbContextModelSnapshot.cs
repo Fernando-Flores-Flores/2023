@@ -22,6 +22,57 @@ namespace BackEnd2023.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("BackEnd2023.Entidades.bd.Inventarios.inventario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IdtipoInventario")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("id_tipoInventario");
+
+                    b.Property<string>("area")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("cantidad")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("codigo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("estado")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("fechaCreacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("fechaModificacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("observaciones")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("oficina")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("bd_Inventario");
+                });
+
             modelBuilder.Entity("BackEnd2023.Entidades.persona", b =>
                 {
                     b.Property<int>("Id")

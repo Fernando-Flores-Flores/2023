@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEnd2023.Migrations
 {
-    public partial class SisitemaDeUSUarios : Migration
+    public partial class InicioCreacionInventarios1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,6 +50,28 @@ namespace BackEnd2023.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "bd_Inventario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id_tipoInventario = table.Column<string>(type: "text", nullable: false),
+                    codigo = table.Column<string>(type: "text", nullable: false),
+                    cantidad = table.Column<long>(type: "bigint", nullable: false),
+                    oficina = table.Column<string>(type: "text", nullable: false),
+                    descripcion = table.Column<string>(type: "text", nullable: false),
+                    observaciones = table.Column<string>(type: "text", nullable: false),
+                    area = table.Column<string>(type: "text", nullable: false),
+                    fechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    fechaModificacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    estado = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_bd_Inventario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "bd_Persona",
                 columns: table => new
                 {
@@ -66,19 +88,6 @@ namespace BackEnd2023.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_bd_Persona", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "bd_Role",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descripcion = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_bd_Role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,10 +267,10 @@ namespace BackEnd2023.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "bd_Persona");
+                name: "bd_Inventario");
 
             migrationBuilder.DropTable(
-                name: "bd_Role");
+                name: "bd_Persona");
 
             migrationBuilder.DropTable(
                 name: "bd_Usuario");

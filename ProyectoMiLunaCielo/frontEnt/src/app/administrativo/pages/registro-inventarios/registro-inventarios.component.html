@@ -4,15 +4,10 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <!--       <h3 class="card-title font-weight-bold">
-       -->
             <div class="row">
               <div class="col-md-6 col-lg-6 col-xl-6">
-               <!--  <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
-             -->
-             <h3 class="card-title font-weight-bold">REPORTE 03</h3>
-
-            </div>
+                <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
+              </div>
               <div class="col-md-6 col-lg-6 col-xl-6 text-right">
                 <button
                   class="btn btn-dark"
@@ -20,7 +15,7 @@
                   data-toggle="modal"
                   data-target=".bd-example-modal-xl"
                 >
-                  <i class="fas fa-download"></i> Descargar
+                  <i class="fas fa-download"></i> Agregar nuevo registro
                 </button>
               </div>
             </div>
@@ -33,7 +28,7 @@
                 datatable
                 [dtOptions]="dtOptions"
                 [dtTrigger]="dtTrigger"
-                class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10 table-striped row-border hover"
+                class="table table-bordered table-hover table-responsive font-size-10 table-striped row-border hover"
               >
                 <thead class="fondo-cafe">
                   <tr>
@@ -56,7 +51,7 @@
                       {{ item.codigo }}
                     </td>
                     <td>{{ item.oficina }}</td>
-                    <td>{{ item.equipo }}</td>
+                    <td>{{ item.descripcion }}</td>
                     <td>{{ item.observaciones }}</td>
                     <td>{{ item.area }}</td>
                     <td class="py-1 text-center">
@@ -70,7 +65,7 @@
                     <td class="py-1 text-center">
                       <button
                         class="btn-sm btn-danger mx-auto font-size-10"
-                        type="button"
+                        type="button" (click)="eliminarRegsitro(item)"
                       >
                         <i class="fas fa-eraser"></i>
                       </button>
@@ -112,95 +107,153 @@
         <div class="card-header text-center">
           INGRESE LA INFORMACIÓN DEL {{ titulo }}
         </div>
-        <div class="card-body">
-          <!--  <h5 class="card-title">Info card title</h5> -->
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                  >Cantidad:</span
+        <form [formGroup]="form">
+          <div class="card-body">
+            <!--  <h5 class="card-title">Info card title</h5> -->
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Cantidad:</span
+                  >
+                  <input
+                    autofocus
+                    type="text"
+                    class="form-control"
+                    formControlName="cantidad"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('cantidad')?.invalid &&
+                  this.form.get('cantidad')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <!--    <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Código:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('tipoDeclaracion')?.invalid &&
+                  this.form.get('tipoDeclaracion')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>-->
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Oficina:
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="oficina"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('oficina')?.invalid &&
+                  this.form.get('oficina')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Equipo:
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="descripcion"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('descripcion')?.invalid &&
+                  this.form.get('descripcion')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Observaciones:
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="observaciones"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('observaciones')?.invalid &&
+                  this.form.get('observaciones')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Area:
+                  </span>
+                  <select class="form-control" formControlName="area">
+                    <option value="GERENCIA">Gerencia</option>
+                    <option value="PRODUCCIÓN">Producción</option>
+                    <option value="DISEÑO">Diseño</option>
+                    <option value="VENTAS">Ventas</option>
+                  </select>
+                  <small
+                    *ngIf="
+                  this.form.get('area')?.invalid &&
+                  this.form.get('area')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-12 text-center footer-button">
+                <button
+                  class="btn btn-outline-primary"
+                  data-dismiss="modal"
+                  (click)="agregarRegistroInventario()"
                 >
-                <input
-                  autofocus
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
+                  <i class="fas fa-user-alt"></i> Registrar
+                </button>
               </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                  >Código:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                  >Oficina:
-                </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                  >Equipo:
-                </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                  >Observaciones:
-                </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"
-                  >Area:
-                </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"
-                />
-              </div>
-            </div>
-            <div class="col-12 text-center footer-button">
-              <button class="btn btn-outline-primary">
-                <i class="fas fa-user-alt"></i> Registrar
-              </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

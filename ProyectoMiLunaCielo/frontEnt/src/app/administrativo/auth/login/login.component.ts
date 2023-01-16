@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
         this.loginService.guardarToken(resp);
         console.log("Se logeo con exito");
 
-        this.router.navigate(['/admin/home']);
+        //this.router.navigate(['/admin/home']);
+        window.location.href= '/admin/home';
       },
       (errores: any) => {
         console.log('Errores');
