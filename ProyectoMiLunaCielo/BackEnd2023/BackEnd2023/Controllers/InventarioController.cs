@@ -40,8 +40,6 @@ namespace BackEnd2023.Controllers
             return Ok(response);
         }
 
-
-
         [HttpPost("CrearInventario")]
         public async Task<ActionResult<ResponseDto<long>>> PostUsuario([FromBody] dto_Inventario request)
         {
@@ -67,7 +65,7 @@ namespace BackEnd2023.Controllers
                     cantidad = request.cantidad,
                     oficina = request.oficina,
                     descripcion = request.descripcion.Trim(),
-                    observaciones = request.descripcion,
+                    observaciones = request.observaciones,
                     area = request.area,
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,

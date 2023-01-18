@@ -27,7 +27,10 @@ namespace BackEnd2023.Controllers
         {
             //var inventario = await context.bd_Inventario.Where(x => x.IdtipoInventario == tipoFormulario).ToListAsync();
             Reportes reportes = new Reportes();
-            string resultado = reportes.generarReportePDF("argumento1");
+            string tipoForm = tipoFormulario;
+            pdf pdf = new pdf();
+           string titulo= pdf.verificarTitulo(tipoForm);
+            string resultado = reportes.generarReportePDF(tipoFormulario, titulo);
             var response = new ResponseDto<string>()
             {
                 statusCode = StatusCodes.Status200OK,

@@ -11,6 +11,9 @@ namespace BackEnd2023
         {
 
         }
+        public ApplicationDbContext()
+        {
+        }
         public DbSet <persona> bd_Persona{ get; set; }
        // public DbSet<roles> bd_Role { get; set; }
         public DbSet<usuario> bd_Usuario { get; set; }
@@ -30,6 +33,15 @@ namespace BackEnd2023
                 throw new Exception(e.Message, e.InnerException);
             }
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql("Server=localhost;Database=Cielo;Port=5432;User Id=postgres;Password=admin;");
+            }
+        }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

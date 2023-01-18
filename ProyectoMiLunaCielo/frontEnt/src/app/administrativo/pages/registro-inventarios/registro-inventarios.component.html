@@ -5,22 +5,31 @@
         <div class="card">
           <div class="card-header">
             <div class="row">
-              <div class="col-md-6 col-lg-6 col-xl-6">
+              <div class="col-md-12 col-lg-12 col-xl-12 mb-4">
                 <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
               </div>
-              <div class="col-md-6 col-lg-6 col-xl-6 text-right">
+              <div class="col-md-4 col-lg-4 col-xl-4 text-right"></div>
+              <div class="col-md-4 col-lg-4 col-xl-4 text-right">
                 <button
-                  class="btn btn-dark"
+                  (click)="generarReporteInventario()"
+                  class="btn-sm btn-info"
+                  type="button"
+                >
+                  <i class="fas fa-download"></i>
+                  GENERAR REPORTE
+                </button>
+              </div>
+              <div class="col-md-4 col-lg-4 col-xl-4 text-right">
+                <button
+                  class="btn-sm btn-dark"
                   type="button"
                   data-toggle="modal"
                   data-target=".bd-example-modal-xl"
                 >
-                  <i class="fas fa-download"></i> Agregar nuevo registro
+                  <i class="fas fa-download"></i> AGREGAR NUEVO REGISTRO
                 </button>
               </div>
             </div>
-            <!--       </h3>
-       -->
           </div>
           <div class="col-12">
             <div class="card-body">
@@ -28,7 +37,7 @@
                 datatable
                 [dtOptions]="dtOptions"
                 [dtTrigger]="dtTrigger"
-                class="table table-bordered table-hover table-responsive font-size-10 table-striped row-border hover"
+                class="table table-bordered table-hover table-responsive-lg font-size-10 table-striped row-border hover"
               >
                 <thead class="fondo-cafe">
                   <tr>
@@ -65,7 +74,8 @@
                     <td class="py-1 text-center">
                       <button
                         class="btn-sm btn-danger mx-auto font-size-10"
-                        type="button" (click)="eliminarRegsitro(item)"
+                        type="button"
+                        (click)="eliminarRegsitro(item)"
                       >
                         <i class="fas fa-eraser"></i>
                       </button>

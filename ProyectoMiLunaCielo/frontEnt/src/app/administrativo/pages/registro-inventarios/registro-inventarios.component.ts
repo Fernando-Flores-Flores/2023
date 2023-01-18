@@ -159,6 +159,47 @@ export class RegistroInventariosComponent implements OnInit {
       }).then((result) => {});
     }
   }
+
+  //TODO: GENERAR REPORTES DE UN INVENTARIO
+
+  async generarReporteInventario() {
+    try {
+      let response: Response =
+        await this.inventariosService.generarReporteInventario(
+          this.idTipoFormulario
+        );
+      if (response.statusCode == 200) {
+        console.log('Response');
+        console.log(JSON.stringify(response));
+        this.base64 = 'data:application/pdf;base64,' + response.datos;
+        Swal.fire({
+          icon: 'success',
+          title: 'El reporte fue generado',
+          confirmButtonText: 'Descargar',
+        }).then((result) => {
+          this.downloadPdf();
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incorrecto',
+        text: 'Se produjo un error',
+        confirmButtonText: 'Entendido',
+      }).then((result) => {});
+    }
+  }
+  base64: any;
+  async downloadPdf() {
+    const linkSource = this.base64;
+    const downloadLink = document.createElement('a');
+    const fileName = 'REPORTE - ' + this.titulo + '.pdf';
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
   ngOnDestroy(): void {
     this.suscription.unsubscribe();
     this.dtTrigger.unsubscribe();

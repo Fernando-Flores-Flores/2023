@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class InventariosService {
   apiURL = environment.apiURL + 'Inventario';
+  apiURLReportes = environment.apiURL + 'ReportesPDF';
+
   constructor(private HttpClient: HttpClient) {}
   obtenerListaInventarios() {
     return this.HttpClient.get<any>('assets/data/inventarioActivos.json');
@@ -19,6 +21,18 @@ export class InventariosService {
     params = params.append('tipoFormulario', tipoFormulario);
     return await lastValueFrom(
       this.HttpClient.get<any>(`${this.apiURL}/listarInventario`, {
+        params,
+      })
+    );
+  }
+
+  async generarReporteInventario(tipoFormulario: string) {
+    //const headers = new HttpHeaders('Content-Type: application/json');
+    let params = new HttpParams();
+    params = params.append('tipoFormulario', tipoFormulario);
+
+    return await lastValueFrom(
+      this.HttpClient.get<any>(`${this.apiURLReportes}/generarPDF`, {
         params,
       })
     );
