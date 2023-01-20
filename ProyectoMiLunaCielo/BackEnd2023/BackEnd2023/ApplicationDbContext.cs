@@ -5,20 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd2023
 {
-    public class ApplicationDbContext:IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions options):base(options)
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
 
         }
         public ApplicationDbContext()
         {
         }
-        public DbSet <persona> bd_Persona{ get; set; }
-       // public DbSet<roles> bd_Role { get; set; }
+        public DbSet<persona> bd_Persona { get; set; }
+        // public DbSet<roles> bd_Role { get; set; }
         public DbSet<usuario> bd_Usuario { get; set; }
 
         public DbSet<inventario> bd_Inventario { get; set; }
+
+        public DbSet<Ventas> bd_Ventas { get; set; }
+
 
         public async Task<long> GuardarUsuario(usuario usuario)
         {
