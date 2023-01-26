@@ -1,0 +1,478 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!--      <div class="col-md-4 col-lg-4 col-xl-4 text-right">
+        <button
+          (click)="generarReporteInventario()"
+          class="btn btn-info"
+          type="button"
+        >
+          <i class="fas fa-download"></i>
+          GENERAR REPORTE
+        </button>
+      </div> -->
+      <div class="col-md-4 col-lg-4 col-xl-4 text-right my-3">
+        <button
+          class="btn btn-dark"
+          type="button"
+          data-toggle="modal"
+          data-target=".bd-example-modal-xl"
+          (click)="setearPost()"
+        >
+          <i class="fas fa-download"></i> AGREGAR NUEVA ORDEN
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-12 col-lg-12 col-xl-12 mb-4">
+                <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card-body">
+              <table
+                datatable
+                [dtOptions]="dtOptions"
+                [dtTrigger]="dtTrigger"
+                class="table table-bordered table-hover table-responsive-xl font-size-10 table-striped row-border hover"
+              >
+                <thead class="fondo-cafe">
+                  <tr>
+                    <th>Tipo Trabajo</th>
+                    <th>Fecha Orden</th>
+                    <th>fecha Entrega Aprox</th>
+                    <th>Descripción</th>
+                    <th>Observaciones</th>
+                    <th>Costo</th>
+                    <th>Tipo Pago</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listaUsuarios; let i = index">
+                    <td>
+                      {{ item.tipoTrabajo }}
+                    </td>
+                    <td>
+                      {{ item.fechaOrden |date:"yyyy/MM/dd"}}
+                    </td>
+                    <td>{{ item.fechaEntregaAprox |date:"yyyy/MM/dd"}}</td>
+                    <td>{{ item.descripcion }}</td>
+                    <td>{{ item.observaciones }}</td>
+                    <td>{{ item.costo }}</td>
+                    <td>{{ item.tipoPago }}</td>
+
+                    <td class="py-1 text-center">
+                      <button
+                        class="btn-sm btn-success mx-auto font-size-10"
+                        type="button"
+                        data-toggle="modal"
+                        data-target=".bd-example-modal-xl"
+                        (click)="setearOrdenTrabajo(item)"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                    </td>
+                    <td class="py-1 text-center">
+                      <button
+                        class="btn-sm btn-danger mx-auto font-size-10"
+                        type="button"
+                      >
+                        <i class="fas fa-eraser"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Extra large modal -->
+<div
+  class="modal fade bd-example-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titulo" id="exampleModalLongTitle">
+          {{ titulo }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="form">
+        <div class="card text-dark bg-info mb-3">
+          <div class="card-header text-center">
+            INGRESE LA INFORMACIÓN DEL ORDEN DE TRABAJO
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Fecha Orden Trabajo:</span
+                  >
+                  <input
+                    autofocus
+                    type="date"
+                    class="form-control"
+                    formControlName="fechaOrden"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('fechaOrden')?.invalid &&
+                  this.form.get('fechaOrden')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Fecha Entrega Aprox:
+                  </span>
+                  <input
+                    type="date"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="fechaEntregaAprox"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('fechaEntregaAprox')?.invalid &&
+                  this.form.get('fechaEntregaAprox')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Costo:
+                  </span>
+                  <input
+                    type="number"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="costo"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('costo')?.invalid &&
+                  this.form.get('costo')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Tipo Trabajo:
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="tipoTrabajo"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('tipoTrabajo')?.invalid &&
+                  this.form.get('tipoTrabajo')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Tipo de Pago:
+                  </span>
+                  <select class="form-control" formControlName="tipoPago">
+                    <option value="TARJETA">TARJETA</option>
+                    <option value="EFECTIVO">EFECTIVO</option>
+                  </select>
+                  <small
+                    *ngIf="
+                  this.form.get('tipoPago')?.invalid &&
+                  this.form.get('tipoPago')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Descripción:
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="descripcion"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('descripcion')?.invalid &&
+                  this.form.get('descripcion')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Observaciones:
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                    formControlName="observaciones"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('observaciones')?.invalid &&
+                  this.form.get('observaciones')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="tituloModal=='REGISTRAR'">
+            <div class="card-header text-center">
+              INGRESE LA INFORMACIÓN DEL CLIENTE
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >N° Cédula de Identidad:</span
+                    >
+                    <input
+                      autofocus
+                      type="number"
+                      class="form-control"
+                      formControlName="ci_persona"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('ci_persona')?.invalid &&
+                  this.form.get('ci_persona')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Nombre:
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control text-uppercase"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                      formControlName="nombre"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('nombre')?.invalid &&
+                  this.form.get('nombre')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Apellido Paterno:
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control text-uppercase"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                      formControlName="a_paterno"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('a_paterno')?.invalid &&
+                  this.form.get('a_paterno')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Apellido Materno:
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control text-uppercase"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                      formControlName="a_materno"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('a_materno')?.invalid &&
+                  this.form.get('a_materno')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Celular:
+                    </span>
+                    <input
+                      type="number"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                      formControlName="celular"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('celular')?.invalid &&
+                  this.form.get('celular')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Email:
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                      formControlName="correo_electronico"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('correo_electronico')?.invalid &&
+                  this.form.get('correo_electronico')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-6 col-sm-12">
+                  <div class="input-group mb-3">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Dirección:
+                    </span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-default"
+                      formControlName="direccion"
+                    />
+                    <small
+                      *ngIf="
+                  this.form.get('direccion')?.invalid &&
+                  this.form.get('direccion')?.touched
+                "
+                      class="rojo"
+                      >* El campo es requerido</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 text-center footer-button">
+            <button
+              class="btn btn-outline-primary"
+              data-dismiss="modal"
+              (click)="agregarRegistroVentas()"
+            >
+              <i class="fas fa-user-alt"></i> {{tituloModal}}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

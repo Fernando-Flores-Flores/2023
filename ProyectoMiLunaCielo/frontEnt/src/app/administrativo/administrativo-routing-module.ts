@@ -9,6 +9,7 @@ import { RegistroInventariosComponent } from "./pages/registro-inventarios/regis
 import { RegistroOrdenTrabajoComponent } from "./pages/registro-orden-trabajo/registro-orden-trabajo.component";
 import { ListadoMistrabajosComponent } from "./pages/listado-mistrabajos/listado-mistrabajos.component";
 import { RegisterComponent } from "./auth/register/register.component";
+import { RegistroVentasComponent } from "./pages/registro-ventas/registro-ventas.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -19,10 +20,13 @@ const routes: Routes = [
     children: [
       { path: "home", component: HomeComponent },
       { path: "registroUsuarios", component: RegistroUsuariosComponent },
+      { path: "registroInventario/:parametro", component: RegistroInventariosComponent },
       { path: "listadoUsuarios", component: ListadoUsuarioComponent },
       { path: "registroOrden", component: RegistroOrdenTrabajoComponent },
       { path: "misTrabajos", component: ListadoMistrabajosComponent },
-      { path: "registroInventario/:parametro", component: RegistroInventariosComponent },
+      { path: "registroVentas", component: RegistroVentasComponent },
+      { path: "registroVentas/:parametro", component: RegistroVentasComponent },
+
 
 
       /*       { path: "prueba1", component: Prueba1Component },

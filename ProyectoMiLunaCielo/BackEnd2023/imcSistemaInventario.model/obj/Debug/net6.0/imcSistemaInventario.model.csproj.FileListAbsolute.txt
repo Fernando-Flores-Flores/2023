@@ -1,0 +1,12 @@
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\bin\Debug\net6.0\imcSistemaInventario.model.deps.json
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\bin\Debug\net6.0\imcSistemaInventario.model.dll
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\bin\Debug\net6.0\imcSistemaInventario.model.pdb
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.csproj.AssemblyReference.cache
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.GeneratedMSBuildEditorConfig.editorconfig
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.AssemblyInfoInputs.cache
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.AssemblyInfo.cs
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.csproj.CoreCompileInputs.cache
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.dll
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\refint\imcSistemaInventario.model.dll
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\imcSistemaInventario.model.pdb
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\imcSistemaInventario.model\obj\Debug\net6.0\ref\imcSistemaInventario.model.dll

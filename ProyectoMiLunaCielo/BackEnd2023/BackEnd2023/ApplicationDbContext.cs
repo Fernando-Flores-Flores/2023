@@ -22,6 +22,7 @@ namespace BackEnd2023
 
         public DbSet<Ventas> bd_Ventas { get; set; }
 
+        public DbSet<ordenTrabajo> bd_ordentrabajo { get; set; }
 
         public async Task<long> GuardarUsuario(usuario usuario)
         {

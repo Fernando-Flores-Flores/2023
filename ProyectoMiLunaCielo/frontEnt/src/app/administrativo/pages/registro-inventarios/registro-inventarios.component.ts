@@ -201,7 +201,7 @@ export class RegistroInventariosComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.suscription.unsubscribe();
+    //this.suscription.unsubscribe();
     this.dtTrigger.unsubscribe();
   }
 }

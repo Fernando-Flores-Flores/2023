@@ -17,6 +17,8 @@ namespace BackEnd2023.Utilitarios
             CreateMap<IdentityUser, usuarioDTO>();
             CreateMap<Claim, roles>();
             CreateMap<inventario, dto_Inventario>();
+            CreateMap<ordenTrabajo, OrdenTrabajoDTO>();
+
         }
     }
 }

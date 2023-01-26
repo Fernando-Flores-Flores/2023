@@ -18,6 +18,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FormularioAutenticacionComponent } from './auth/formulario-autenticacion/formulario-autenticacion.component';
 import { UtilitariosModule } from "../utilitarios/utilitarios.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegistroVentasComponent } from './pages/registro-ventas/registro-ventas.component';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -34,6 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListadoMistrabajosComponent,
     RegisterComponent,
     FormularioAutenticacionComponent,
+    RegistroVentasComponent,
   ],
   imports: [CommonModule, RouterModule,DataTablesModule,UtilitariosModule,  FormsModule,
     ReactiveFormsModule],
