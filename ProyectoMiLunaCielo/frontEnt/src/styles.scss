@@ -61,6 +61,12 @@
   font-weight: 700;
   color: var(--cafe);
 }
+
+.tituloPrincipal {
+  color: #361e0b;
+  font-size: 24px;
+  font-weight: 600;
+}
 .card-header {
   margin: 5px;
   padding: 10px;
@@ -108,11 +114,9 @@
   border-color: var(--cafe);
   background-color: #e4e4e4;
   font-weight: 700;
-  box-shadow: 29px -2px 15px 8px rgba(0,0,0,0.29);
-  -webkit-box-shadow: 29px -2px 15px 8px rgba(0,0,0,0.29);
-  -moz-box-shadow: 29px -2px 15px 8px rgba(0,0,0,0.29);
-
-
+  box-shadow: 29px -2px 15px 8px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: 29px -2px 15px 8px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 29px -2px 15px 8px rgba(0, 0, 0, 0.29);
 }
 .content-wrapper {
   background: rgb(180, 152, 101);
@@ -122,6 +126,7 @@
     rgba(218, 144, 96, 1) 35%,
     rgba(246, 193, 129, 1) 100%
   );
+  /*  background:#c11643; */
 }
 .font-size-10 {
   font-size: 13px !important;

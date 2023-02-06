@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { credencialesUsuario, usuarioDTO } from 'src/app/Model/auth';
+import { credencialesUsuario, PersonaInDto, usuarioDTO } from 'src/app/Model/auth';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs';
@@ -125,6 +125,9 @@ export class LoginService {
       )
     );
   }
+
+
+
   removerAdmin(usuarioId: string) {
     const headers = new HttpHeaders('Content-Type: application/json');
     return this.HttpClient.post(

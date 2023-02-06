@@ -1,14 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
+import { parsearErroresAPI, PersonaInDto } from 'src/app/Model/auth';
 import { InventarioDto, Response } from 'src/app/Model/inventario';
 import { Cliente, VentasDTO } from 'src/app/Model/ventas';
 import Swal from 'sweetalert2';
 import { InventariosService } from '../../service/inventarios.service';
 import { LoginService } from '../../service/login.service';
 import { MetodosService } from '../../service/metodos.service';
+import { UsuariosService } from '../../service/usuarios.service';
 import { VentasService } from '../../service/ventas.service';
 declare var $: any;
 
@@ -18,20 +27,25 @@ declare var $: any;
   styleUrls: ['./registro-ventas.component.scss'],
 })
 export class RegistroVentasComponent implements OnInit {
-  titulo: any = '';
+  titulo: any = 'ORDEN DE TRABAJO';
   idTipoFormulario: string = '';
   suscription!: Subscription;
   listaUsuarios: any = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: any = new Subject<any>();
   form: FormGroup;
+  listadoCuentas: any = [];
+  tipoRol: any = 'prod';
+  errores: string[];
+
   constructor(
     private ventasService: VentasService,
     private loginService: LoginService,
     private routerActivated: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private metodosService: MetodosService
+    private metodosService: MetodosService,
+    private usuariosService: UsuariosService
   ) {
     this.buildForm();
     this.dtTrigger.next();
@@ -46,14 +60,27 @@ export class RegistroVentasComponent implements OnInit {
     }
   }
 
+  async cargarListadosCuentasRol(valorRol: string) {
+    try {
+      let response: Response = await this.usuariosService.obtenerListaCuentas(
+        this.tipoRol
+      );
+      if (response.statusCode == 200) {
+        this.listadoCuentas = response.datos;
+        console.log('LISTAD CUENTAS');
+        console.log(this.listadoCuentas);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   ngOnInit(): void {
     this.dtOptions = this.loginService.dtOptions;
-    /*   this.verificarInvetarios(
-      this.routerActivated.snapshot.paramMap.get('parametro')!
-    );
-    */
     this.cargarRegistros(this.idTipoFormulario);
+    this.cargarListadosCuentasRol(this.tipoRol);
   }
+
   async verificarInvetarios(tipo: string) {
     switch (tipo) {
       case 'muebles':
@@ -93,7 +120,7 @@ export class RegistroVentasComponent implements OnInit {
   private buildForm() {
     this.form = this.formBuilder.group({
       fechaOrden: [this.metodosService.fechaActual(), [Validators.required]],
-      tipoTrabajo: ['', []],
+      tipoTrabajo: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       costo: ['', [Validators.required]],
       fechaEntregaAprox: ['', [Validators.required]],
@@ -106,11 +133,12 @@ export class RegistroVentasComponent implements OnInit {
       nombre: ['', []],
       direccion: ['', []],
       correo_electronico: ['', [Validators.required]],
+      idPersonalAsignado: [''],
     });
   }
 
   async agregarRegistroVentas() {
-    if (this.tituloModal == 'REGISTRO') {
+    if (this.tituloModal == 'REGISTRAR') {
       let cliente: Cliente = {
         ci_persona: this.form.get('ci_persona')?.value.toString().toUpperCase(),
         a_paterno: this.form.get('a_paterno')?.value.toUpperCase(),
@@ -130,6 +158,7 @@ export class RegistroVentasComponent implements OnInit {
           ?.value.toUpperCase(),
         observaciones: this.form.get('observaciones')?.value.toUpperCase(),
         tipoPago: this.form.get('tipoPago')?.value.toUpperCase(),
+        idPersonalAsignado: this.form.get('idPersonalAsignado')?.value,
         cliente: cliente,
       };
       try {
@@ -137,8 +166,6 @@ export class RegistroVentasComponent implements OnInit {
           body
         );
         if (response.statusCode == 200) {
-          console.log('Response');
-          console.log(JSON.stringify(response));
           Swal.fire({
             icon: 'success',
             title: 'Registro correcto',
@@ -147,14 +174,10 @@ export class RegistroVentasComponent implements OnInit {
             window.location.reload();
           });
         }
-      } catch (error) {
-        console.log(error);
-        Swal.fire({
-          icon: 'warning',
-          title: 'Incorrecto',
-          text: 'Se produjo un error',
-          confirmButtonText: 'Entendido',
-        }).then((result) => {});
+      } catch (errores) {
+        console.log('Errores');
+        console.log(errores);
+        this.errores = parsearErroresAPI(errores);
       }
     } else {
       this.editarOrdenTrabajo(this.bodyEditar);
@@ -173,6 +196,7 @@ export class RegistroVentasComponent implements OnInit {
         costo: parseInt(this.form.get('costo')?.value),
         observaciones: this.form.get('observaciones')?.value.toUpperCase(),
         tipoPago: this.form.get('tipoPago')?.value.toUpperCase(),
+        idPersonalAsignado: this.form.get('idPersonalAsignado')?.value,
         fechaEntregaAprox: item.fechaEntregaAprox,
         fechaOrden: item.fechaOrden,
         fechaCreacion: item.fechaCreacion,
@@ -202,14 +226,93 @@ export class RegistroVentasComponent implements OnInit {
     this.form.get('tipoPago')?.patchValue(item.tipoPago);
     this.form.get('fechaOrden')?.patchValue(fechaOrden);
     this.form.get('fechaEntregaAprox')?.patchValue(momentFinal);
-    this.form.get('observaciones')?.patchValue(item.observaciones);
-    this.form.get('tipoPago')?.patchValue(item.tipoPago);
     this.bodyEditar = item;
+  }
+
+  async verOrdenTrabajo(item: any) {
+    console.log(item);
   }
 
   setearPost() {
     this.tituloModal = 'REGISTRAR';
   }
+
+cliente1:Cliente={
+  ci_persona:         "",
+  a_paterno:          "",
+  a_materno:          "",
+  celular:            0,
+  nombre:             "",
+  direccion:          "",
+  correo_electronico: "",
+}
+  orden: VentasDTO={
+    fechaOrden:       new Date,
+    tipoTrabajo:       "",
+    descripcion:       "",
+    costo:             0,
+    fechaEntregaAprox: new Date,
+    observaciones:     "",
+    tipoPago:          "",
+    idPersonalAsignado:"",
+    cliente:    this.cliente1
+  };
+  personalAsignado: PersonaInDto={
+    ci_persona:         "",
+    a_paterno:          "",
+    a_materno:          "",
+    celular:            0,
+    nombre:             "",
+    direccion:          "",
+    correo_electronico: "",
+  }
+  async verOrdenCompleta(item: any) {
+    console.log(item);
+    let idCliente: number = item.idCliente;
+    let idOrdenTrabajo: number = item.idOrdenTrabajo;
+    let idPersonalAsignado: string = item.idPersonalAsignado;
+
+    try {
+      let response: any = await this.ventasService.obtenerListaOrdenes(
+        idCliente,
+        idOrdenTrabajo,
+        idPersonalAsignado
+      );
+      if (response.statusCode == 200) {
+        /* Orden */
+        this.orden.tipoTrabajo = response.listaOrdenes[0].tipoTrabajo;
+        this.orden.descripcion = response.listaOrdenes[0].descripcion;
+        this.orden.costo = response.listaOrdenes[0].costo;
+        this.orden.observaciones = response.listaOrdenes[0].observaciones;
+        this.orden.tipoPago = response.listaOrdenes[0].tipoPago;
+        this.orden.fechaEntregaAprox =
+          response.listaOrdenes[0].fechaEntregaAprox;
+        this.orden.fechaOrden = response.listaOrdenes[0].fechaOrden;
+        /* cliente */
+        this.orden.cliente.nombre =
+          response.listaClientes[0].nombre +
+          ' ' +
+          response.listaClientes[0].a_paterno +
+          ' ' +
+          response.listaClientes[0].a_materno;
+        this.orden.cliente.celular = response.listaClientes[0].celular;
+        this.orden.cliente.correo_electronico =
+          response.listaClientes[0].correo_electronico;
+        this.orden.cliente.direccion = response.listaClientes[0].direccion;
+        /* personalAsignado */
+        this.personalAsignado.nombre =
+          response.listaPersonalAsignado[0].nombre +
+          ' ' +
+          response.listaPersonalAsignado[0].a_paterno +
+          ' ' +
+          response.listaPersonalAsignado[0].a_materno;
+        this.personalAsignado.celular = response.listaPersonalAsignado[0].celular;
+        this.personalAsignado.correo_electronico =
+          response.listaPersonalAsignado[0].correo_electronico;
+      }
+    } catch (error: any) {}
+  }
+
   /*
   async eliminarRegsitro(item: any) {
     try {

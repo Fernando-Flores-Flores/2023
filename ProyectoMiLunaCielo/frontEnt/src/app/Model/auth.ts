@@ -45,3 +45,12 @@ export interface usuarioDTO{
   email:string;
   claims:any[];
 }
+export interface PersonaInDto {
+  ci_persona:         string;
+  a_paterno:          string;
+  a_materno:          string;
+  celular:            number;
+  nombre:             string;
+  direccion:          string;
+  correo_electronico: string;
+}

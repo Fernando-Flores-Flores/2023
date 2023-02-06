@@ -6,6 +6,7 @@ export interface VentasDTO {
   fechaEntregaAprox: Date;
   observaciones:     string;
   tipoPago:          string;
+  idPersonalAsignado:string;
   cliente:           Cliente;
 }
 

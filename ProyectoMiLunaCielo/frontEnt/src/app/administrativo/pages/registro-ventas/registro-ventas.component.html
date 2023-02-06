@@ -1,6 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180">
+  <path
+    fill="#c11643"
+    fill-opacity="1"
+    d="M0,160L48,160C96,160,192,160,288,165.3C384,171,480,181,576,160C672,139,768,85,864,90.7C960,96,1056,160,1152,176C1248,192,1344,160,1392,144L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+  ></path>
+  <text
+    x="100"
+    y="100"
+    class="tituloPrincipal"
+    fill="#fff"
+    style="
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 40px;
+      word-spacing: 3;
+    "
+  >
+    {{ titulo }}
+  </text>
+</svg>
 <section class="content">
   <div class="container-fluid">
     <div class="row">
+      <!--       <div class="col-md-12 col-lg-12 col-xl-12">
+        <h2 class="tituloPrincipal">{{ titulo }}</h2>
+      </div> -->
       <!--      <div class="col-md-4 col-lg-4 col-xl-4 text-right">
         <button
           (click)="generarReporteInventario()"
@@ -11,7 +34,7 @@
           GENERAR REPORTE
         </button>
       </div> -->
-      <div class="col-md-4 col-lg-4 col-xl-4 text-right my-3">
+      <div class="col-md-4 col-lg-4 col-xl-4 my-3">
         <button
           class="btn btn-dark"
           type="button"
@@ -25,73 +48,74 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-12 col-lg-12 col-xl-12 mb-4">
-                <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="card-body">
-              <table
-                datatable
-                [dtOptions]="dtOptions"
-                [dtTrigger]="dtTrigger"
-                class="table table-bordered table-hover table-responsive-xl font-size-10 table-striped row-border hover"
-              >
-                <thead class="fondo-cafe">
-                  <tr>
-                    <th>Tipo Trabajo</th>
-                    <th>Fecha Orden</th>
-                    <th>fecha Entrega Aprox</th>
-                    <th>Descripción</th>
-                    <th>Observaciones</th>
-                    <th>Costo</th>
-                    <th>Tipo Pago</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of listaUsuarios; let i = index">
-                    <td>
-                      {{ item.tipoTrabajo }}
-                    </td>
-                    <td>
-                      {{ item.fechaOrden |date:"yyyy/MM/dd"}}
-                    </td>
-                    <td>{{ item.fechaEntregaAprox |date:"yyyy/MM/dd"}}</td>
-                    <td>{{ item.descripcion }}</td>
-                    <td>{{ item.observaciones }}</td>
-                    <td>{{ item.costo }}</td>
-                    <td>{{ item.tipoPago }}</td>
+        <div class="card-body">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="table table-bordered table-hover table-responsive-xl font-size-10 table-striped row-border hover"
+          >
+            <thead class="fondo-cafe">
+              <tr>
+                <th>Tipo Trabajo</th>
+                <th>Fecha Orden</th>
+                <th>fecha Entrega Aprox</th>
+                <th>Descripción</th>
+                <th>Observaciones</th>
+                <th>Costo</th>
+                <th>Tipo Pago</th>
+                <th>Editar</th>
+                <th>Ver</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listaUsuarios; let i = index">
+                <td>
+                  {{ item.tipoTrabajo }}
+                </td>
+                <td>
+                  {{ item.fechaOrden |date:"yyyy/MM/dd"}}
+                </td>
+                <td>{{ item.fechaEntregaAprox |date:"yyyy/MM/dd"}}</td>
+                <td>{{ item.descripcion }}</td>
+                <td>{{ item.observaciones }}</td>
+                <td>{{ item.costo }}</td>
+                <td>{{ item.tipoPago }}</td>
 
-                    <td class="py-1 text-center">
-                      <button
-                        class="btn-sm btn-success mx-auto font-size-10"
-                        type="button"
-                        data-toggle="modal"
-                        data-target=".bd-example-modal-xl"
-                        (click)="setearOrdenTrabajo(item)"
-                      >
-                        <i class="fas fa-edit"></i>
-                      </button>
-                    </td>
-                    <td class="py-1 text-center">
-                      <button
-                        class="btn-sm btn-danger mx-auto font-size-10"
-                        type="button"
-                      >
-                        <i class="fas fa-eraser"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+                <td class="py-1 text-center">
+                  <button
+                    class="btn-sm btn-success mx-auto font-size-10"
+                    type="button"
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-xl"
+                    (click)="setearOrdenTrabajo(item)"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </td>
+                <td class="py-1 text-center">
+                  <button
+                    class="btn-sm btn-info mx-auto font-size-10"
+                    type="button"
+                    data-toggle="modal"
+                    data-target=".eye"
+                    (click)="verOrdenCompleta(item)"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </td>
+                <td class="py-1 text-center">
+                  <button
+                    class="btn-sm btn-danger mx-auto font-size-10"
+                    type="button"
+                  >
+                    <i class="fas fa-eraser"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -127,7 +151,7 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Fecha Orden Trabajo:</span
@@ -150,7 +174,7 @@
                   >
                 </div>
               </div>
-              <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Fecha Entrega Aprox:
@@ -173,7 +197,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Costo:
@@ -220,12 +244,14 @@
               <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
-                    >Tipo de Pago:
+                    >Tipo de pago:
                   </span>
                   <select class="form-control" formControlName="tipoPago">
+                    <option value="" selected disabled>Seleccione:</option>
                     <option value="TARJETA">TARJETA</option>
                     <option value="EFECTIVO">EFECTIVO</option>
                   </select>
+
                   <small
                     *ngIf="
                   this.form.get('tipoPago')?.invalid &&
@@ -288,7 +314,7 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="input-group mb-3">
                     <span
                       class="input-group-text"
@@ -314,7 +340,7 @@
                   </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="input-group mb-3">
                     <span
                       class="input-group-text"
@@ -339,7 +365,7 @@
                   </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="input-group mb-3">
                     <span
                       class="input-group-text"
@@ -363,7 +389,7 @@
                     >
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="input-group mb-3">
                     <span
                       class="input-group-text"
@@ -387,7 +413,7 @@
                     >
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="input-group mb-3">
                     <span
                       class="input-group-text"
@@ -411,7 +437,7 @@
                     >
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                   <div class="input-group mb-3">
                     <span
                       class="input-group-text"
@@ -462,6 +488,41 @@
               </div>
             </div>
           </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <h5 class="title">Asignar trabajo a:</h5>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Asignar a:
+                  </span>
+                  <select
+                    class="form-control"
+                    formControlName="idPersonalAsignado"
+                  >
+                    <option value="" selected disabled>Seleccione</option>
+                    <option
+                      *ngFor="let item of listadoCuentas"
+                      value="{{ item.id }}"
+                    >
+                      {{ item.email }}
+                    </option>
+                  </select>
+                  <small
+                    *ngIf="
+                  this.form.get('idPersonalAsignado')?.invalid &&
+                  this.form.get('idPersonalAsignado')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-12 text-center footer-button">
             <button
               class="btn btn-outline-primary"
@@ -473,6 +534,185 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+<!-- TODO: Modal VER -->
+
+<div
+  class="modal fade eye"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titulo" id="exampleModalLongTitle">
+          Detalle de la orden de trabajo
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table
+          class="table table-bordered table-hover table-responsive-xl font-size-10 table-striped row-border hover"
+        >
+          <tr>
+            <td>
+              Detalle
+            </td>
+            <td colspan="4">
+              Descripción
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Fecha de la orden:
+            </td>
+            <td colspan="4">
+              {{this.orden.fechaOrden}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Fecha de la entrega acordada:
+            </td>
+            <td colspan="4">
+              {{this.orden.fechaEntregaAprox}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tipo de trabajo:
+            </td>
+            <td colspan="4">
+              {{this.orden.tipoTrabajo}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Descripción:
+            </td>
+            <td colspan="4">
+              {{ this.orden.descripcion}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Monto total:
+            </td>
+            <td colspan="4">
+              {{this.orden.costo}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Observaciones:
+            </td>
+            <td colspan="4">
+              {{this.orden.observaciones}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tipo de trabajo:
+            </td>
+            <td colspan="4">
+              {{this.orden.tipoTrabajo}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tipo de pago:
+            </td>
+            <td colspan="4">
+              {{this.orden.tipoPago}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tipo de trabajo:
+            </td>
+            <td colspan="4">
+              {{this.orden.tipoTrabajo}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              DATOS DEL CLIENTE
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Nombre:
+            </td>
+            <td colspan="4">
+              {{ this.orden.cliente.nombre}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Celular:
+            </td>
+            <td colspan="4">
+              {{ this.orden.cliente.celular}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Correo:
+            </td>
+            <td colspan="4">
+              {{ this.orden.cliente.correo_electronico}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Dirección:
+            </td>
+            <td colspan="4">
+              {{this.orden.cliente.direccion}}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              PERSONAL RESPONSABLE DEL TRABAJO
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Nombre:
+            </td>
+            <td colspan="4">
+              {{ this.personalAsignado.nombre}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Celular:
+            </td>
+            <td colspan="4">
+              {{ this.personalAsignado.celular}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Correo:
+            </td>
+            <td colspan="4">
+              {{ this.personalAsignado.correo_electronico}}
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

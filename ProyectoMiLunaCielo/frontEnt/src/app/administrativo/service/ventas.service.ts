@@ -4,18 +4,23 @@ import { lastValueFrom } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VentasService {
   apiURL = environment.apiURL + 'OrdenTrabajo';
   apiURLReportes = environment.apiURL + 'ReportesPDF';
   constructor(private HttpClient: HttpClient) {}
-
-  async obtenerListaOrdenes(idCliente: number=0) {
+  /* https://localhost:7207/api/OrdenTrabajo/listaOrdenes?idCliente=0&idOrdenTrabajo=0&idPersonalAsignado=defecto */
+  async obtenerListaOrdenes(
+    idCliente: number = 0,
+    idOrdenTrabajo: number = 0,
+    idPersonalAsignado: string = 'defecto'
+  ) {
     let params = new HttpParams();
     params = params.append('idCliente', idCliente);
+    params = params.append('idOrdenTrabajo', idOrdenTrabajo);
+    params = params.append('idPersonalAsignado', idPersonalAsignado);
     return await lastValueFrom(
       this.HttpClient.get<any>(`${this.apiURL}/listaOrdenes`, {
         params,
@@ -29,10 +34,9 @@ export class VentasService {
     );
   }
 
-
-  async updateOrdenTrabajo(body: any,id:number) {
+  async updateOrdenTrabajo(body: any, id: number) {
     return await lastValueFrom(
-      this.HttpClient.put<any>(`${this.apiURL}/OrdenTrabajo/`+id, body)
+      this.HttpClient.put<any>(`${this.apiURL}/` + id, body)
     );
   }
 }
