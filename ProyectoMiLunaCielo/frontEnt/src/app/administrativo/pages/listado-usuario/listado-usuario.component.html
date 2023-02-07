@@ -1,118 +1,71 @@
 <section class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <div class="card" *ngIf="listaUsuarios">
-          <div class="card-header">
-            <h3 class="card-title font-weight-bold">
-              LISTADO DE USUARIOS REGISTRADOS
-            </h3>
+      <div class="card" *ngIf="listaUsuarios">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-9">
+              <h3 class="card-title font-weight-bold">
+                LISTADO DE USUARIOS REGISTRADOS
+              </h3>
+            </div>
+            <div class="col-md-3">
+              <button
+                class="btn btn-sm btn-outline-info"
+                routerLink="/admin/registroUsuarios"
+              >
+                Crear nuevo usuario
+              </button>
+            </div>
           </div>
-          <!--<div class="card-body">
-            <table
-              class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10"
-            >
-              <thead class="fondo-cafe">
-                <tr>
-                  <th>Id</th>
-                  <th>Nombre completo</th>
-                  <th>Email</th>
-                  <th>Celular</th>
-                  <th>Rol</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of listaUsuarios; let i = index">
-                  <td>
-                    {{ item.id }}
-                  </td>
-                  <td>
-                    {{ item.nombres }} {{ item.apellidoPaterno }}
-                    {{ item.apellidoMaterno }}
-                  </td>
-                  <td>{{ item.email }}</td>
-                  <td>{{ item.celular }}</td>
-                  <td>{{ item.rol }}</td>
-                  <td class="py-1 text-center">
-                    <button
-                      class="btn-sm btn-success mx-auto font-size-10"
-                      type="button"
-                    >
-                      <i class="fas fa-edit"></i>
-                    </button>
-                  </td>
-                  <td class="py-1 text-center">
-                    <button
-                      class="btn-sm btn-danger mx-auto font-size-10"
-                      type="button"
-                    >
-                      <i class="fas fa-eraser"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
-          <div class="col-12 card-body">
-            <table
-              datatable
-              [dtOptions]="dtOptions"
-              [dtTrigger]="dtTrigger"
-              class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10 table-striped row-border hover"
-            >
-              <thead class="fondo-cafe">
-                <tr>
-                  <th>#</th>
-                  <!--<th>Nombre completo</th>
+        </div>
+
+        <div class="col-12 card-body">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10 table-striped row-border hover"
+          >
+            <thead class="fondo-cafe">
+              <tr>
+                <th>#</th>
+                <!--<th>Nombre completo</th>
                   <th>Email</th>-->
-                  <!--   <th>Celular</th> -->
-                  <th>Email</th>
-                  <th>Rol</th>
-                  <th>Cambiar rol</th>
-                  <!--     <th>Remover Admin</th> -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of listaUsuarios; let i = index">
-                  <td>
-                    {{i}}
-                  </td>
-                  <!--                 <td>
+                <!--   <th>Celular</th> -->
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Cambiar rol</th>
+                <!--     <th>Remover Admin</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listaUsuarios; let i = index">
+                <td>
+                  {{i}}
+                </td>
+                <!--                 <td>
                     {{ item.nombres }} {{ item.apellidoPaterno }} {{
                     item.apellidoMaterno }}
                   </td> -->
-                  <td>{{ item.email }}</td>
-                  <td>
-                    <p class="" *ngFor="let item2 of item.claims ">
-                      {{item2.value }}
-                    </p>
-                  </td>
-                  <!--<td>{{ item.rol }}</td> -->
-                  <td class="py-1 text-center">
-                    <!--   <button
-                      class="btn-sm btn-success mx-auto font-size-10"
-                      type="button"
-                      (click)="hacerAdmin(item.id)"
-                    >
-                      <i class="fas fa-edit"></i>Hacer admin
-                    </button> -->
-                    <select
-                      class="form-control"
-                      (change)="cambiarRol(item)"
-                      [(ngModel)]="rol"
-                    >
-                      <option value="" disabled selected
-                        >Seleccione rol a asignar:</option
-                      >
-                      <option value="prod">Producción</option>
-                      <option value="ventas">Ventas</option>
-                      <option value="admin">Administrador</option>
-                      <option value="user">Usuario</option>
-                    </select>
-                  </td>
-                  <!--  <td class="py-1 text-center">
+                <td>{{ item.email }}</td>
+                <td>
+                  <p class="" *ngFor="let item2 of item.claims ">
+                    {{item2.value|roles }}
+                  </p>
+                </td>
+                <!--<td>{{ item.rol }}</td> -->
+                <td class="py-1 text-center">
+                  <button
+                    class="btn btn-outline-info"
+                    data-toggle="modal"
+                    data-target=".bd-example-modal-xl"
+                    (click)="envioItem(item)"
+                  >
+                    <i class="fas fa-check-square"></i> Asignar rol
+                  </button>
+                </td>
+                <!--  <td class="py-1 text-center">
                     <button
                       class="btn-sm btn-danger mx-auto font-size-10"
                       type="button"
@@ -121,12 +74,46 @@
                       <i class="fas fa-eraser"></i> Remover admin
                     </button>
                   </td> -->
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </section>
+<!-- TODO: MODAL-CREAR NUEVO USUARIO -->
+<div
+  class="modal fade bd-example-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titulo" id="exampleModalLongTitle">
+          Asignar rol a usuario.
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-content p-4">
+        <select class="form-control" (change)="cambiarRol()" [(ngModel)]="rol">
+          <option value="" disabled selected>Seleccione rol a asignar:</option>
+          <option value="prod">Producción</option>
+          <option value="ventas">Ventas</option>
+          <option value="admin">Administrador</option>
+          <option value="user">Usuario</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

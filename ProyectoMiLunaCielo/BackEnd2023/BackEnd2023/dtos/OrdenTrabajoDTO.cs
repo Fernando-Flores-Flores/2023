@@ -20,6 +20,8 @@ namespace BackEnd2023.dtos
         public string? Observaciones { get; set; }
         [Column("tipopago")]
         public string? TipoPago { get; set; }
+        [Column("idpersonalasignado")]
+        public string? idPersonalAsignado { get; set; }
 
         public PersonaInDto Cliente { get; set; }
     

@@ -23,25 +23,49 @@ namespace BackEnd2023.Controllers
         }
 
         [HttpGet("listaOrdenes")]
-        public async Task<ActionResult<List<ordenTrabajo>>> GetOrdenes(int idCliente = 0)
+        public async Task<ActionResult<List<ordenTrabajo>>> GetOrdenes(int idCliente = 0,int idOrdenTrabajo=0,string idPersonalAsignado="defecto")
         {
             try
             {
-
                 if (idCliente > 0)
                 {
-                    var ordenesFiltradas = await context.bd_ordentrabajo.FindAsync(idCliente);
-                    var lista = new List<ordenTrabajo>();
-                    lista.Add(ordenesFiltradas);
-                    //var personasRelacionadas = ordenesFiltradas.Select(o => o.IdCliente);
-                    //var listaOrdenes = await personasRelacionadas.ToListAsync();
-                    var response = new ResponseDto<List<ordenTrabajo>>()
+                    var listaClientes = new List<persona>();
+                    var listaOrdenes = new List<ordenTrabajo>();
+             
+                    var listaPersonalAsignado = new List<persona>();
+
+                    if (idCliente > 0)
+                    {
+                        var ordenesFiltradas = await context.bd_Persona.FindAsync(idCliente);
+                        listaClientes.Add(ordenesFiltradas);
+                    }
+                    if (idOrdenTrabajo > 0)
+                    {
+                        var ordenesFiltradas = await context.bd_ordentrabajo.FindAsync(idOrdenTrabajo);
+                        listaOrdenes.Add(ordenesFiltradas);
+                    }
+                    if (idPersonalAsignado != "defecto")
+                    {
+                        //var ordenesFiltradas = await context.bd_Persona.FindAsync(idPersonalAsignado);
+                        var ordenesFiltradas = await context.bd_Persona
+                                    .Where(x => x.idUsuario == idPersonalAsignado)
+                                    .ToListAsync();
+                        foreach (var persona in ordenesFiltradas)
+                        {
+                            listaPersonalAsignado.Add(persona);
+                        }
+                        // listaPersonalAsignado.Add(ordenesFiltradas);
+                    }
+
+                    var response = new OrdenTrabajoFinalDTO<List<persona>>()
                     {
                         statusCode = StatusCodes.Status200OK,
                         fechaConsulta = DateTime.Now,
                         codigoRespuesta = 1001,
                         MensajeRespuesta = "CORRECTO",
-                        datos = lista
+                        listaOrdenes = listaOrdenes,
+                        listaClientes = listaClientes,
+                        listaPersonalAsignado = listaPersonalAsignado,
                     };
                     return Ok(response);
                 }
@@ -57,7 +81,6 @@ namespace BackEnd2023.Controllers
                         datos = listaOrdenes
                     };
                     return Ok(response);
-
                 }
             }
             catch (Exception e)
@@ -103,6 +126,7 @@ namespace BackEnd2023.Controllers
                     FechaEntregaAprox = FechaEntrega,
                     Observaciones = request.Observaciones.ToUpper(),
                     TipoPago = request.TipoPago.ToUpper(),
+                    idPersonalAsignado = request.idPersonalAsignado,
                     IdCliente = idAsignado,
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,
@@ -137,7 +161,6 @@ namespace BackEnd2023.Controllers
             {
                 return BadRequest("El Id del autor  no coincide con el id de la URL");
             }
-
             try
             {
                 var existe = await context.bd_ordentrabajo.AnyAsync(x => x.IdOrdenTrabajo == idOrden);
@@ -162,13 +185,12 @@ namespace BackEnd2023.Controllers
                     Observaciones = request.Observaciones.ToUpper(),
                     TipoPago = request.TipoPago.ToUpper(),
                     IdCliente = request.IdCliente,
+                    idPersonalAsignado = request.idPersonalAsignado,
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,
                 };
-
                 context.Update(ordenTrabajo);
                 await context.SaveChangesAsync();
-
                 var lista = new List<ordenTrabajo>();
                 lista.Add(ordenTrabajo);
                 var response = new ResponseDto<List<ordenTrabajo>>()
@@ -209,6 +231,8 @@ namespace BackEnd2023.Controllers
             };
             return Ok(response);
         }
+
+
 
     }
 }

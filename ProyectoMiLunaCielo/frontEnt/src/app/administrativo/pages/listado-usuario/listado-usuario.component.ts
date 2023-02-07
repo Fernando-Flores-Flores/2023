@@ -18,6 +18,7 @@ export class ListadoUsuarioComponent implements OnDestroy, OnInit {
   listaUsuarios: any = [];
   dtOptions: DataTables.Settings = {};
   dtTrigger: any = new Subject<any>();
+  itemUsuario:any;
   ngOnInit(): void {
     this.dtOptions = this.loginService.dtOptions;
     /*     this.usuariosService.obtenerListaUsuarios().subscribe((resp: any) => {
@@ -103,7 +104,12 @@ export class ListadoUsuarioComponent implements OnDestroy, OnInit {
       }
     );
   }
-  cambiarRol(item: any) {
-    this.asignarRol(item.id, this.rol);
+  cambiarRol() {
+    this.asignarRol(this.itemUsuario.id, this.rol);
+  }
+
+  envioItem(item:any){
+    this.itemUsuario=item;
+
   }
 }

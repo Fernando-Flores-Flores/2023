@@ -71,7 +71,8 @@ namespace BackEnd2023.Controllers
                     fechaModificacion = FechaModificacion,
                     estado = request.estado,
                 };
-        
+                await context.AddAsync(registroInventario);
+                await context.SaveChangesAsync();
 
                 var response = new ResponseDto<inventario>()
                 {

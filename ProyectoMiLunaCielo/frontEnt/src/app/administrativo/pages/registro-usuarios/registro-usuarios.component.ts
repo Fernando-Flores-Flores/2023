@@ -59,7 +59,7 @@ export class RegistroUsuariosComponent implements OnInit {
             confirmButtonText: 'Entiendo',
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/login']);
+              this.router.navigate(['/admin/listadoUsuarios']);
             }
           });
         }

@@ -22,16 +22,15 @@ namespace BackEnd2023.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("listaOrdenes")]
-        public async Task<ActionResult<List<PersonaOutDto>>> GetPersonas(int idPersona = 0)
+        [HttpGet("listarPersonas")]
+        public async Task<ActionResult<List<PersonaOutDto>>> GetPersonas(string idUsuario = "IdUsuario")
         {
             try
             {
-                var ci = idPersona.ToString();
                 List<persona> personasFiltradas;
-                if (idPersona > 0)
+                if (idUsuario != "IdUsuario")
                 {
-                    personasFiltradas = await context.bd_Persona.Where(x => x.ci_persona == ci).ToListAsync();
+                    personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == idUsuario).ToListAsync();
                 }
                 else
                 {
@@ -81,7 +80,6 @@ namespace BackEnd2023.Controllers
                     MensajeRespuesta = "CORRECTO",
                     datos = cliente
                 };
-
                 return Ok(response);
             }
             catch (Exception e)

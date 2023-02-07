@@ -35,7 +35,7 @@ namespace BackEnd2023.Controllers
 
                 var personaIn = new persona()
                 {
-                    idUsuario = respIdUsuario,
+                    idUsuario = "0",
                     ci_persona = request.Persona.ci_persona.Trim(),
                     a_paterno = request.Persona.a_paterno.Trim(),
                     a_materno = request.Persona.a_materno.Trim(),

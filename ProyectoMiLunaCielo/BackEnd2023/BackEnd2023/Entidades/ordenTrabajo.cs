@@ -25,6 +25,10 @@ namespace BackEnd2023.Entidades
         [Column("tipopago")]
         public string? TipoPago { get; set; }
 
+        [Column("idpersonalasignado")]
+        public string? idPersonalAsignado { get; set; }
+
+
 
         [Column("fechaentregaaprox")]
         public DateTime? FechaEntregaAprox { get; set; }

@@ -19,6 +19,7 @@ import { FormularioAutenticacionComponent } from './auth/formulario-autenticacio
 import { UtilitariosModule } from "../utilitarios/utilitarios.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistroVentasComponent } from './pages/registro-ventas/registro-ventas.component';
+import { RolesPipe } from './pipes/roles.pipe';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -36,6 +37,7 @@ import { RegistroVentasComponent } from './pages/registro-ventas/registro-ventas
     RegisterComponent,
     FormularioAutenticacionComponent,
     RegistroVentasComponent,
+    RolesPipe,
   ],
   imports: [CommonModule, RouterModule,DataTablesModule,UtilitariosModule,  FormsModule,
     ReactiveFormsModule],

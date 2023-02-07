@@ -22,8 +22,9 @@ namespace BackEnd2023.Controllers
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly ILogger<UsuarioController> logger;
 
-        public CuentasController(UserManager<IdentityUser> userManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager, ApplicationDbContext context, IMapper mapper
+        public CuentasController(UserManager<IdentityUser> userManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager, ApplicationDbContext context, IMapper mapper, ILogger<UsuarioController> logger
             )
         {
             this.userManager = userManager;
@@ -31,19 +32,67 @@ namespace BackEnd2023.Controllers
             this.signInManager = signInManager;
             this.context = context;
             this.mapper = mapper;
+            this.logger = logger;
         }
-        [HttpPost("crear")]
-        public async Task<ActionResult<ResponseAutenticacion>> CrearCuentaUsuario([FromBody] CredencialesUsuario credenciales)
+
+        [HttpPost("CrearCuentaUsuario")]
+        public async Task<ActionResult<ResponseAutenticacion>> CrearCuentaUsuario([FromBody] PersonaInDto request)
         {
-            var usuarioEntity = new IdentityUser { UserName = credenciales.Email, Email = credenciales.Email };
-            var resultado = await userManager.CreateAsync(usuarioEntity, credenciales.password);
-            if (resultado.Succeeded)
+            try
             {
-                return await ConstruirToken(credenciales);
+                var idAsignado = "";
+                var usuarioEntity = new IdentityUser { UserName = request.correo_electronico, Email = request.correo_electronico };
+
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var resultado = await userManager.CreateAsync(usuarioEntity, "Tempo.2023@");
+                        if (resultado.Succeeded)
+                        {
+                            var usuarioCreado = await userManager.FindByNameAsync(usuarioEntity.UserName);
+                            idAsignado = usuarioCreado.Id;
+                        }
+                        else
+                        {
+                            return BadRequest(resultado.Errors);
+                        }
+                        var cliente = new persona()
+                        {
+                            ci_persona = request.ci_persona.Trim(),
+                            a_paterno = request.a_paterno.Trim().ToUpper(),
+                            a_materno = request.a_materno.Trim().ToUpper(),
+                            nombre = request.nombre.Trim().ToUpper(),
+                            celular = request.celular,
+                            direccion = request.direccion.Trim().ToUpper(),
+                            correo_electronico = request.correo_electronico.Trim(),
+                            idUsuario = idAsignado
+                        };
+                        await context.AddAsync(cliente);
+                        await context.SaveChangesAsync();
+                        transaction.Commit();
+                        var response = new ResponseDto<persona>()
+                        {
+                            statusCode = StatusCodes.Status200OK,
+                            fechaConsulta = DateTime.Now,
+                            codigoRespuesta = 1001,
+                            MensajeRespuesta = "CORRECTO",
+                            datos = cliente
+                        };
+                        return Ok(response);
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                        return BadRequest(ex.Message);
+                    }
+                }
             }
-            else
+            catch (Exception e)
             {
-                return BadRequest(resultado.Errors);
+                logger.LogError(e, e.Message);
+                return NotFound(e.Message);
             }
         }
 
@@ -66,13 +115,26 @@ namespace BackEnd2023.Controllers
 
         private async Task<ResponseAutenticacion> ConstruirToken(CredencialesUsuario credenciales)
         {
+            var response = new ResponseDto<List<persona>>();
+            List<persona> personasFiltradas;
+            var userId="";
+            var user = await userManager.FindByEmailAsync(credenciales.Email);
+            var result = await userManager.CheckPasswordAsync(user, credenciales.password);
+            if (result)
+            {
+                userId = user.Id;
+                personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == userId).ToListAsync();
+            }
+
             //Claims es un ocnjunto de informacion del usuario, lo que se puede mostrar
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Email, credenciales.Email),
                 new Claim(ClaimTypes.Role,"Rol"),
-
+             
             };
+            Claim idClaim = new Claim("Id", userId);
+            claims.Add(idClaim);
             var usuario = await userManager.FindByEmailAsync(credenciales.Email);
             var claimsDB = await userManager.GetClaimsAsync(usuario);
             claims.AddRange(claimsDB);
@@ -82,6 +144,16 @@ namespace BackEnd2023.Controllers
             var expiracion = DateTime.Now.AddDays(1);
             var token = new JwtSecurityToken(issuer: null, audience: null, claims: claims, expires: expiracion, signingCredentials: creds);
 
+            //TODO: Agregando datos al payload
+            //var claims2 = new List<Claim>
+            //           {
+            //           new Claim(ClaimTypes.Name, "John Doe"),
+            //           new Claim("CustomClaimType", "CustomClaimValue"),
+            //           };
+            //var jwtPayload = new JwtPayload(claims);
+            //var jwtToken = new JwtSecurityToken(jwtPayload);
+
+
             return new ResponseAutenticacion()
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -89,88 +161,34 @@ namespace BackEnd2023.Controllers
             };
         }
 
-        [HttpGet("listadoUsuarios")]
-        //public async Task<ActionResult<List<usuarioDTO>>> ListadoUsuario([FromQuery]PaginacionDTO paginacionDTO) { 
-        public async Task<ActionResult<List<usuarioDTO>>> ListadoUsuario()
-        {
-
-            //var queryable = context.Users.AsQueryable();
-            //    await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
-            //    var usuarios = await queryable.OrderBy(x => x.Email).Paginar(paginacionDTO).ToListAsync();
-            //return mapper.Map<List<usuarioDTO>>(usuarios);
-            var listaUsuario = await context.Users.ToListAsync();
-
-            //var listaRoles = await context.UserClaims.ToListAsync();
-
-            //return Ok(mapper.Map<List<AutorDto>>(autores));
-
-            //var resultado = await (from usuario in listaUsuario
-            //                       join rol in listaRoles on usuario.Id equals rol.UserId into roles
-            //                       select new usuarioDTO
-            //                       {
-            //                           Id = usuario.Id,
-            //                           Email = usuario.Email,
-            //                           roles = roles.ToList<IdentityUserClaim<string>>()
-            //                       }).ToList();
-
-            // var listaUsuarios = await userManager.GetUsersInRoleAsync("admin");
-            var listadoDeUsuariosConClaims = new List<usuarioDTO>();
-            foreach (var usuario in listaUsuario)
-            {
-                var claims = await userManager.GetClaimsAsync(usuario);
-                var roles = mapper.Map<List<roles>>(claims);
-                var usuarioConClaims = new usuarioDTO
-                {
-                    Id = usuario.Id,
-                    Email = usuario.Email,
-                    //Claims = claims
-                    Claims = roles
-                };
-                listadoDeUsuariosConClaims.Add(usuarioConClaims);
-            }
-
-
-
-
-            //  List<usuarioDTO> usuariosEnviar = new List<usuarioDTO>();
-            //  foreach (var item in listaUsuario)
-            //  {
-
-            //usuariosEnviar.Add(
-            //new usuarioDTO()
-            //{
-            //    Id = int.Parse(string.Concat(item.DepartamentoId, item.ProvinciaId, item.SeccionId, item.CantonId)),
-            //    CodigoGeograficoId = item.Id,
-            //    DepartamentoId = item.DepartamentoId,
-            //    ProvinciaId = item.ProvinciaId,
-            //    CantoId = item.CantonId,
-            //    SeccionId = item.SeccionId,
-            //    Departamento = item.Departamento,
-            //    Provincia = item.Provincia,
-            //    Seccion = item.Seccion,
-            //    Descripcion = item.Ciudad
-            //}
-
-
-            //     }
-            var response = new ResponseDto<object>()
-            {
-                statusCode = StatusCodes.Status200OK,
-                fechaConsulta = DateTime.Now,
-                codigoRespuesta = 1001,
-                MensajeRespuesta = "CORRECTO",
-                datos = listadoDeUsuariosConClaims,
-                // roles= listaRoles
-                //datos = new List<usuarioDTO>()
-                //{
-                //   listaUsuario= listaUsuario,
-                //}
-            };
-            return Ok(response);
-
-
-        }
-
+        //[HttpGet("listadoUsuarios")]
+        //public async Task<ActionResult<List<usuarioDTO>>> ListadoUsuario()
+        //{
+        //    var listaUsuario = await context.Users.ToListAsync();
+        //    var listadoDeUsuariosConClaims = new List<usuarioDTO>();
+        //    foreach (var usuario in listaUsuario)
+        //    {
+        //        var claims = await userManager.GetClaimsAsync(usuario);
+        //        var roles = mapper.Map<List<roles>>(claims);
+        //        var usuarioConClaims = new usuarioDTO
+        //        {
+        //            Id = usuario.Id,
+        //            Email = usuario.Email,
+        //            //Claims = claims
+        //            Claims = roles
+        //        };
+        //        listadoDeUsuariosConClaims.Add(usuarioConClaims);
+        //    }
+        //    var response = new ResponseDto<object>()
+        //    {
+        //        statusCode = StatusCodes.Status200OK,
+        //        fechaConsulta = DateTime.Now,
+        //        codigoRespuesta = 1001,
+        //        MensajeRespuesta = "CORRECTO",
+        //        datos = listadoDeUsuariosConClaims,
+        //    };
+        //    return Ok(response);
+        //}
 
         [HttpPost("asignarRol")]
         public async Task<ActionResult> asignarRol([FromBody] string usuarioId, string rol)
@@ -179,7 +197,7 @@ namespace BackEnd2023.Controllers
             var claims = await userManager.GetClaimsAsync(usuario);
             if (claims.Count == 0)
             {
-               await userManager.AddClaimAsync(usuario, new Claim("role", rol));
+                await userManager.AddClaimAsync(usuario, new Claim("role", rol));
             }
             else
             {
@@ -224,6 +242,62 @@ namespace BackEnd2023.Controllers
                 MensajeRespuesta = "EL ROL ADMIN FUE ELIMINADO",
             };
             return Ok(response);
+        }
+
+
+        [HttpGet("listadoUsuarios")]
+        public async Task<ActionResult> ListarUsuariosPorTipo(string? rol = "")
+        {
+            try
+            {
+                var listaUsuario = await context.Users.ToListAsync();
+                var listadoDeUsuariosConClaims = new List<usuarioDTO>();
+                foreach (var usuario in listaUsuario)
+                {
+                    if (rol != "")
+                    {
+                        var claims = await userManager.GetClaimsAsync(usuario);
+                        var claimsByType = claims.Where(c => c.Value == rol).ToList();
+                        if (claimsByType.Count() > 0)
+                        {
+                            var roles = mapper.Map<List<roles>>(claimsByType);
+                            var usuarioConClaims = new usuarioDTO
+                            {
+                                Id = usuario.Id,
+                                Email = usuario.Email,
+                                Claims = roles
+                            };
+                            listadoDeUsuariosConClaims.Add(usuarioConClaims);
+                        }
+                    }
+                    else
+                    {
+                        var claims = await userManager.GetClaimsAsync(usuario);
+                        var roles = mapper.Map<List<roles>>(claims);
+                        var usuarioConClaims = new usuarioDTO
+                        {
+                            Id = usuario.Id,
+                            Email = usuario.Email,
+                            //Claims = claims
+                            Claims = roles
+                        };
+                        listadoDeUsuariosConClaims.Add(usuarioConClaims);
+                    }
+                }
+                var response = new ResponseDto<object>()
+                {
+                    statusCode = StatusCodes.Status200OK,
+                    fechaConsulta = DateTime.Now,
+                    codigoRespuesta = 1001,
+                    MensajeRespuesta = "CORRECTO",
+                    datos = listadoDeUsuariosConClaims,
+                };
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
     }
