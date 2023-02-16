@@ -7,12 +7,15 @@
         ><i class="fas fa-bars"></i
       ></a>
     </li>
-    <li class="nav-item d-none d-sm-inline-block" *ngIf="this.loginService.obtenerRol()=='admin'">
+   <!--  <li
+      class="nav-item d-none d-sm-inline-block"
+      *ngIf="this.loginService.obtenerRol()=='admin'"
+    >
       <a href="index3.html" class="nav-link">Solo admin</a>
-    </li>
+    </li> -->
     <li class="nav-item d-none d-sm-inline-block">
       <!-- <a href="#" class="nav-link">ADMINISTRADOR (ROOT)</a> -->
-      <a href="#" class="nav-link">PRODUCCIÓN </a>
+      <a *ngIf="rolUsuario!=''" class="nav-link">{{rolUsuario|roles}} </a>
     </li>
   </ul>
 
@@ -82,7 +85,7 @@
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
           <!-- Message Start -->
-     <!--      <div class="media">
+          <!--      <div class="media">
             <img
               src="assets/dist/img/user8-128x128.jpg"
               alt="User Avatar"
@@ -106,7 +109,7 @@
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
           <!-- Message Start -->
-   <!--        <div class="media">
+          <!--        <div class="media">
             <img
               src="assets/dist/img/user3-128x128.jpg"
               alt="User Avatar"
@@ -127,12 +130,12 @@
           </div> -->
           <!-- Message End -->
         </a>
-<!--         <div class="dropdown-divider"></div>
+        <!--         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a> -->
       </div>
     </li>
     <!-- Notifications Dropdown Menu -->
- <!--    <li class="nav-item dropdown">
+    <!--    <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
         <i class="far fa-bell"></i>
         <span class="badge badge-warning navbar-badge">15</span>

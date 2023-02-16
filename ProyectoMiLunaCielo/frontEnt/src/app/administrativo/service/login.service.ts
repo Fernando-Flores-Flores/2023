@@ -89,6 +89,7 @@ export class LoginService {
       return '';
     }
     var dataToken = JSON.parse(atob(token.split('.')[1]));
+    //console.log(dataToken);
     return dataToken[campo];
   }
 

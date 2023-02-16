@@ -17,8 +17,8 @@ export class FormularioAutenticacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['', { validators: [Validators.required, Validators.email] }],
-      password: ['', { validators: [Validators.required] }],
+      email: ['userProduccion@gmail.com', { validators: [Validators.required, Validators.email] }],
+      password: ['Tempo.2023@', { validators: [Validators.required] }],
     });
   }
 

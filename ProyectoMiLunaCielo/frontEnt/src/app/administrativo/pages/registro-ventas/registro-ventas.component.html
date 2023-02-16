@@ -57,33 +57,53 @@
           >
             <thead class="fondo-cafe">
               <tr>
-                <th>Tipo Trabajo</th>
+                <!--        <th>Tipo Trabajo</th> -->
                 <th>Fecha Orden</th>
-                <th>fecha Entrega Aprox</th>
+                <th>Fecha Entrega</th>
                 <th>Descripción</th>
-                <th>Observaciones</th>
-                <th>Costo</th>
-                <th>Tipo Pago</th>
-                <th>Editar</th>
+                <th>Avance</th>
+                <th>Estado</th>
+                <!-- <th>Observaciones</th>
+               <th>Costo</th>
+                <th>Tipo Pago</th> -->
+                <td *ngIf="rolUsuario=='admin'">Editar</td>
                 <th>Ver</th>
                 <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of listaUsuarios; let i = index">
-                <td>
+                <!--      <td>
                   {{ item.tipoTrabajo }}
-                </td>
+                </td> -->
                 <td>
                   {{ item.fechaOrden |date:"yyyy/MM/dd"}}
                 </td>
                 <td>{{ item.fechaEntregaAprox |date:"yyyy/MM/dd"}}</td>
-                <td>{{ item.descripcion }}</td>
-                <td>{{ item.observaciones }}</td>
+                <td style="min-width: 300px;">{{ item.descripcion }}</td>
+                <!--       <td>{{ item.observaciones }}</td>
                 <td>{{ item.costo }}</td>
-                <td>{{ item.tipoPago }}</td>
+                <td>{{ item.tipoPago }}</td> -->
+                <td>
+                  <div
+                    class="progress"
+                    style="min-width: 200px; width: 100%; border-radius: 5px;"
+                  >
+                    <div
+                      class="progress-bar bg-info"
+                      role="progressbar"
+                      [style.width]="item.avance + '%'"
+                      aria-valuenow="item.avance"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      {{ item.avance }}%
+                    </div>
+                  </div>
+                </td>
+                <td>{{ item.estado }}</td>
 
-                <td class="py-1 text-center">
+                <td class="py-1 text-center" *ngIf="rolUsuario=='admin'">
                   <button
                     class="btn-sm btn-success mx-auto font-size-10"
                     type="button"
@@ -421,7 +441,7 @@
                       >Celular:
                     </span>
                     <input
-                      type="number"
+                      type="text"
                       class="form-control"
                       aria-label="Sizing example input"
                       aria-describedby="inputGroup-sizing-default"
@@ -563,7 +583,7 @@
       </div>
       <div class="modal-body">
         <table
-          class="table table-bordered table-hover table-responsive-xl font-size-10 table-striped row-border hover"
+          class="table table-bordered table-hover table-responsive-md font-size-10 table-striped row-border hover"
         >
           <tr>
             <td>

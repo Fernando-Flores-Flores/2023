@@ -1,0 +1,63 @@
+h1 {
+  float: left;
+  width: 100%;
+  color: #232323;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+h1 span {
+  font-family: "Libre Baskerville", serif;
+  display: block;
+  font-size: 45px;
+  text-transform: none;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  font-weight: 700;
+}
+h1 a {
+  color: #131313;
+  font-weight: bold;
+}
+
+/*Profile Card 5*/
+.profile-card-5 {
+  margin-top: 20px;
+}
+.profile-card-5 .btn {
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 7px 20px;
+}
+.profile-card-5 .card-img-block {
+  width: 91%;
+  margin: 0 auto;
+  position: relative;
+  top: -20px;
+}
+.profile-card-5 .card-img-block img {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.63);
+}
+.profile-card-5 h5 {
+  color: #361e0b;
+  font-weight: 600;
+}
+.profile-card-5 p {
+  font-size: 14px;
+  font-weight: 300;
+}
+.profile-card-5 .btn-primary {
+  background-color: #361e0b;
+  border-color: #361e0b;
+}
+.card-footerV2 {
+  border-radius: 10px;
+  background: rgb(193, 22, 67);
+  background: linear-gradient(
+    90deg,
+    rgba(193, 22, 67, 1) 0%,
+    rgba(255, 212, 228, 1) 5%
+  );
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.423);
+}

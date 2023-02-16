@@ -250,3 +250,4 @@ D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\BackEnd2023\bin\Debug\net6.0\Micros
 D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\BackEnd2023\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\BackEnd2023\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\BackEnd2023\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\UMSA 2023\ProyectoMiLunaCielo\BackEnd2023\BackEnd2023\bin\Debug\net6.0\BackEnd2023.staticwebassets.runtime.json

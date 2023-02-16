@@ -90,8 +90,58 @@ namespace BackEnd2023.Controllers
             }
         }
 
+        [HttpGet("listaOrdenesPorID")]
+        public async Task<ActionResult<List<ordenTrabajo>>> GetOrdenesPorID(string idPersonalAsignado = "defecto")
+        {
+            try
+            {
+                if (idPersonalAsignado != "defecto")
+                {
+                    var listaOrdenes = new List<ordenTrabajo>();
+
+                    var ordenesFiltradas = await context.bd_ordentrabajo
+                                .Where(x => x.idPersonalAsignado== idPersonalAsignado)
+                                .ToListAsync();
+                    foreach (var persona in ordenesFiltradas)
+                    {
+                        listaOrdenes.Add(persona);
+                    }
+                    var response = new OrdenTrabajoFinalDTO<List<ordenTrabajo>>()
+                    {
+                        statusCode = StatusCodes.Status200OK,
+                        fechaConsulta = DateTime.Now,
+                        codigoRespuesta = 1001,
+                        MensajeRespuesta = "CORRECTO",
+                        listaOrdenes=listaOrdenes
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    var listaOrdenes = await context.bd_ordentrabajo.ToListAsync();
+                    var response = new ResponseDto<List<ordenTrabajo>>()
+                    {
+                        statusCode = StatusCodes.Status200OK,
+                        fechaConsulta = DateTime.Now,
+                        codigoRespuesta = 1001,
+                        MensajeRespuesta = "CORRECTO",
+                        datos = listaOrdenes
+                    };
+                    return Ok(response);
+                }
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, e.Message);
+                return NotFound(e.Message);
+            }
+        }
+
+
+
+
         [HttpPost("CrearOrdenTrabajo")]
-        public async Task<ActionResult<ResponseDto<long>>> PostUsuario([FromBody] OrdenTrabajoDTO request)
+        public async Task<ActionResult<ResponseDto<long>>> PostOrdenTrabajo([FromBody] OrdenTrabajoDTO request)
         {
             try
             {
@@ -130,6 +180,8 @@ namespace BackEnd2023.Controllers
                     IdCliente = idAsignado,
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,
+                    estado = "creado",
+                    avance = 0
 
                 };
                 await context.AddAsync(ordenTrabajo);

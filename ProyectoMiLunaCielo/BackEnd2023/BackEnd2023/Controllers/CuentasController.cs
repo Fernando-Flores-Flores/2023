@@ -23,8 +23,10 @@ namespace BackEnd2023.Controllers
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly ILogger<UsuarioController> logger;
+        private readonly IAlmacenadorArchivos almacenadorArchivos;
+        private readonly string contenedor = "personas";
 
-        public CuentasController(UserManager<IdentityUser> userManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager, ApplicationDbContext context, IMapper mapper, ILogger<UsuarioController> logger
+        public CuentasController(UserManager<IdentityUser> userManager, IConfiguration configuration, SignInManager<IdentityUser> signInManager, ApplicationDbContext context, IMapper mapper, ILogger<UsuarioController> logger, IAlmacenadorArchivos almacenadorArchivos
             )
         {
             this.userManager = userManager;
@@ -33,10 +35,11 @@ namespace BackEnd2023.Controllers
             this.context = context;
             this.mapper = mapper;
             this.logger = logger;
+            this.almacenadorArchivos = almacenadorArchivos;
         }
 
         [HttpPost("CrearCuentaUsuario")]
-        public async Task<ActionResult<ResponseAutenticacion>> CrearCuentaUsuario([FromBody] PersonaInDto request)
+        public async Task<ActionResult<ResponseAutenticacion>> CrearCuentaUsuario([FromForm] PersonaInDto request)
         {
             try
             {
@@ -57,6 +60,7 @@ namespace BackEnd2023.Controllers
                         {
                             return BadRequest(resultado.Errors);
                         }
+
                         var cliente = new persona()
                         {
                             ci_persona = request.ci_persona.Trim(),
@@ -68,8 +72,14 @@ namespace BackEnd2023.Controllers
                             correo_electronico = request.correo_electronico.Trim(),
                             idUsuario = idAsignado
                         };
+                        if (request.foto != null)
+                        {
+                            cliente.foto = await almacenadorArchivos.GuardarArchivo(contenedor, request.foto);
+                        }
+
                         await context.AddAsync(cliente);
                         await context.SaveChangesAsync();
+
                         transaction.Commit();
                         var response = new ResponseDto<persona>()
                         {
@@ -117,13 +127,21 @@ namespace BackEnd2023.Controllers
         {
             var response = new ResponseDto<List<persona>>();
             List<persona> personasFiltradas;
-            var userId="";
+            var userId = "";
+            var nombreUsuarioLogeado = "";
+            var rutaFoto = "";
+
+
+
             var user = await userManager.FindByEmailAsync(credenciales.Email);
             var result = await userManager.CheckPasswordAsync(user, credenciales.password);
             if (result)
             {
                 userId = user.Id;
                 personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == userId).ToListAsync();
+                nombreUsuarioLogeado = personasFiltradas[0].nombre + " " + personasFiltradas[0].a_paterno;
+                rutaFoto = personasFiltradas[0].foto;
+
             }
 
             //Claims es un ocnjunto de informacion del usuario, lo que se puede mostrar
@@ -131,10 +149,24 @@ namespace BackEnd2023.Controllers
             {
                 new Claim(ClaimTypes.Email, credenciales.Email),
                 new Claim(ClaimTypes.Role,"Rol"),
-             
+
             };
             Claim idClaim = new Claim("Id", userId);
+            Claim nombreUserLogeado = new Claim("nombreUsuarioLogeado", nombreUsuarioLogeado);
+            if (rutaFoto != null)
+            {
+                System.Net.WebClient webClient = new System.Net.WebClient();
+                byte[] imageBytes = webClient.DownloadData(rutaFoto);
+                string base64String = System.Convert.ToBase64String(imageBytes);
+                string imageSrc = "data:image/jpeg;base64," + base64String;
+                Claim rutaFotoUserLogeado = new Claim("rutaFoto", imageSrc);
+                claims.Add(rutaFotoUserLogeado);
+
+            }
+
+
             claims.Add(idClaim);
+            claims.Add(nombreUserLogeado);
             var usuario = await userManager.FindByEmailAsync(credenciales.Email);
             var claimsDB = await userManager.GetClaimsAsync(usuario);
             claims.AddRange(claimsDB);

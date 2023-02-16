@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using BackEnd2023.Utilitarios;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +20,13 @@ namespace BackEnd2023
         {
             services.AddCors();
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+
+
+            services.AddTransient<IAlmacenadorArchivos, AlmacenarArchivos>();
+
+            services.AddHttpContextAccessor();
+
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("defaultConnection")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
@@ -84,6 +92,10 @@ namespace BackEnd2023
             }
 
             app.UseHttpsRedirection();
+
+            //Para subir localmente las fotos
+            app.UseStaticFiles();
+
             app.UseRouting();
             app.UseAuthorization();
 

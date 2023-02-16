@@ -14,7 +14,7 @@ export interface Cliente {
   ci_persona:         string;
   a_paterno:          string;
   a_materno:          string;
-  celular:            number;
+  celular:            string;
   nombre:             string;
   direccion:          string;
   correo_electronico: string;

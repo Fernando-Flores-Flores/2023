@@ -1,54 +1,55 @@
-<!-- TODO: MODAL-CONFIRMAR SOLICITUD -->
-<div
-  class="modal fade"
-  id="showInconsistencia"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1"
-  role="dialog"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title subttitleN w-100" id="exampleModalToggleLabel">
-          Registro asegurado
-        </h4>
-      </div>
-      <div class="modal-body">
-        <h3
-          align="center"
-          class="modal-title w-100 subtitle"
-          id="exampleModalToggleLabel"
-        >
-          ¿ Usted desea registrar un asegurado dependiente o un socio
-          cooperativista ?
-        </h3>
-        <br />
-        <div class="card p-30">
-          <div class="row">
-            <div class="col-sm-6 text-center">
-              <button
-                class="btn-Gestora-Cuadrado"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                Dependiente
-              </button>
-            </div>
-            <div class="col-sm-6 text-center">
-              <button
-                class="btn-Gestora-Cuadrado"
-                data-dismiss="modal"
-                aria-label="Close"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180">
+  <path
+    fill="#c11643"
+    fill-opacity="1"
+    d="M0,160L48,160C96,160,192,160,288,165.3C384,171,480,181,576,160C672,139,768,85,864,90.7C960,96,1056,160,1152,176C1248,192,1344,160,1392,144L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
+  ></path>
+  <text
+    x="40"
+    y="80"
+    class="tituloPrincipal"
+    fill="#fff"
+    style="
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      word-spacing: 3;
+    "
+  >
+    {{ titulo }}
+  </text>
+</svg>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mt-4" *ngFor="let item of listaPrdenesTrabajo">
+        <div class="card profile-card-5">
+          <div class="card-img-block">
+            <img
+              class="card-img-top"
+              src="assets\dist\img\alasitas.jpg"
+              alt="Card image cap"
+            />
+          </div>
+          <div class="card-body">
+            <p class="card-title">Descripción: {{item.descripcion}}</p>
+            <p class="card-text">
+              Tipo trabajo: {{item.tipoTrabajo}}<br />
 
-              >
-                Social Cooperativista
-              </button>
-            </div>
+              Observaciones: {{item.observaciones}}
+            </p>
           </div>
         </div>
+        <p class="mt-2 w-100 float-left text-justify px-4 card-footerV2">
+          <strong>
+            Fecha de asignación: {{item.fechaOrden| date: "dd-MM-yyyy"
+            }}</strong
+          ><br />
+          <strong>
+            Fecha entrega: {{item.fechaEntregaAprox| date: "dd-MM-yyyy"
+            }}</strong
+          >
+        </p>
       </div>
     </div>
   </div>
-</div>
-
+</section>

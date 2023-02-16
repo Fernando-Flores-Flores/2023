@@ -33,6 +33,13 @@ namespace BackEnd2023.Entidades
         [Column("fechaentregaaprox")]
         public DateTime? FechaEntregaAprox { get; set; }
 
+
+        [Column("avance")]
+        public int? avance { get; set; }
+
+        [Column("estado")]
+        public string? estado { get; set; }
+
         [Column("fechaorden")]
         public DateTime? FechaOrden { get; set; }
         public DateTime? fechaCreacion { get; set; }

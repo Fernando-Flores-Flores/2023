@@ -1,10 +1,6 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   OnInit,
-  ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,12 +10,10 @@ import { parsearErroresAPI, PersonaInDto } from 'src/app/Model/auth';
 import { InventarioDto, Response } from 'src/app/Model/inventario';
 import { Cliente, VentasDTO } from 'src/app/Model/ventas';
 import Swal from 'sweetalert2';
-import { InventariosService } from '../../service/inventarios.service';
 import { LoginService } from '../../service/login.service';
 import { MetodosService } from '../../service/metodos.service';
 import { UsuariosService } from '../../service/usuarios.service';
 import { VentasService } from '../../service/ventas.service';
-declare var $: any;
 
 @Component({
   selector: 'app-registro-ventas',
@@ -27,7 +21,7 @@ declare var $: any;
   styleUrls: ['./registro-ventas.component.scss'],
 })
 export class RegistroVentasComponent implements OnInit {
-  titulo: any = 'ORDEN DE TRABAJO';
+  titulo: any = 'ORDEN DE TRABAJOS';
   idTipoFormulario: string = '';
   suscription!: Subscription;
   listaUsuarios: any = [];
@@ -37,11 +31,11 @@ export class RegistroVentasComponent implements OnInit {
   listadoCuentas: any = [];
   tipoRol: any = 'prod';
   errores: string[];
+  rolUsuario = '';
 
   constructor(
     private ventasService: VentasService,
     private loginService: LoginService,
-    private routerActivated: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
     private metodosService: MetodosService,
@@ -75,10 +69,11 @@ export class RegistroVentasComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.dtOptions = this.loginService.dtOptions;
     this.cargarRegistros(this.idTipoFormulario);
     this.cargarListadosCuentasRol(this.tipoRol);
+    this.rolUsuario = await this.loginService.obtenerCampoJWT('role');
   }
 
   async verificarInvetarios(tipo: string) {
@@ -129,7 +124,14 @@ export class RegistroVentasComponent implements OnInit {
       ci_persona: ['', [Validators.required]],
       a_paterno: ['', []],
       a_materno: ['', []],
-      celular: ['', [Validators.required]],
+      celular: [
+        '',
+        [
+          Validators.pattern(/^[1-9]\d{6,10}$/),
+          Validators.max(99999999),
+          Validators.required,
+        ],
+      ],
       nombre: ['', []],
       direccion: ['', []],
       correo_electronico: ['', [Validators.required]],
@@ -143,7 +145,7 @@ export class RegistroVentasComponent implements OnInit {
         ci_persona: this.form.get('ci_persona')?.value.toString().toUpperCase(),
         a_paterno: this.form.get('a_paterno')?.value.toUpperCase(),
         a_materno: this.form.get('a_materno')?.value.toUpperCase(),
-        celular: parseInt(this.form.get('celular')?.value),
+        celular: this.form.get('celular')?.value,
         nombre: this.form.get('nombre')?.value.toUpperCase(),
         direccion: this.form.get('direccion')?.value.toUpperCase(),
         correo_electronico: this.form.get('correo_electronico')?.value,
@@ -241,7 +243,7 @@ cliente1:Cliente={
   ci_persona:         "",
   a_paterno:          "",
   a_materno:          "",
-  celular:            0,
+  celular:            "",
   nombre:             "",
   direccion:          "",
   correo_electronico: "",
@@ -261,7 +263,7 @@ cliente1:Cliente={
     ci_persona:         "",
     a_paterno:          "",
     a_materno:          "",
-    celular:            0,
+    celular:            "",
     nombre:             "",
     direccion:          "",
     correo_electronico: "",

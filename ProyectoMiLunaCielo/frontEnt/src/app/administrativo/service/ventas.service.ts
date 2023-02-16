@@ -28,6 +28,22 @@ export class VentasService {
     );
   }
 
+
+  //https://localhost:7207/api/OrdenTrabajo/listaOrdenesPorID?idPersonalAsignado=b303aeaf-d919-4980-ba7b-1f82fa2dc159
+  async obtenerListaOrdenesPorID(
+    idPersonalAsignado: string = 'defecto'
+  ) {
+    let params = new HttpParams();
+    params = params.append('idPersonalAsignado', idPersonalAsignado);
+    return await lastValueFrom(
+      this.HttpClient.get<any>(`${this.apiURL}/listaOrdenesPorID`, {
+        params,
+      })
+    );
+  }
+
+
+
   async agregarRegistroVentas(body: VentasDTO) {
     return await lastValueFrom(
       this.HttpClient.post<any>(`${this.apiURL}/CrearOrdenTrabajo`, body)

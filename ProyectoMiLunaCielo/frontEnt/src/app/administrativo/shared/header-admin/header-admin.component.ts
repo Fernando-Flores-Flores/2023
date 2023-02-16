@@ -1,19 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { EnvioDatosEntreComponentesService } from '../../service/envio-datos-entre-componentes.service';
 import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-header-admin',
   templateUrl: './header-admin.component.html',
-  styleUrls: ['./header-admin.component.scss']
+  styleUrls: ['./header-admin.component.scss'],
 })
 export class HeaderAdminComponent implements OnInit {
+  constructor(
+    public loginService: LoginService,
+    private envioDatos: EnvioDatosEntreComponentesService
+  ) {}
+  rolUsuario = '';
+  async ngOnInit() {
+    try {
+ /*      await this.envioDatos.currentMessage.subscribe(
+        (message) =>{
+          this.rolUsuario = message;
+          console.log("WWWWWWWWWWWWWWWWWDDDDDD");
+          console.log("WWWWWWWWWWWWWWWWWDDDDDD");
+          console.log("WWWWWWWWWWWWWWWWWDDDDDD");
 
-  constructor(public loginService: LoginService, private router: Router) {}
+          console.log(this.rolUsuario);
+          console.log("WWWWWWWWWWWWWWWWWDDDDDD");
+          console.log("WWWWWWWWWWWWWWWWWDDDDDD");
+          console.log("WWWWWWWWWWWWWWWWWDDDDDD");
 
-  ngOnInit(): void {
+        }
+      ); */
+      this.rolUsuario = await this.loginService.obtenerCampoJWT('role');
+    } catch (error) {
+      console.error(error);
+    }
   }
-  logout(){
+  logout() {
     this.loginService.logout();
   }
 }

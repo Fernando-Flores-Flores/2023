@@ -8,6 +8,7 @@
       class="brand-image img-circle elevation-3"
       style="opacity: 0.8;"
     />
+
     <span class="brand-text font-weight-light">MI LUNA CIELO</span>
   </a>
 
@@ -15,15 +16,22 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
+      <div class="">
         <img
-          src="assets/dist/img/user2-160x160.jpg"
-          class="img-circle elevation-2"
+          *ngIf="!fotoPerfil"
+          src="assets\dist\img\iconoUsuario.png"
+          class="img-circle image elevation-2"
           alt="User Image"
+        />
+        <img
+          [src]="fotoPerfil"
+          *ngIf="fotoPerfil"
+          alt="LUNA Logo"
+          class="img-circle image elevation-2"
         />
       </div>
       <div class="info">
-        <a class="d-block">Fernando</a>
+        <a class="d-block">{{nombreUsuario}}</a>
       </div>
     </div>
 
@@ -67,6 +75,7 @@
         </li>
         <li class="nav-item">
           <a
+            *ngIf="this.rolUsuario=='admin'"
             class="nav-link"
             [routerLink]="['/admin/registroVentas']"
             routerLinkActive="active"
@@ -78,7 +87,10 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li
+          class="nav-item"
+          *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas' "
+        >
           <a class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
@@ -88,11 +100,6 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <!--  <a
-                [routerLink]="['/admin/registroInventario', 'muebles']"
-                routerLinkActive="active"
-                class="nav-link"
-              > -->
               <a
                 href="/admin/registroInventario/muebles"
                 routerLinkActive="active"
@@ -103,12 +110,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--               <a
-                [routerLink]="['/admin/registroInventario', 'maquinaria']"
-                routerLinkActive="active"
-                class="nav-link"
-              >
-               -->
               <a
                 href="/admin/registroInventario/maquinaria"
                 routerLinkActive="active"
@@ -119,14 +120,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--               <a
-                [routerLink]="[
-                  '/admin/registroInventario',
-                  'equiposComputacion'
-                ]"
-                routerLinkActive="active"
-                class="nav-link"
-              > -->
               <a
                 href="
                 /admin/registroInventario/equiposComputacion"
@@ -138,14 +131,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--      <a
-                [routerLink]="[
-                  '/admin/registroInventario',
-                  'equiposComunicacion'
-                ]"
-                routerLinkActive="active"
-                class="nav-link"
-              > -->
               <a
                 href="/admin/registroInventario/equiposComunicacion
               "
@@ -157,14 +142,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--  <a
-                [routerLink]="[
-                  '/admin/registroInventario',
-                  'materialEscritorio'
-                ]"
-                routerLinkActive="active"
-                class="nav-link"
-              > -->
               <a
                 href="/admin/registroInventario/materialEscritorio
               "
@@ -176,11 +153,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--               <a
-                [routerLink]="['/admin/registroInventario', 'cocina']"
-                routerLinkActive="active"
-                class="nav-link"
-              > -->
               <a
                 href="/admin/registroInventario/cocina"
                 routerLinkActive="active"
@@ -191,11 +163,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <!--          <a
-                [routerLink]="['/admin/registroInventario', 'activosFijos']"
-                routerLinkActive="active"
-                class="nav-link"
-              > -->
               <a
                 href="/admin/registroInventario/activosFijos"
                 routerLinkActive="active"
@@ -207,7 +174,10 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
+        <li
+          class="nav-item"
+          *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas'"
+        >
           <a class="nav-link">
             <i class="nav-icon fas fa-users"></i>
             <p>
@@ -238,16 +208,10 @@
                 <p>Listado de usuarios</p>
               </a>
             </li>
-            <!--  <li class="nav-item">
-              <a href="pages/layout/boxed.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Registro de ventas</p>
-              </a>
-            </li> -->
           </ul>
         </li>
 
-    <!--     <li class="nav-item">
+        <!--     <li class="nav-item">
           <a class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
@@ -264,15 +228,19 @@
             </li>
           </ul>
         </li> -->
-        <li class="nav-item">
-          <a class="nav-link">
+        <!--       <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/admin/listadoUsuarios']"
+            routerLinkActive="active"
+          >
             <i class="nav-icon fas fa-table"></i>
             <p>
               REPORTES
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          <!--       <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="pages/tables/simple.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
@@ -291,7 +259,19 @@
                 <p>jsGrid</p>
               </a>
             </li>
-          </ul> -->
+          </ul>
+        </li>-->
+        <li class="nav-item" *ngIf="this.rolUsuario=='prod'">
+          <a
+            class="nav-link"
+            [routerLink]="['/admin/misTrabajos']"
+            routerLinkActive="active"
+          >
+            <i class="nav-icon fas fa-tasks"></i>
+            <p>
+              MIS TRABAJOS
+            </p>
+          </a>
         </li>
       </ul>
     </nav>

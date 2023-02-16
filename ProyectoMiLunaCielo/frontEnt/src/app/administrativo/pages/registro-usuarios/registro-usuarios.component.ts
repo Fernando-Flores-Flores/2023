@@ -34,10 +34,18 @@ export class RegistroUsuariosComponent implements OnInit {
       ci_persona: ['', [Validators.required]],
       a_paterno: ['', [Validators.required]],
       a_materno: ['', [Validators.required]],
-      celular: ['', [Validators.required]],
+      celular: [
+        '',
+        [
+          Validators.pattern(/^[1-9]\d{6,10}$/),
+          Validators.max(99999999),
+          Validators.required,
+        ],
+      ],
       nombre: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       correo_electronico: ['', [Validators.required, Validators.email]],
+      foto: ['', [Validators.required]],
     });
   }
 
@@ -73,4 +81,13 @@ export class RegistroUsuariosComponent implements OnInit {
       this.errores = parsearErroresAPI(error);
     }
   }
+
+  imagenCambiada = false;
+
+  archivoSeleccionado(file:any){
+    this.imagenCambiada = true;
+    this.form.get('foto')?.setValue(file);
+  }
+
+
 }

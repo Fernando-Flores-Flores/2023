@@ -40,17 +40,18 @@ export function parsearErroresAPI(response: any): string[] {
 
   return resultado;
 }
-export interface usuarioDTO{
-  id:string;
-  email:string;
-  claims:any[];
+export interface usuarioDTO {
+  id: string;
+  email: string;
+  claims: any[];
 }
 export interface PersonaInDto {
-  ci_persona:         string;
-  a_paterno:          string;
-  a_materno:          string;
-  celular:            number;
-  nombre:             string;
-  direccion:          string;
+  ci_persona: string;
+  a_paterno: string;
+  a_materno: string;
+  celular: string;
+  nombre: string;
+  direccion: string;
   correo_electronico: string;
+  foto?: File;
 }

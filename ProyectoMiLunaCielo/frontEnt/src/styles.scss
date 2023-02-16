@@ -84,10 +84,21 @@
   margin: 5px;
   background: rgb(227, 226, 240);
   color: var(--cafe);
+  padding: 5px !important;
 }
 .card {
   width: 90%;
   margin: auto;
+}
+
+.card-text {
+  font-weight: 700 !important;
+  color: #361e0b;
+}
+
+.card-title {
+  font-weight: 700 !important;
+  color: #361e0b;
 }
 /* .input-group-text {
   background: rgba(255, 181, 85, 0.6);
@@ -140,3 +151,10 @@
   margin-left: 20px;
   margin-bottom: 0px;
 }
+.user-panel img {
+  /* height: auto; */
+  width: 100px;
+  height: 100px;
+
+}
+

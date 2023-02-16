@@ -4857,7 +4857,8 @@ input[type="button"].btn-block {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+/*  padding: 1.25rem; */
+ padding: 0.25rem;
 }
 
 .card-title {
@@ -44506,7 +44507,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .img-circle {
-  border-radius: 50%;
+  border-radius: 80%;
 }
 
 .img-size-64,

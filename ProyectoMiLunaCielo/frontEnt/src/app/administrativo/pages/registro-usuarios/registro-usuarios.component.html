@@ -1,5 +1,5 @@
 <section class="container">
-  <br>
+  <br />
   <h2 class="tituloPrincipal">REGISTRO DE USUARIOS</h2>
 
   <div class="card text-dark bg-info mb-3">
@@ -92,7 +92,7 @@
               />
             </div>
           </div>
-          <div class="col-lg-6 col-md-12 col-sm-12">
+          <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default"
                 >Correo Electrónico</span
@@ -104,6 +104,18 @@
                 aria-describedby="inputGroup-sizing-default"
                 formControlName="correo_electronico"
               />
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Fotografía:
+              </span>
+              <!--    <app-input-img [urlImagenActual]="modelo?.foto" (archivoSeleccionado)="archivoSeleccionado($event)"></app-input-img>
+      -->
+              <app-input-img
+                (archivoSeleccionado)="archivoSeleccionado($event)"
+              ></app-input-img>
             </div>
           </div>
           <div class="col-12 text-center footer-button">
