@@ -61,3 +61,35 @@ h1 a {
   );
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.423);
 }
+
+.contenedor-imagen {
+  position: relative;
+}
+
+.boton {
+  position: absolute;
+  top: 80%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+.botonCard {
+  border-radius: 30%;
+  border: none;
+  background-color: #faa72a;
+  padding: 10px;
+  color: aliceblue;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.423);
+}
+
+.botonCard:hover {
+  color: #faa72a;
+  background-color: aliceblue;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.423);
+  translate: 2px 2px;
+}
+
+/* .color1 { #faa72a };
+.color2 { #e89820 };
+.color3 { #d78915 };
+.color4 { #c57a0b };
+.color5 { #b36b00 }; */

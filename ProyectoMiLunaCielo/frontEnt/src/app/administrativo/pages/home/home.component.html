@@ -1,7 +1,10 @@
 <div class="content-header">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-12 col-6">
+      <div
+        class="col-lg-6 col-md-6 col-sm-12 col-6"
+        *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas'"
+      >
         <div class="small-box bg-info">
           <div class="inner">
             <h3>15</h3>
@@ -20,6 +23,7 @@
         class="col-lg-6 col-md-6 col-sm-12 col-6"
         data-toggle="modal"
         data-target=".bd-example-modal-xl"
+        *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='prod'"
       >
         <div class="small-box bg-success">
           <div class="inner">
@@ -34,8 +38,30 @@
           ></a>
         </div>
       </div>
-
-      <div class="col-lg-6 col-md-6 col-sm-12 col-6">
+      <div
+        class="col-lg-6 col-md-6 col-sm-12 col-6"
+        data-toggle="modal"
+        data-target=".bd-example-modal-xl"
+        *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='prod'"
+        [routerLink]="['/admin/misTrabajos']"
+      >
+        <div class="small-box bg-gradient-cyan">
+          <div class="inner">
+            <h3>13<sup style="font-size: 20px;"></sup></h3>
+            <p>Trabajos que tengo asignado</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a class="small-box-footer"
+            >Más información <i class="fas fa-arrow-circle-right"></i
+          ></a>
+        </div>
+      </div>
+      <div
+        class="col-lg-6 col-md-6 col-sm-12 col-6"
+        *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas'"
+      >
         <div class="small-box bg-secondary">
           <div class="inner">
             <h3>5</h3>
@@ -49,7 +75,10 @@
           ></a>
         </div>
       </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-6">
+      <div
+        class="col-lg-6 col-md-6 col-sm-12 col-6"
+        *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas'"
+      >
         <div class="small-box bg-info">
           <div class="inner">
             <h3>2</h3>
@@ -101,10 +130,10 @@
                   <div class="filledbar"></div>
                 </div>
                 <div class="circle">
-               <!--    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <!--    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg> -->
-                  <img src="" alt="">
+                  <img src="" alt="" />
                 </div>
               </div>
             </div>

@@ -23,12 +23,24 @@
     <div class="row">
       <div class="col-md-4 mt-4" *ngFor="let item of listaPrdenesTrabajo">
         <div class="card profile-card-5">
-          <div class="card-img-block">
-            <img
+          <div class="card-img-block contenedor-imagen">
+            <!--    <img
               class="card-img-top"
               src="assets\dist\img\alasitas.jpg"
               alt="Card image cap"
+            /> -->
+            <img
+              src="assets\dist\img\alasitas.jpg"
+              alt="Imagen del pedido"
+              class="card-img-top"
             />
+            <button
+              class="boton botonCard"
+              data-toggle="modal"
+              data-target=".bd-example-modal-xl"
+            >
+              <i class="fas fa-edit fa-lg"></i>
+            </button>
           </div>
           <div class="card-body">
             <p class="card-title">Descripción: {{item.descripcion}}</p>
@@ -53,3 +65,40 @@
     </div>
   </div>
 </section>
+
+<!-- Extra large modal -->
+<div
+  class="modal fade bd-example-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titulo" id="exampleModalLongTitle">
+          {{ titulo }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="card text-dark bg-info mb-3">
+          <div class="card-header text-center">
+            <h3 class=""></h3>
+          </div>
+          <div class="card-body">
+            <div class="row"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

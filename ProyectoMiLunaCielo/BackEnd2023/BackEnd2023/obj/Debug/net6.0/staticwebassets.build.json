@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Asnda3e2khPYxkl0bGEawrXvsk3XY2p3dhKQjpT9uE0=",
+  "Hash": "q9oD1tr2K2kRdS3UOlDvLeIkOKSe6VhrhA9VwECJM6I=",
   "Source": "BackEnd2023",
   "BasePath": "_content/BackEnd2023",
   "Mode": "Default",
@@ -17,6 +17,23 @@
   ],
   "Assets": [
     {
+      "Identity": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\personas\\136be897-6962-4d5b-a20d-43b128c72617.jpg",
+      "SourceId": "BackEnd2023",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\",
+      "BasePath": "_content/BackEnd2023",
+      "RelativePath": "personas/136be897-6962-4d5b-a20d-43b128c72617.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\personas\\136be897-6962-4d5b-a20d-43b128c72617.jpg"
+    },
+    {
       "Identity": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\personas\\3f7fb6c7-ce9c-40d5-abd4-ec4f4b9f0dd4.png",
       "SourceId": "BackEnd2023",
       "SourceType": "Discovered",
@@ -32,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\personas\\3f7fb6c7-ce9c-40d5-abd4-ec4f4b9f0dd4.png"
+    },
+    {
+      "Identity": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\personas\\4873f5e3-d4c0-45f1-83d0-f7d85876f007.jpg",
+      "SourceId": "BackEnd2023",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\",
+      "BasePath": "_content/BackEnd2023",
+      "RelativePath": "personas/4873f5e3-d4c0-45f1-83d0-f7d85876f007.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\personas\\4873f5e3-d4c0-45f1-83d0-f7d85876f007.jpg"
+    },
+    {
+      "Identity": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\personas\\4a149bae-0013-4f6f-b371-c6a41157a326.png",
+      "SourceId": "BackEnd2023",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\",
+      "BasePath": "_content/BackEnd2023",
+      "RelativePath": "personas/4a149bae-0013-4f6f-b371-c6a41157a326.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\personas\\4a149bae-0013-4f6f-b371-c6a41157a326.png"
     },
     {
       "Identity": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\BackEnd2023\\wwwroot\\personas\\562f347e-5668-429d-ba53-b468209c7a3d.jpg",
