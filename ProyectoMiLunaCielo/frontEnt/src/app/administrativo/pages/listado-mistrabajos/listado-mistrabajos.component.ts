@@ -28,31 +28,12 @@ export class ListadoMistrabajosComponent implements OnInit, AfterViewInit {
 
   async ngAfterViewInit() {
     try {
-      /*  let responseID: any = await this.envioDatos.currentMessage.subscribe(
-        (message) => (this.id = message)
-      );
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log(this.id);
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log('WWWWWWWWWWWWWWWWWW');
-      console.log('WWWWWWWWWWWWWWWWWW'); */
       this.idUsuario = await this.loginService.obtenerCampoJWT('Id');
       let response: any = await this.ventasService.obtenerListaOrdenesPorID(
         this.idUsuario
       );
       if (response.statusCode == 200) {
         this.listaPrdenesTrabajo = response.listaOrdenes;
-        /*       console.log('===========================================');
-        console.log('===========================================');
-        console.log('Trabajos que tengo asignado');
-        console.log(this.listaPrdenesTrabajo);
-        console.log('===========================================');
-        console.log('===========================================');
-        console.log('==========================================='); */
       }
     } catch (error) {
       console.error(error);
@@ -79,22 +60,6 @@ export class ListadoMistrabajosComponent implements OnInit, AfterViewInit {
       fechaModificacion: ['', [Validators.required]],
     });
   }
-  /*
-     "idOrdenTrabajo": 22,
-      "idCliente": 66,
-      "tipoTrabajo": "MANUAL",
-      "descripcion": "CINTAS MAGNETICAS",
-      "costo": 500,
-      "observaciones": "300 CINTAS PARA DISCOTECA COMADRES",
-      "tipoPago": "EFECTIVO",
-      "idPersonalAsignado": "f9860231-814e-43d0-ba84-ee18635a1054",
-      "fechaEntregaAprox": "2023-02-16T00:00:00",
-      "avance": 0,
-      "estado": "creado",
-      "fechaOrden": "2023-02-16T00:00:00",
-      "fechaCreacion": "2023-02-16T19:12:34.683528Z",
-      "fechaModificacion": "2023-02-16T19:12:34.683561Z"
-*/
 
   editarTrabajoPaso1(item: any) {
     console.log(item);
@@ -136,10 +101,7 @@ export class ListadoMistrabajosComponent implements OnInit, AfterViewInit {
         body,
         this.form.get('idOrdenTrabajo')?.value
       );
-      console.log(response);
       if (response.statusCode == 200) {
-        console.log('Response');
-        console.log(JSON.stringify(response));
         Swal.fire({
           icon: 'success',
           title: 'Se realizo la actualización',
@@ -149,6 +111,9 @@ export class ListadoMistrabajosComponent implements OnInit, AfterViewInit {
           let response: any = await this.ventasService.obtenerListaOrdenesPorID(
             this.idUsuario
           );
+          if (response.statusCode == 200) {
+            this.listaPrdenesTrabajo = response.listaOrdenes;
+          }
         });
       }
     } catch (error: any) {
