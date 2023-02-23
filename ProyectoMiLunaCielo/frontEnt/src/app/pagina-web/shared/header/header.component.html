@@ -1,41 +1,118 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<!-- <div class="container imgImagenInicio">
+  <div class="row">
+    <div class="col-12">
+      <img src="assets\dist\img\bannerMiLunaCielo.jpg" alt="" />
+    </div>
+  </div>
+</div> -->
+
+<nav
+  class="container navbar navbar-expand-lg navbar-light menuNavBar sticky-top mt-5"
+>
+  <button
+    class="navbar-toggler collapsed"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <i class="fas fa-bars" style="background-color: aliceblue;"></i>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div
+    class="collapse navbar-collapse justify-content-end"
+    id="navbarSupportedContent"
+  >
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">INICIO </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">NOSOTROS</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">PROMOCIONES</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          CATÁLOGO
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <div
+          class="dropdown-menu animate__animated animate__backInLeft"
+          aria-labelledby="navbarDropdown"
+        >
+          <a class="dropdown-item submenu" href="#">Material Gráfico</a>
+          <a class="dropdown-item submenu" href="#">Libros</a>
+          <a class="dropdown-item submenu" href="#"
+            >Gigantografías, Lonas y vinilos</a
+          >
+          <a class="dropdown-item submenu" href="#">Merchadesing</a>
         </div>
       </li>
-
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
-  <!--     <li class="nav-item active">
-        <a class="nav-link" routerLink="registro">Registro</a>
-      </li> -->
       <li class="nav-item">
         <a class="nav-link" routerLink="login">Iniciar Sesión</a>
       </li>
       <li class="nav-item">
-        <label class="nav-link disabled" href="#">{{email}}</label>
+        <a
+          class="nav-link"
+          id="toggle-button"
+          (click)="mostrar()"
+          style="padding: 5px;"
+        >
+          <!--  <i class="fas fa-bars"></i> -->
+          <img
+            src="assets/dist/img/iconos/redes.png"
+            style="width: 40px; height: 40px;"
+          />
+        </a>
       </li>
-      </ul>
-
+    </ul>
   </div>
 </nav>
+
+<!-- TODO: Contenido Offcanva -->
+<div class="offcanvas">
+  <div class="row">
+    <div class="col-12">
+      <button
+        type="button"
+        class="cerrar float-right mr-2"
+        id="close-button"
+        (click)="mostrar()"
+      >
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="p-3 row">
+    <div class="col-sm-4 col-md-6" *ngFor="let item of menuPerfil">
+      <a href="{{item.url}}">
+        <div class="tarj">
+          <img src="{{ item.icono }}" class="imgLogo" />
+          <p>{{ item.nombre }}</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-4 col-md-6">
+      <a routerLink="login">
+        <div class="tarj">
+          <img src="assets/dist/img/iconos/inicioSesion.png" class="imgLogo" />
+          <p>LOGIN</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <hr />
+</div>

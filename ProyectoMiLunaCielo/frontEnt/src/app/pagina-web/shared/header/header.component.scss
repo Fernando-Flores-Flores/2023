@@ -1,0 +1,162 @@
+.imgImagenInicio img {
+  display: block;
+  width: 100%;
+
+  display: block;
+  margin: auto;
+}
+
+.imgLogo {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar-toggler-icon{
+  color: #feffff !important;
+}
+.menuNavBar {
+  background: linear-gradient(to bottom, #0c78a4, #0a2e71 50%, #0b80aa);
+  margin: 2px solid black !important;
+  border-radius: 30px;
+  border: 2px solid rgb(255, 255, 255);
+}
+li a {
+  color: white !important;
+  font-size: 16px;
+  border: 1px solid rgba(11, 34, 109, 0);
+  padding: 15px;
+  font-weight: 700;
+  border-bottom: 3px solid rgba(255, 255, 255, 0);
+  /*     background: linear-gradient(#00203d 80%, #0b80aa); */
+}
+li a:hover {
+  background: #9bc9e3 !important;
+  color: #00203d !important;
+  border: 1px solid #709dbc;
+  transform: translateY(-2px);
+  border: 1px solid #00203d;
+  border-bottom: 3px solid #00203d;
+  border-radius: 10px;
+  font-weight: 700;
+}
+ul li {
+  font-weight: 600;
+  border-radius: 15px;
+}
+a {
+  cursor: pointer;
+}
+.submenu {
+  color: #9dcfda;
+  background: linear-gradient(#014e84 80%, #0b80aa);
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 1px solid #0c78a4;
+  border-radius: 10px;
+  margin: 2px;
+}
+
+.dropdown-menu {
+  background: none;
+  border: none;
+}
+.user {
+  color: #709dbc;
+  font-size: 12px;
+}
+.navbar-toggler {
+  border: 1px solid transparent;
+}
+
+/********************************BOTONES******************************************************************/
+.botonF {
+  color: white;
+  border: 1px solid #fff;
+  background: linear-gradient(to bottom, #0c78a4, #0a2e71 40%, #0b80aa);
+  border-radius: 30px;
+  box-shadow: 3px 3px 1px 1px rgba(7, 7, 7, 0.337);
+  font-size: 35px;
+}
+.botonF:hover {
+  color: #0a2e71;
+  border: 2px solid #0a2e71;
+  background: linear-gradient(to bottom, #9dcfda, #feffff, #9dcfda);
+  transform: translate(6px, 1px) !important;
+}
+.centro {
+  margin: auto;
+  align-items: center;
+}
+/*******************OffCanva**************************/
+.offcanvas {
+  position: fixed;
+  top: 150px;
+  left: -400px; /* Ocultar el off canvas fuera del borde izquierdo de la pantalla */
+  width: 400px;
+  background: #9dcfda;
+  color: #0a2e71;
+  font-size: 18px;
+  padding-top: 10px;
+  border: #c2e0e8 10px solid;
+  border-left: 0px;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out; /* Animación para mostrar y ocultar el off canvas */
+  height: max-content;
+}
+
+.offcanvas-open {
+  overflow: hidden;
+}
+.cerrar {
+  display: flex;
+  justify-content: flex-end;
+  background: #ffffff;
+  color: #9c2424;
+  font-size: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+}
+/********************************BOTONES******************************************************************/
+.botonF {
+  color: white;
+  border: 1px solid #fff;
+  background: linear-gradient(to bottom, #0c78a4, #0a2e71 40%, #0b80aa);
+  border-radius: 30px;
+  box-shadow: 3px 3px 1px 1px rgba(7, 7, 7, 0.337);
+  font-size: 35px;
+}
+.botonF:hover {
+  color: #0a2e71;
+  border: 2px solid #0a2e71;
+  background: linear-gradient(to bottom, #9dcfda, #feffff, #9dcfda);
+  transform: translate(6px, 1px) !important;
+}
+.centro {
+  margin: auto;
+  align-items: center;
+}
+/* ***************************** BUZON ********************** */
+.tarj {
+  width: 100%;
+  height: 130px;
+  background: #c2e0e8;
+  color: #00203d;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0px 15px 15px -6px black;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+a {
+  text-decoration: none;
+}
+.tarj:hover {
+  background: #00203d;
+  color: #c2e0e8;
+  box-shadow: 0px 0px 0px 0px rgb(255, 255, 255);
+  transform: translate(2px, 5px);
+}
