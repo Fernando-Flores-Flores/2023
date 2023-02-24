@@ -15,10 +15,10 @@
   color: #feffff !important;
 }
 .menuNavBar {
-  background: linear-gradient(to bottom, #0c78a4, #0a2e71 50%, #0b80aa);
+  background: linear-gradient(to bottom, #a44e0cf8, #a15c17 50%, #e2850cc0);
   margin: 2px solid black !important;
   border-radius: 30px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
 }
 li a {
   color: white !important;
@@ -102,6 +102,7 @@ a {
   border-radius: 30px;
   transition: all 0.3s ease-in-out; /* Animación para mostrar y ocultar el off canvas */
   height: max-content;
+  z-index: 100;
 }
 
 .offcanvas-open {

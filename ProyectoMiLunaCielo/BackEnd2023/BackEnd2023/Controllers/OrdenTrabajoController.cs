@@ -238,6 +238,8 @@ namespace BackEnd2023.Controllers
                     TipoPago = request.TipoPago.ToUpper(),
                     IdCliente = request.IdCliente,
                     idPersonalAsignado = request.idPersonalAsignado,
+                    estado = "editado",
+                    avance = request.avance,
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,
                 };

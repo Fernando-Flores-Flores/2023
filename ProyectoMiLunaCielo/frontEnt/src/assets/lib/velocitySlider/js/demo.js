@@ -1,1 +1,0 @@
-$(function(){$("#js-slide").slider({speed:600,delay:3400,easing:"easeOutQuad",pager:!0,arrow:!0,autoPlay:true,$slideMain:"#js-slideMain",$slideGroup:".js-slideGroup",$slideChild:".js-slideChild",$slideContent:"#js-slideContent"})});
