@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'web',
     component: PagesWebComponent,
     children: [
+      { path: 'inicio', component: Banner1Component },
       { path: 'nosotros', component: NosotrosComponent },
       { path: "dashboard", component: Banner1Component },
       /*       { path: "prueba1", component: Prueba1Component },

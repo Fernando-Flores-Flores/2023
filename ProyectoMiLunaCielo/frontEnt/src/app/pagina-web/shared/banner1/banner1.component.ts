@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/administrativo/service/login.service';
 
 @Component({
   selector: 'app-banner1',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./banner1.component.scss'],
 })
 export class Banner1Component implements OnInit {
-  constructor() {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    if (this.loginService.estalogeado()) {
+      this.router.navigate(['/admin/home']);
+    }
+  }
 }
