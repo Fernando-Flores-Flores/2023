@@ -53,6 +53,26 @@ namespace BackEnd2023.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "bd_catalogo",
+                schema: "public",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    fechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    fechaModificacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    estado = table.Column<string>(type: "text", nullable: true),
+                    nombre = table.Column<string>(type: "text", nullable: true),
+                    foto = table.Column<string>(type: "text", nullable: true),
+                    descripcion = table.Column<string>(type: "text", nullable: true),
+                    tipocatalogo = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_bd_catalogo", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "bd_Inventario",
                 columns: table => new
                 {
@@ -316,6 +336,10 @@ namespace BackEnd2023.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "bd_catalogo",
+                schema: "public");
 
             migrationBuilder.DropTable(
                 name: "bd_Inventario");

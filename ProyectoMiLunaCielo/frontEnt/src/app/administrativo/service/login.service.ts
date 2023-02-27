@@ -15,7 +15,7 @@ export class LoginService {
   constructor(private HttpClient: HttpClient, private router: Router) {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       language: {
         url: '../../../../assets/data/cdn-datatables.json',
       },

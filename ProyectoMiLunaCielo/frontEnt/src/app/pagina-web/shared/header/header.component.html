@@ -5,7 +5,7 @@
     </div>
   </div>
 </div> -->
-<br>
+<br />
 <nav
   class="container navbar navbar-expand-lg navbar-light menuNavBar sticky-top"
 >
@@ -33,7 +33,7 @@
         <a class="nav-link" routerLink="/web/nosotros">NOSOTROS</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">PROMOCIONES</a>
+        <a class="nav-link" [routerLink]="['/web/promociones']">PROMOCIONES</a>
       </li>
       <li class="nav-item dropdown">
         <a
@@ -51,17 +51,31 @@
           class="dropdown-menu animate__animated animate__backInLeft"
           aria-labelledby="navbarDropdown"
         >
-        <a class="dropdown-item submenu" [routerLink]="['/web/catalogo/materialGrafico']">Material Gráfico</a>
-        <a class="dropdown-item submenu" [routerLink]="['/web/catalogo/libros']">Libros</a>
-          <a class="dropdown-item submenu" [routerLink]="['/web/catalogo/otros']"
+          <a
+            class="dropdown-item submenu"
+            [routerLink]="['/web/catalogo/materialGrafico']"
+            >Material Gráfico</a
+          >
+          <a
+            class="dropdown-item submenu"
+            [routerLink]="['/web/catalogo/libros']"
+            >Libros</a
+          >
+          <a
+            class="dropdown-item submenu"
+            [routerLink]="['/web/catalogo/otros']"
             >Gigantografías, Lonas y vinilos</a
           >
-          <a class="dropdown-item submenu" routerLink="/web/catalogo/merchadesing">Merchadesing</a>
+          <a
+            class="dropdown-item submenu"
+            routerLink="/web/catalogo/merchadesing"
+            >Merchadesing</a
+          >
         </div>
       </li>
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">
-    <!--   <li class="nav-item">
+      <!--   <li class="nav-item">
         <a class="nav-link" routerLink="login">Iniciar Sesión</a>
       </li> -->
       <li class="nav-item">

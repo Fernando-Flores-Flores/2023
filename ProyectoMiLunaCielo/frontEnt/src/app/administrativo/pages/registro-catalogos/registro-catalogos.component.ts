@@ -1,9 +1,10 @@
 import { CatalogoService } from './../../../pagina-web/services/catalogo.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../service/login.service';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-registro-catalogos',
@@ -13,10 +14,10 @@ import { LoginService } from '../../service/login.service';
 export class RegistroCatalogosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: any = new Subject<any>();
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
   listaCatalogo: any = [];
   titulo = 'INSERTAR REGISTROS AL CATALOGO';
   form: FormGroup;
-
   constructor(
     private formBuilder: FormBuilder,
     private catalogoService: CatalogoService,
@@ -28,7 +29,7 @@ export class RegistroCatalogosComponent implements OnInit {
 
   ngOnInit(): void {
     this.dtOptions = this.loginService.dtOptions;
-    this.cargarRegistros("all", "all");
+    this.cargarRegistros('all', 'all');
   }
   async cargarRegistros(estado: string, tipoCatalogo: string) {
     let response: any = await this.catalogoService.obtenerListaCatalogos(
@@ -40,10 +41,11 @@ export class RegistroCatalogosComponent implements OnInit {
       this.dtTrigger.next();
     }
   }
+
   async insertarCatalogo() {
     try {
       if (this.form.valid) {
-       let body = this.form.value as ICatalogo;
+        let body = this.form.value as ICatalogo;
         let response: any = await this.catalogoService.InsertarCatalogo(body);
 
         if (response.statusCode == 200) {
@@ -51,7 +53,16 @@ export class RegistroCatalogosComponent implements OnInit {
             icon: 'success',
             title: 'Se realizo el registro',
             confirmButtonText: 'Entendido',
-          }).then(async (result: any) => {});
+          }).then(async (result: any) => {
+            let response: any =
+              await this.catalogoService.obtenerListaCatalogos('all', 'all');
+            if (response.statusCode == 200) {
+              this.listaCatalogo = response.datos;
+              this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+              dtInstance.draw();
+              });
+            }
+          });
         }
       } else {
         this.form.markAllAsTouched();
@@ -83,7 +94,7 @@ export class RegistroCatalogosComponent implements OnInit {
   }
 
   imagenCambiada = false;
-  archivoSeleccionado(file:any){
+  archivoSeleccionado(file: any) {
     this.imagenCambiada = true;
     this.form.get('foto')?.setValue(file);
   }

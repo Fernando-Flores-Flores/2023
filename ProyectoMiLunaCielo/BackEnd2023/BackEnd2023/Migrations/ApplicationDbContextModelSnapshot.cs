@@ -22,6 +22,40 @@ namespace BackEnd2023.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("BackEnd2023.Entidades.bd_Catalogo", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("descripcion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("estado")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("fechaCreacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("fechaModificacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("foto")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nombre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tipocatalogo")
+                        .HasColumnType("text");
+
+                    b.HasKey("id");
+
+                    b.ToTable("bd_catalogo", "public");
+                });
+
             modelBuilder.Entity("BackEnd2023.Entidades.bd.Inventarios.inventario", b =>
                 {
                     b.Property<int>("Id")

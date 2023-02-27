@@ -29,7 +29,7 @@ namespace BackEnd2023.Metodos
                     // pdf.crearParrafoInicial(doc, "Reporte Inventarios", 20, "center");
 
                     //string rutaImage = Path.Combine(env.ContentRootPath, "assets/Xamarin.jpeg");
-                    string rutaImage = Path.Combine(Directory.GetCurrentDirectory(), "assets/Xamarin.jpeg");
+                    string rutaImage = Path.Combine(Directory.GetCurrentDirectory(), "assets/descarga.jpg");
                     byte[] buffer = io.File.ReadAllBytes(rutaImage);
 
 
