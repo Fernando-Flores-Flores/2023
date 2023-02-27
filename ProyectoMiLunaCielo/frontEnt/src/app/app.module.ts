@@ -8,6 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PaginaWebModule } from "./pagina-web/pagina-web.module";
 import { DataTablesModule } from "angular-datatables";
+import { SpinnerInterceptor } from './pagina-web/shared/spinner/spinner.interceptor';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -23,7 +24,7 @@ import { DataTablesModule } from "angular-datatables";
     RouterModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:SpinnerInterceptor,multi:true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

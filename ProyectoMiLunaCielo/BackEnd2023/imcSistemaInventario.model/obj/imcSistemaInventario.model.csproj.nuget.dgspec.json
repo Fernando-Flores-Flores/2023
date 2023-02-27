@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj": {}
+    "D:\\2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj": {}
   },
   "projects": {
-    "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj": {
+    "D:\\2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj",
+        "projectUniqueName": "D:\\2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj",
         "projectName": "imcSistemaInventario.model",
-        "projectPath": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj",
-        "packagesPath": "C:\\Users\\fernando.flores\\.nuget\\packages\\",
-        "outputPath": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\obj\\",
+        "projectPath": "D:\\2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\imcSistemaInventario.model.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "D:\\2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fernando.flores\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,7 +45,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -54,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

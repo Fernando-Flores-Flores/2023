@@ -20,6 +20,8 @@ import { UtilitariosModule } from '../utilitarios/utilitarios.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistroVentasComponent } from './pages/registro-ventas/registro-ventas.component';
 import { RolesPipe } from './pipes/roles.pipe';
+import { PaginaWebModule } from '../pagina-web/pagina-web.module';
+import { RegistroCatalogosComponent } from './pages/registro-catalogos/registro-catalogos.component';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -38,6 +40,7 @@ import { RolesPipe } from './pipes/roles.pipe';
     FormularioAutenticacionComponent,
     RegistroVentasComponent,
     RolesPipe,
+    RegistroCatalogosComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +48,7 @@ import { RolesPipe } from './pipes/roles.pipe';
     DataTablesModule,
     UtilitariosModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,PaginaWebModule
   ],
 })
 export class AdministrativoModule {}

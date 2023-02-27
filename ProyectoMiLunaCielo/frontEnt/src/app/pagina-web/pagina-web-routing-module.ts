@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CatalogoComponent } from './pages-web/catalogo/catalogo.component';
 import { NosotrosComponent } from './pages-web/nosotros/nosotros.component';
 import { PagesWebComponent } from './pages-web/pages-web.component';
 import { Banner1Component } from './shared/banner1/banner1.component';
@@ -14,6 +15,8 @@ const routes: Routes = [
       { path: 'inicio', component: Banner1Component },
       { path: 'nosotros', component: NosotrosComponent },
       { path: "dashboard", component: Banner1Component },
+      { path: "catalogo", component: CatalogoComponent },
+      { path: "catalogo/:parametro", component: CatalogoComponent },
       /*       { path: "prueba1", component: Prueba1Component },
       { path: "prueba2", component: Prueba2Component }, */
     ],

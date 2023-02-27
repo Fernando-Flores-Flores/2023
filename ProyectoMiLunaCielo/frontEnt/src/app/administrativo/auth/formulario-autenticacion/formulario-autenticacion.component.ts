@@ -17,10 +17,10 @@ export class FormularioAutenticacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      email: ['admin@gmail.com', { validators: [Validators.required, Validators.email] }],
+      //email: ['admin@gmail.com', { validators: [Validators.required, Validators.email] }],
       //email: ['produccion1@gmail.com', { validators: [Validators.required, Validators.email] }],
       //email: ['gerencia@gmail.com, { validators: [Validators.required, Validators.email] }],
-        //email: ['ventas@gmail.com', { validators: [Validators.required, Validators.email] }],
+      email: ['ventas@gmail.com', { validators: [Validators.required, Validators.email] }],
       //email: ['produccion2@gmail.com', { validators: [Validators.required, Validators.email] }],
       password: ['Tempo.2023@', { validators: [Validators.required] }],
     });

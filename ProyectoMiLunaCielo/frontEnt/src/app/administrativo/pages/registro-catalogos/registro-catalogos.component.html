@@ -1,0 +1,197 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-xl-4 my-3">
+        <button
+          class="btn btn-dark"
+          type="button"
+          data-toggle="modal"
+          data-target=".bd-example-modal-xl"
+        >
+          <i class="fas fa-download"></i> AGREGAR
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card-body table-responsive">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="table table-bordered table-hover table-responsive font-size-10 table-striped row-border hover"
+          >
+            <thead class="fondo-cafe w-100">
+              <tr>
+                <th>Titulo</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Foto</th>
+                <th>Ver</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listaCatalogo; let i = index">
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td>{{ item.estado }}</td>
+                <td>
+                  <img
+                    [src]="item.foto"
+                    alt="Imagen del pedido"
+                    style="width: 100px; height: 100px;"
+                  />
+                </td>
+
+                <td class="py-1 text-center">
+                  <button
+                    class="btn-sm btn-info mx-auto font-size-10"
+                    type="button"
+                    data-toggle="modal"
+                    data-target=".eye"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </td>
+                <td class="py-1 text-center">
+                  <button
+                    class="btn-sm btn-danger mx-auto font-size-10"
+                    type="button"
+                  >
+                    <i class="fas fa-eraser"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Extra large modal -->
+<div
+  class="modal fade bd-example-modal-xl"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titulo" id="exampleModalLongTitle">
+          {{ titulo }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="form">
+        <div class="card text-dark bg-info mb-3">
+          <div class="card-header text-center">
+            INGRESE LA INFORMACIÓN DEL REGISTRO
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Titulo:</span
+                  >
+                  <input
+                    autofocus
+                    type="text"
+                    class="form-control"
+                    formControlName="nombre"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('nombre')?.invalid &&
+                  this.form.get('nombre')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Descripción:</span
+                  >
+                  <input
+                    autofocus
+                    type="text"
+                    class="form-control"
+                    formControlName="descripcion"
+                    aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default"
+                  />
+                  <small
+                    *ngIf="
+                  this.form.get('descripcion')?.invalid &&
+                  this.form.get('descripcion')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Tipo de registro:
+                  </span>
+                  <select class="form-control" formControlName="tipocatalogo">
+                    <option value="" selected disabled>Seleccione:</option>
+                    <option value="libros">LIBROS</option>
+                    <option value="grafico">GRÁFICO</option>
+                    <option value="otros">OTROS</option>
+                    <option value="mercha">MERCHADESING</option>
+                  </select>
+                  <small
+                    *ngIf="
+                  this.form.get('tipocatalogo')?.invalid &&
+                  this.form.get('tipocatalogo')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Fotografía:
+                  </span>
+                  <app-input-img
+                    (archivoSeleccionado)="archivoSeleccionado($event)"
+                  ></app-input-img>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 text-center footer-button">
+            <button
+              class="btn btn-outline-primary"
+              data-dismiss="modal"
+              (click)="insertarCatalogo()"
+            >
+              <i class="fas fa-user-alt"></i> GUARDAR
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,7 @@ export class PagesWebComponent implements OnInit {
     }
     if (this.router.url === '/') {
       // Estamos en la ruta { path: '', component: PagesWebComponent }
-      alert("Estamos en comillas")
+      // alert("Estamos en comillas")
       this.router.navigate(['/web/inicio']);
     }
   }

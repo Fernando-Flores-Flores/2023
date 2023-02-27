@@ -8,9 +8,13 @@ import { UtilitariosModule } from "../utilitarios/utilitarios.module";
 import { Banner1Component } from './shared/banner1/banner1.component';
 import { NosotrosComponent } from './pages-web/nosotros/nosotros.component';
 import { Banner2Component } from './shared/banner2/banner2.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { CatalogoComponent } from './pages-web/catalogo/catalogo.component';
+import { TituloComponent } from './pages-web/elementosPage/titulo/titulo.component';
 
 @NgModule({
-  declarations: [FooterComponent, HeaderComponent, PagesWebComponent, Banner1Component, NosotrosComponent, Banner2Component],
+  declarations: [FooterComponent, HeaderComponent, PagesWebComponent, Banner1Component, NosotrosComponent, Banner2Component, SpinnerComponent, CatalogoComponent, TituloComponent],
   imports: [CommonModule, PaginaWebRoutingModule,UtilitariosModule],
+  exports:[SpinnerComponent]
 })
 export class PaginaWebModule {}

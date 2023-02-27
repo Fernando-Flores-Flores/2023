@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\catalogo\" />
   </ItemGroup>
 
 </Project>

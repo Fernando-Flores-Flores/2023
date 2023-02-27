@@ -51,12 +51,12 @@
           class="dropdown-menu animate__animated animate__backInLeft"
           aria-labelledby="navbarDropdown"
         >
-          <a class="dropdown-item submenu" href="#">Material Gráfico</a>
-          <a class="dropdown-item submenu" href="#">Libros</a>
-          <a class="dropdown-item submenu" href="#"
+        <a class="dropdown-item submenu" [routerLink]="['/web/catalogo/materialGrafico']">Material Gráfico</a>
+        <a class="dropdown-item submenu" [routerLink]="['/web/catalogo/libros']">Libros</a>
+          <a class="dropdown-item submenu" [routerLink]="['/web/catalogo/otros']"
             >Gigantografías, Lonas y vinilos</a
           >
-          <a class="dropdown-item submenu" href="#">Merchadesing</a>
+          <a class="dropdown-item submenu" routerLink="/web/catalogo/merchadesing">Merchadesing</a>
         </div>
       </li>
     </ul>

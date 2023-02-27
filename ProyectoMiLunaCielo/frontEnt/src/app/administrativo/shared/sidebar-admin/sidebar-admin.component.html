@@ -75,7 +75,7 @@
         </li>
         <li class="nav-item">
           <a
-            *ngIf="this.rolUsuario=='admin'"
+            *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas' "
             class="nav-link"
             [routerLink]="['/admin/registroVentas']"
             routerLinkActive="active"
@@ -83,6 +83,20 @@
             <i class="nav-icon fas fa-shopping-cart"></i>
             <p>
               ORDEN DE TRABAJOS
+              <!-- <i class="fas fa-angle-left right"></i> -->
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas' "
+            class="nav-link"
+            [routerLink]="['/admin/catalogo']"
+            routerLinkActive="active"
+          >
+            <i class="nav-icon fas fa-shopping-cart"></i>
+            <p>
+              CATÁLOGO
               <!-- <i class="fas fa-angle-left right"></i> -->
             </p>
           </a>

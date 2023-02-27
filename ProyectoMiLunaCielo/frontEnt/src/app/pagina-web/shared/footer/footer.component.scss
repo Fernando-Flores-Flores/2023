@@ -1,0 +1,152 @@
+:root {
+  /* Colores primarios aprobados por comunicaciones */
+  --color-claro: #abcbd9;
+  --color-oscuro: #003d75;
+  --color-intermedio: #5b9acc;
+  /* Colores secundarios pantone Gestora */
+  --color-claro2: #cee5ea;
+  --color-oscuro2: #002241;
+
+  /* COLORES GENERALES */
+  --blanco: #ffffff;
+  --negro: #04040486;
+  --plomoOscuro: #242a33;
+  --plomo-claro: #c6c6c6;
+  --verde-success: #32b74a;
+  --verde-oscuro:  #1e586e;
+
+  --amarillo-warning-oscuro: #f9c416;
+  --amarillo-claro: #ffe285;
+  --rojo-delete: #930000;
+  --rojo-claro: #d37878;
+  --celeste: #01ccd3;
+  --naranja: #e99516;
+
+  /* Typografia */
+  /* --roboto: 'Roboto', sans-serif;
+ */
+}
+
+footer {
+  background: var(--color-oscuro);
+  margin-top: auto;
+}
+.redes {
+  width: 45%;
+  border-radius: 40px;
+  color: #aed1e5;
+  font-weight: 700;
+  padding-top: 10px;
+}
+.cajaRedes {
+  width: 95%;
+  border: #aed1e5 solid 2px;
+  padding: 5px;
+  align-items: center;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.iconosredes {
+  font-size: 60px;
+  color: #aed1e5;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 30px;
+
+}
+hr {
+  background: #aed1e5;
+}
+/* Foot*/
+.imgFooter {
+  width: 50%;
+}
+.cajaImgg {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.foote {
+  margin: auto;
+  background: var(--color-claro2);
+  height: auto;
+}
+.informacionFooter {
+  color: #003b77;
+  margin: 10px;
+  padding: 10px;
+
+}
+
+p:hover {
+  font-size: larger;
+}
+.ubicacion {
+  width: 95%;
+  height: 300px;
+  border-radius: 20px;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+}
+.ubicacionCentro {
+  width: 80%;
+  border-radius: 20px;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+}
+.seccionAps {
+  background: #ffffffd2;
+  padding: 15px;
+  align-items: center;
+  text-align: center;
+}
+
+.facebook {
+  color: rgb(2, 46, 189);
+  padding: 0, 12px, 0, 12px;
+}
+.twitter {
+  color: rgb(105, 193, 245);
+}
+.linkelin {
+  color: rgb(7, 138, 245);
+}
+.mail {
+  color: white;
+}
+.youtube {
+  color: red;
+}
+a i {
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #003b77;
+  border-radius: 50%;
+  box-shadow: 0px 10px 10px -6px black;
+}
+a i:hover {
+  box-shadow: 0px 10px 10px -6px rgb(255, 255, 255);
+  transform: translate(2px, 5px);
+}
+.texto{
+  font-weight: 700;
+}
+@media screen and (max-width: 700px) {
+  .imgFooter img {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+  }
+  .seccionAps img {
+    max-width: 90%;
+  }
+  .cajaRedes{
+    width: 80%;
+    margin: auto;
+  }
+}
