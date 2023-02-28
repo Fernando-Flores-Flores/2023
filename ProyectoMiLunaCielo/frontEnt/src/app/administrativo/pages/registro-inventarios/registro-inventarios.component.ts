@@ -49,6 +49,10 @@ export class RegistroInventariosComponent implements OnInit {
   }
   async verificarInvetarios(tipo: string) {
     switch (tipo) {
+      case 'consumibles':
+        this.titulo = 'CONSUMIBLES';
+        this.idTipoFormulario = '6';
+        break;
       case 'muebles':
         this.titulo = 'REGISTRO DE MUEBLES Y ENSERES';
         this.idTipoFormulario = '1';
