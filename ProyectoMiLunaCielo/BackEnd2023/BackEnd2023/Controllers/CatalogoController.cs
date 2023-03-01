@@ -43,8 +43,14 @@ namespace BackEnd2023.Controllers
             }
             else
             {
-                catalogosFiltrados = await context.bd_Catalogo.Where(c => c.estado == estado && c.tipocatalogo == tipo).ToListAsync();
-
+                if (estado == "HABILITADO" && tipo == "all")
+                {
+                    catalogosFiltrados = await context.bd_Catalogo.Where(c => c.estado == estado).ToListAsync();
+                }
+                else
+                {
+                    catalogosFiltrados = await context.bd_Catalogo.Where(c => c.estado == estado && c.tipocatalogo == tipo).ToListAsync();
+                }
             }
             if (catalogosFiltrados.Count > 0)
             {
@@ -60,7 +66,6 @@ namespace BackEnd2023.Controllers
                         catalogosFiltrados[i].foto = imageSrc;
                     }
                 }
-
             }
 
             var response = new ResponseDto<List<bd_Catalogo>>()

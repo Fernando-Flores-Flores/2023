@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { LoginService } from 'src/app/administrativo/service/login.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.loginService.obtenerCampoJWT('email');
+
   }
   logout() {
     this.loginService.logout();
@@ -44,14 +46,14 @@ export class HeaderComponent implements OnInit {
     {
       nombre: 'WHATSAPP',
       icono: 'assets/dist/img/iconos/whatsapp.png',
-      url: 'https://api.whatsapp.com/send?phone=59165610080&text=MENSAJE',
+      url: 'https://api.whatsapp.com/send?phone=59161204899&text=MENSAJE',
     },
     {
       nombre: 'TIK TOKS',
       icono: 'assets/dist/img/iconos/tiktok.png',
       url: 'chancePassword',
     },
-/*     {
+    /*     {
       nombre: 'LOGIN',
       icono: 'assets/dist/img/iconos/inicioSesion.png',
       url: 'login',
@@ -68,6 +70,4 @@ export class HeaderComponent implements OnInit {
       url: 'updateInfo',
     }, */
   ];
-
-
 }

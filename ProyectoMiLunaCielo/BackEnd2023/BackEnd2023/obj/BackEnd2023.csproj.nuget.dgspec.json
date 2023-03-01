@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[6.2.3, )"
             },
+            "Whatsapp.NET": {
+              "target": "Package",
+              "version": "[1.2.2, )"
+            },
             "itext7": {
               "target": "Package",
               "version": "[7.2.5, )"

@@ -6,6 +6,7 @@ import { InventarioDto, Response } from 'src/app/Model/inventario';
 import Swal from 'sweetalert2';
 import { InventariosService } from '../../service/inventarios.service';
 import { LoginService } from '../../service/login.service';
+import { DataTableDirective } from 'angular-datatables';
 declare var $: any;
 
 @Component({
@@ -21,6 +22,8 @@ export class RegistroInventariosComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: any = new Subject<any>();
   form: FormGroup;
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement: DataTableDirective;
   constructor(
     private inventariosService: InventariosService,
     private loginService: LoginService,
@@ -47,12 +50,9 @@ export class RegistroInventariosComponent implements OnInit {
     );
     this.cargarRegistros(this.idTipoFormulario);
   }
+
   async verificarInvetarios(tipo: string) {
     switch (tipo) {
-      case 'consumibles':
-        this.titulo = 'CONSUMIBLES';
-        this.idTipoFormulario = '6';
-        break;
       case 'muebles':
         this.titulo = 'REGISTRO DE MUEBLES Y ENSERES';
         this.idTipoFormulario = '1';
@@ -60,26 +60,27 @@ export class RegistroInventariosComponent implements OnInit {
       case 'maquinaria':
         this.titulo = 'REGISTRO DE MAQUINARIA ';
         this.idTipoFormulario = '2';
-
         break;
       case 'equiposComputacion':
-        this.titulo = 'REGISTRO DE EQUIPOS DE COMPUTACIÓN';
+        this.titulo = 'REGISTRO DE EQUIPOS DE COMPUTACIÓN Y COMUNICACIÓN';
         this.idTipoFormulario = '3';
+        break;
 
-        break;
-      case 'equiposComunicacion':
-        break;
       case 'materialEscritorio':
         this.titulo = 'REGISTRO DE MATERIAL DE ESCRITORIO';
         this.idTipoFormulario = '4';
-
-        break;
-      case 'cocina':
         break;
       case 'activosFijos':
         this.titulo = 'REGISTRO DE ACTIVOS FIJOS ';
         this.idTipoFormulario = '5';
-
+        break;
+      case 'consumibles':
+        this.titulo = 'CONSUMIBLES';
+        this.idTipoFormulario = '6';
+        break;
+      case 'cocina':
+        this.titulo = 'REGISTRO DE ACTIVOS COCINA ';
+        this.idTipoFormulario = '7';
         break;
       default:
         this.router.navigate(['/admin']);
@@ -91,10 +92,10 @@ export class RegistroInventariosComponent implements OnInit {
       idtipoInventario: [this.idTipoFormulario, [Validators.required]],
       codigo: ['', []],
       cantidad: ['', [Validators.required]],
-      oficina: ['', [Validators.required]],
+      oficina: ['', []],
       descripcion: ['', [Validators.required]],
       observaciones: ['', [Validators.required]],
-      area: ['', [Validators.required]],
+      area: ['PRODUCCION', [Validators.required]],
       fechaCreacion: [null, []],
       fechaModificacion: [null, []],
       estado: ['ACTIVO', []],
@@ -124,8 +125,17 @@ export class RegistroInventariosComponent implements OnInit {
           icon: 'success',
           title: 'Registro correcto',
           confirmButtonText: 'Entendido',
-        }).then((result) => {
-          window.location.reload();
+        }).then(async (result: any) => {
+          let response: Response =
+            await this.inventariosService.obtenerListaInventariosV2(
+              this.idTipoFormulario
+            );
+          if (response.statusCode == 200) {
+            this.listaUsuarios = response.datos;
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+              dtInstance.draw();
+            });
+          }
         });
       }
     } catch (error) {
