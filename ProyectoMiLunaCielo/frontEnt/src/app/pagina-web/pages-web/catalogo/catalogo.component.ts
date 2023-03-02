@@ -46,6 +46,10 @@ export class CatalogoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async verificarInvetarios(tipo: string) {
     switch (tipo) {
+      case 'all':
+        this.titulo = 'TODOS';
+        this.tipoCatalogo = 'all';
+        break;
       case 'materialGrafico':
         this.titulo = 'MATERIAL GRÁFICO';
         this.tipoCatalogo = 'grafico';

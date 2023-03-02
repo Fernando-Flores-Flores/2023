@@ -8,8 +8,7 @@
         <div class="small-box bg-info">
           <div class="inner">
             <h3>15</h3>
-
-            <p>Ordenes de trabajo</p>
+            <p>Ordenes de trabajo/Seguimiento</p>
           </div>
           <div class="icon">
             <i class="ion ion-bag"></i>
@@ -60,7 +59,7 @@
         class="col-lg-6 col-md-6 col-sm-12 col-6"
         *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas'"
       >
-        <div class="small-box bg-secondary">
+        <div class="small-box bg-secondary" routerLink="/admin/listadoUsuarios">
           <div class="inner">
             <h3>5</h3>
             <p>Usuarios</p>
@@ -68,12 +67,13 @@
           <div class="icon">
             <i class="ion ion-pie-graph"></i>
           </div>
-          <a routerLink="/admin/listadoUsuarios" class="small-box-footer"
+          <a class="small-box-footer"
             >Más información <i class="fas fa-arrow-circle-right"></i
           ></a>
+
         </div>
       </div>
-      <div
+      <!--   <div
         class="col-lg-6 col-md-6 col-sm-12 col-6"
         *ngIf="this.rolUsuario=='admin' ||this.rolUsuario=='ventas'"
       >
@@ -89,7 +89,7 @@
             >Más información <i class="fas fa-arrow-circle-right"></i
           ></a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -121,102 +121,151 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-4">
-              <div class="card">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/consumibles"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <h3 class="title">Consumibles</h3>
+                <div class="bar">
+                  <div class="emptybar"></div>
+                  <div class="filledbar"></div>
+                </div>
+                <!--   <div class="circle">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="stroke" cx="60" cy="60" r="50" />
+                  </svg>
+                </div> -->
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/muebles"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <h3 class="title">Muebles y enseres</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
-                  <!--    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <!--       <div class="circle">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
-                  </svg> -->
-                  <img src="" alt="" />
-                </div>
+                  </svg>
+                </div> -->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="card">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/maquinaria"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <h3 class="title">Maquinaria y equipos</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
+                <!--                <div class="circle">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="card">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/equiposComputacion"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <h3 class="title">Equipos de computación</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
+                <!--         <div class="circle">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="card">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/equiposComunicacion"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <h3 class="title">Equipos de comunicación</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
+                <!--           <div class="circle">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="card">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/materialEscritorio"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <h3 class="title">Material de escritorio</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
+                <!--          <div class="circle">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="card">
+              <div class="card" routerLink="/admin/registroInventario/cocina">
                 <h3 class="title">Activos fijos cocina</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
+                <!--           <div class="circle">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="card">
+              <div
+                class="card"
+                routerLink="/admin/registroInventario/activosFijos"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <h3 class="title">Activos fijos</h3>
                 <div class="bar">
                   <div class="emptybar"></div>
                   <div class="filledbar"></div>
                 </div>
-                <div class="circle">
+                <!--           <div class="circle">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <circle class="stroke" cx="60" cy="60" r="50" />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

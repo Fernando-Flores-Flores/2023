@@ -1959,6 +1959,15 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "Whatsapp.NET/1.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/WhatsAppApi.dll": {}
+        },
+        "runtime": {
+          "lib/WhatsAppApi.dll": {}
+        }
       }
     }
   },
@@ -6038,6 +6047,18 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "Whatsapp.NET/1.2.2": {
+      "sha512": "q86p1BtgXqOCERIkjIQ//vyz4bUkjtFGzaasfu4nIyLhXAPx8rN6ZHHN1d3cA/ZxPzl/khR14f8ssYVY64EVqw==",
+      "type": "package",
+      "path": "whatsapp.net/1.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/WhatsAppApi.dll",
+        "whatsapp.net.1.2.2.nupkg.sha512",
+        "whatsapp.net.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -6048,6 +6069,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.12",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 6.0.8",
       "Swashbuckle.AspNetCore >= 6.2.3",
+      "Whatsapp.NET >= 1.2.2",
       "itext7 >= 7.2.5"
     ]
   },
@@ -6116,6 +6138,10 @@
             "target": "Package",
             "version": "[6.2.3, )"
           },
+          "Whatsapp.NET": {
+            "target": "Package",
+            "version": "[1.2.2, )"
+          },
           "itext7": {
             "target": "Package",
             "version": "[7.2.5, )"
@@ -6143,5 +6169,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"Whatsapp.NET 1.2.2\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \"net6.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "Whatsapp.NET",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

@@ -14,6 +14,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "6.0.12",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "6.0.8",
           "Swashbuckle.AspNetCore": "6.2.3",
+          "Whatsapp.NET": "1.2.2",
           "itext7": "7.2.5"
         },
         "runtime": {
@@ -1033,6 +1034,14 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "Whatsapp.NET/1.2.2": {
+        "runtime": {
+          "lib/WhatsAppApi.dll": {
+            "assemblyVersion": "1.0.2.1",
+            "fileVersion": "1.0.2.1"
+          }
+        }
       }
     }
   },
@@ -1846,6 +1855,13 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "Whatsapp.NET/1.2.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q86p1BtgXqOCERIkjIQ//vyz4bUkjtFGzaasfu4nIyLhXAPx8rN6ZHHN1d3cA/ZxPzl/khR14f8ssYVY64EVqw==",
+      "path": "whatsapp.net/1.2.2",
+      "hashPath": "whatsapp.net.1.2.2.nupkg.sha512"
     }
   }
 }

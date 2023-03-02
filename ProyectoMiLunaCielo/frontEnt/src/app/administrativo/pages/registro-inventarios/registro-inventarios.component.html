@@ -34,17 +34,18 @@
           <div class="col-12">
             <div class="card-body">
               <table
+                #dataTable
                 datatable
                 [dtOptions]="dtOptions"
                 [dtTrigger]="dtTrigger"
-                class="table table-bordered table-hover table-responsive-lg font-size-10 table-striped row-border hover"
+                class="table table-bordered table-hover table-responsive-lg font-size-10 row-border hover"
               >
                 <thead class="fondo-cafe">
                   <tr>
-                    <th>Cantidad</th>
                     <th>Código</th>
-                    <th>Oficina</th>
-                    <th>Equipo</th>
+                    <!--        <th>Oficina</th> -->
+                    <th>Material/Equipo</th>
+                    <th>Cantidad</th>
                     <th>Observaciones</th>
                     <th>Area</th>
                     <th>Editar</th>
@@ -52,15 +53,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of listaUsuarios; let i = index">
-                    <td>
-                      {{ item.cantidad }}
-                    </td>
+                  <tr
+                    *ngFor="let item of listaUsuarios; let i = index"
+                    [ngClass]="{'pocosRecursos': item.cantidad < 10, 'normalesRecursos': item.cantidad >= 10}"
+                  >
                     <td>
                       {{ item.codigo }}
                     </td>
-                    <td>{{ item.oficina }}</td>
+                    <!--      <td>{{ item.oficina }}</td> -->
                     <td>{{ item.descripcion }}</td>
+                    <td class="text-center">
+                      {{ item.cantidad }}
+                    </td>
                     <td>{{ item.observaciones }}</td>
                     <td>{{ item.area }}</td>
                     <td class="py-1 text-center">
@@ -121,14 +125,24 @@
           <div class="card-body">
             <!--  <h5 class="card-title">Info card title</h5> -->
             <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="col-lg-6 col-md-6 col-sm-6 py-1">
+                <div class="group">
+                  <input
+                    type="number"
+                    formControlName="cantidad"
+                    required="required"
+                  /><span class="highlight"></span><span class="bar"></span>
+                  <label>Cantidad</label>
+                </div>
+              </div>
+              <!--      <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Cantidad:</span
                   >
                   <input
                     autofocus
-                    type="text"
+                    type="number"
                     class="form-control"
                     formControlName="cantidad"
                     aria-label="Sizing example input"
@@ -143,7 +157,7 @@
                     >* El campo es requerido</small
                   >
                 </div>
-              </div>
+              </div> -->
               <!--    <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
@@ -165,7 +179,7 @@
                   >
                 </div>
               </div>-->
-              <div class="col-lg-6 col-md-6 col-sm-6">
+              <!--            <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Oficina:
@@ -186,9 +200,17 @@
                     >* El campo es requerido</small
                   >
                 </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="input-group mb-3">
+              </div> -->
+              <div class="col-lg-6 col-md-6 col-sm-6 py-1">
+                <div class="group">
+                  <input
+                    type="text"
+                    formControlName="descripcion"
+                    required="required"
+                  /><span class="highlight"></span><span class="bar"></span>
+                  <label>Descripción</label>
+                </div>
+                <!--         <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Equipo:
                   </span>
@@ -207,10 +229,19 @@
                     class="rojo"
                     >* El campo es requerido</small
                   >
-                </div>
+                </div> -->
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="input-group mb-3">
+              <div class="col-lg-6 col-md-6 col-sm-6 py-1">
+                <div class="group">
+                  <input
+                    type="text"
+                    formControlName="descripcion"
+                    required="required"
+                    formControlName="observaciones"
+                  /><span class="highlight"></span><span class="bar"></span>
+                  <label>Observaciones</label>
+                </div>
+                <!--             <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Observaciones:
                   </span>
@@ -229,10 +260,25 @@
                     class="rojo"
                     >* El campo es requerido</small
                   >
-                </div>
+                </div> -->
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="input-group mb-3">
+              <div class="col-lg-6 col-md-6 col-sm-6 pt-2">
+                <div class="group">
+                  <!--             <select id="my-select">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </select> -->
+                  <select id="my-select" formControlName="area">
+                    <option value="PRODUCCION">Producción</option>
+                    <option value="GERENCIA">Gerencia</option>
+                    <option value="DISEÑO">Diseño</option>
+                    <option value="VENTAS">Ventas</option>
+                  </select>
+                  <label for="my-select">Area</label>
+                  <span class="bar"></span>
+                </div>
+                <!--      <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Area:
                   </span>
@@ -242,15 +288,15 @@
                     <option value="DISEÑO">Diseño</option>
                     <option value="VENTAS">Ventas</option>
                   </select>
-                  <small
-                    *ngIf="
-                  this.form.get('area')?.invalid &&
-                  this.form.get('area')?.touched
-                "
-                    class="rojo"
-                    >* El campo es requerido</small
-                  >
-                </div>
+                </div> -->
+                <small
+                  *ngIf="
+              this.form.get('area')?.invalid &&
+              this.form.get('area')?.touched
+            "
+                  class="rojo"
+                  >* El campo es requerido</small
+                >
               </div>
               <div class="col-12 text-center footer-button">
                 <button
