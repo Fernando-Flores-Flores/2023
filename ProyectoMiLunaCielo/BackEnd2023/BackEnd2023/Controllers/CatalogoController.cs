@@ -75,25 +75,12 @@ namespace BackEnd2023.Controllers
                 datos = catalogosFiltrados
             };
             return Ok(response);
-
-
-            //var inventario = await context.bd_Inventario.Where(x => x.IdtipoInventario == tipoFormulario).ToListAsync();
-
-            //var response = new ResponseDto<List<dto_Inventario>>()
-            //{
-            //    statusCode = StatusCodes.Status200OK,
-            //    fechaConsulta = DateTime.Now,
-            //    codigoRespuesta = 1001,
-            //    MensajeRespuesta = "CORRECTO",
-            //    datos = mapper.Map<List<dto_Inventario>>(inventario)
-            //};
-            //return Ok(response);
         }
 
         [HttpGet("listarPromocionesNovedades")]
         public async Task<ActionResult<List<bd_Catalogo>>> GetNovedadCatalogo(string novedad)
         {
-            List<bd_Catalogo> catalogosFiltrados;
+            List<bd_Catalogo> catalogosFiltrados = new List<bd_Catalogo>();
 
             if (novedad != "")
             {
@@ -125,10 +112,8 @@ namespace BackEnd2023.Controllers
             }
             else
             {
-                return NotFound("");
+                return NotFound("Campo re");
             }
-
-
         }
 
 
