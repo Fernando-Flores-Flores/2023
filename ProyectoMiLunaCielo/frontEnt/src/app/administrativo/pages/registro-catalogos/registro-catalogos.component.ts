@@ -42,11 +42,11 @@ export class RegistroCatalogosComponent implements OnInit {
     }
   }
 
-  async insertarCatalogo() {
+  async crearCatalogo() {
     try {
       if (this.form.valid) {
         let body = this.form.value as ICatalogo;
-        let response: any = await this.catalogoService.InsertarCatalogo(body);
+        let response: any = await this.catalogoService.crearCatalogo(body);
 
         if (response.statusCode == 200) {
           Swal.fire({
@@ -90,6 +90,7 @@ export class RegistroCatalogosComponent implements OnInit {
       foto: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       tipocatalogo: ['', [Validators.required]],
+      novedad: ['', [Validators.required]],
     });
   }
 
@@ -103,5 +104,6 @@ export interface ICatalogo {
   nombre: string;
   descripcion: string;
   tipocatalogo: string;
+  novedad: string;
   foto?: File;
 }

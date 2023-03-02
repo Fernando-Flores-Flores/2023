@@ -33,10 +33,9 @@ namespace BackEnd2023.Controllers
 
 
         [HttpGet("listarCatalogos")]
-        public async Task<ActionResult<List<dto_Inventario>>> Get(string estado = "all", string tipo = "all")
+        public async Task<ActionResult<List<bd_Catalogo>>> Get(string estado = "all", string tipo = "all")
         {
             List<bd_Catalogo> catalogosFiltrados;
-
             if (estado == "all" && tipo == "all")
             {
                 catalogosFiltrados = await context.bd_Catalogo.ToListAsync();
@@ -67,7 +66,6 @@ namespace BackEnd2023.Controllers
                     }
                 }
             }
-
             var response = new ResponseDto<List<bd_Catalogo>>()
             {
                 statusCode = StatusCodes.Status200OK,
@@ -92,6 +90,50 @@ namespace BackEnd2023.Controllers
             //return Ok(response);
         }
 
+        [HttpGet("listarPromocionesNovedades")]
+        public async Task<ActionResult<List<bd_Catalogo>>> GetNovedadCatalogo(string novedad)
+        {
+            List<bd_Catalogo> catalogosFiltrados;
+
+            if (novedad != "")
+            {
+                catalogosFiltrados = await context.bd_Catalogo.Where(c => c.novedad == novedad).ToListAsync();
+                if (catalogosFiltrados.Count > 0)
+                {
+                    for (int i = 0; i < catalogosFiltrados.Count; i++)
+                    {
+                        var rutaFoto = catalogosFiltrados[i].foto;
+                        if (rutaFoto != null)
+                        {
+                            System.Net.WebClient webClient = new System.Net.WebClient();
+                            byte[] imageBytes = webClient.DownloadData(rutaFoto);
+                            string base64String = System.Convert.ToBase64String(imageBytes);
+                            string imageSrc = "data:image/jpeg;base64," + base64String;
+                            catalogosFiltrados[i].foto = imageSrc;
+                        }
+                    }
+                }
+                var response = new ResponseDto<List<bd_Catalogo>>()
+                {
+                    statusCode = StatusCodes.Status200OK,
+                    fechaConsulta = DateTime.Now,
+                    codigoRespuesta = 1001,
+                    MensajeRespuesta = "CORRECTO",
+                    datos = catalogosFiltrados
+                };
+                return Ok(response);
+            }
+            else
+            {
+                return NotFound("");
+            }
+
+
+        }
+
+
+
+
         [HttpPost("CrearCatalogo")]
         public async Task<ActionResult<ResponseDto<bd_Catalogo>>> CrearCatalogo([FromForm] dto_Catalogo request)
         {
@@ -107,8 +149,8 @@ namespace BackEnd2023.Controllers
                     estado = "HABILITADO",
                     nombre = request.nombre,
                     descripcion = request.descripcion,
-                    tipocatalogo = request.tipocatalogo
-
+                    tipocatalogo = request.tipocatalogo,
+                    novedad = request.novedad,
                 };
                 if (request.foto != null)
                 {
@@ -124,7 +166,6 @@ namespace BackEnd2023.Controllers
                     MensajeRespuesta = "CORRECTO",
                     datos = catalogo
                 };
-
                 return Ok(response);
 
             }

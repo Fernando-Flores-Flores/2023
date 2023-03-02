@@ -23,7 +23,18 @@ export class CatalogoService {
     );
   }
 
-  async InsertarCatalogo(body: any) {
+  async obtenerListaCatalogosNovedad(novedad: string) {
+    //const headers = new HttpHeaders('Content-Type: application/json');
+    let params = new HttpParams();
+    params = params.append('novedad', novedad);
+    return await lastValueFrom(
+      this.HttpClient.get<any>(`${this.apiURLCatalogo}/listarPromocionesNovedades`, {
+        params,
+      })
+    );
+  }
+
+  async crearCatalogo(body: any) {
     const formData = this.construirFormData(body);
     return await lastValueFrom(
       this.HttpClient.post<any>(`${this.apiURLCatalogo}/CrearCatalogo`, formData)
@@ -34,6 +45,7 @@ export class CatalogoService {
     formData.append('nombre', body.nombre);
     formData.append('descripcion', body.descripcion);
     formData.append('tipocatalogo', body.tipocatalogo);
+    formData.append('novedad', body.novedad);
     if (body.foto) {
       formData.append('foto', body.foto);
     }

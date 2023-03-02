@@ -27,6 +27,7 @@
                 <th>Titulo</th>
                 <th>Descripción</th>
                 <th>Estado</th>
+                <th>Condición</th>
                 <th>Foto</th>
                 <th>Ver</th>
                 <th>Eliminar</th>
@@ -37,6 +38,7 @@
                 <td>{{ item.nombre }}</td>
                 <td>{{ item.descripcion }}</td>
                 <td>{{ item.estado }}</td>
+                <td>{{ item.novedad }}</td>
                 <td>
                   <img
                     [src]="item.foto"
@@ -169,6 +171,28 @@
                   >
                 </div>
               </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Tipo Ingreso:
+                  </span>
+                  <select class="form-control" formControlName="novedad">
+                    <option value="" selected disabled>Seleccione:</option>
+                    <option value="nor">Normal</option>
+                    <option value="pro">Promoción</option>
+                    <option value="nov">Novedad</option>
+                    <option value="amb">Promocion y Novedad</option>
+                  </select>
+                  <small
+                    *ngIf="
+                  this.form.get('tipocatalogo')?.invalid &&
+                  this.form.get('tipocatalogo')?.touched
+                "
+                    class="rojo"
+                    >* El campo es requerido</small
+                  >
+                </div>
+              </div>
               <div class="col-12">
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
@@ -186,7 +210,7 @@
             <button
               class="btn btn-outline-primary"
               data-dismiss="modal"
-              (click)="insertarCatalogo()"
+              (click)="crearCatalogo()"
             >
               <i class="fas fa-user-alt"></i> GUARDAR
             </button>
