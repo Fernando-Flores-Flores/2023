@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PtkpVYBIYVygHPgmz+0Oh6uXdTHL23Ntmj+JkCqAPBstWLjuyVC0S3MIRo6H0jJc2tLVeLdpjKRa9MPHIVLsVw==",
+  "dgSpecHash": "lZZtgA0aEvhmM5A6bQzThlqRB/y7rrMJv6YGhmFr9eqkPMpvbJEWtYEB8vFgIMrBuEplpxwiiHEKaBlGg1RoIA==",
   "success": true,
-  "projectFilePath": "D:\\UMSA 2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.dto\\imcSistemaInventario.dto.csproj",
+  "projectFilePath": "D:\\2023\\ProyectoMiLunaCielo\\BackEnd2023\\imcSistemaInventario.dto\\imcSistemaInventario.dto.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

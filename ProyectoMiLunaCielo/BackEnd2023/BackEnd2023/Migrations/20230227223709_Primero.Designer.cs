@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackEnd2023.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230227200430_Primero")]
+    [Migration("20230227223709_Primero")]
     partial class Primero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
