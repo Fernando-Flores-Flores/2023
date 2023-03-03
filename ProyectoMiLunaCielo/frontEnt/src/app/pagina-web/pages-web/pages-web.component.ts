@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/administrativo/service/login.service';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-pages-web',
@@ -12,6 +13,8 @@ export class PagesWebComponent implements OnInit {
   mostrarBanner: boolean = true;
 
   ngOnInit() {
+    AOS.init()
+    window.addEventListener('load',AOS.refresh);
     //alert("Esta logeado : "+ !this.loginService.estalogeado());
     if (this.loginService.estalogeado()) {
       this.router.navigate(['/admin/home']);
