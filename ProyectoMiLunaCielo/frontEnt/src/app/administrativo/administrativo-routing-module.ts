@@ -11,6 +11,7 @@ import { ListadoMistrabajosComponent } from "./pages/listado-mistrabajos/listado
 import { RegisterComponent } from "./auth/register/register.component";
 import { RegistroVentasComponent } from "./pages/registro-ventas/registro-ventas.component";
 import { RegistroCatalogosComponent } from "./pages/registro-catalogos/registro-catalogos.component";
+import { NotificacionesComponent } from "./pages/notificaciones/notificaciones.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: "misTrabajos", component: ListadoMistrabajosComponent },
       { path: "registroVentas", component: RegistroVentasComponent },
       { path: "registroVentas/:parametro", component: RegistroVentasComponent },
+      { path: "notification", component: NotificacionesComponent },
 
 
 

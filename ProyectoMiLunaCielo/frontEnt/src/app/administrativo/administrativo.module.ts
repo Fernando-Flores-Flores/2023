@@ -22,6 +22,7 @@ import { RegistroVentasComponent } from './pages/registro-ventas/registro-ventas
 import { RolesPipe } from './pipes/roles.pipe';
 import { PaginaWebModule } from '../pagina-web/pagina-web.module';
 import { RegistroCatalogosComponent } from './pages/registro-catalogos/registro-catalogos.component';
+import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -41,6 +42,7 @@ import { RegistroCatalogosComponent } from './pages/registro-catalogos/registro-
     RegistroVentasComponent,
     RolesPipe,
     RegistroCatalogosComponent,
+    NotificacionesComponent,
   ],
   imports: [
     CommonModule,

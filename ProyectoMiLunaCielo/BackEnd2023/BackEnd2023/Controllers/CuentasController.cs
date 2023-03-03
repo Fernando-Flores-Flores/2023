@@ -123,104 +123,70 @@ namespace BackEnd2023.Controllers
         }
 
 
-        private async Task<ResponseAutenticacion> ConstruirToken(CredencialesUsuario credenciales)
+        private async Task<ActionResult<ResponseAutenticacion>> ConstruirToken(CredencialesUsuario credenciales)
         {
-            var response = new ResponseDto<List<persona>>();
-            List<persona> personasFiltradas;
-            var userId = "";
-            var nombreUsuarioLogeado = "";
-            var rutaFoto = "";
-
-
-
-            var user = await userManager.FindByEmailAsync(credenciales.Email);
-            var result = await userManager.CheckPasswordAsync(user, credenciales.password);
-            if (result)
+            try
             {
-                userId = user.Id;
-                personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == userId).ToListAsync();
-                nombreUsuarioLogeado = personasFiltradas[0].nombre + " " + personasFiltradas[0].a_paterno;
-                rutaFoto = personasFiltradas[0].foto;
+                var response = new ResponseDto<List<persona>>();
+                List<persona> personasFiltradas;
+                var userId = "";
+                var nombreUsuarioLogeado = "";
+                var rutaFoto = "";
 
-            }
+                var user = await userManager.FindByEmailAsync(credenciales.Email);
+                var result = await userManager.CheckPasswordAsync(user, credenciales.password);
+                if (result)
+                {
+                    userId = user.Id;
+                    personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == userId).ToListAsync();
+                    nombreUsuarioLogeado = personasFiltradas[0].nombre + " " + personasFiltradas[0].a_paterno;
+                    rutaFoto = personasFiltradas[0].foto;
 
-            //Claims es un ocnjunto de informacion del usuario, lo que se puede mostrar
-            var claims = new List<Claim>()
+                }
+
+                //Claims es un ocnjunto de informacion del usuario, lo que se puede mostrar
+                var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Email, credenciales.Email),
                 new Claim(ClaimTypes.Role,"Rol"),
 
             };
-            Claim idClaim = new Claim("Id", userId);
-            Claim nombreUserLogeado = new Claim("nombreUsuarioLogeado", nombreUsuarioLogeado);
-            if (rutaFoto != null)
-            {
-                System.Net.WebClient webClient = new System.Net.WebClient();
-                byte[] imageBytes = webClient.DownloadData(rutaFoto);
-                string base64String = System.Convert.ToBase64String(imageBytes);
-                string imageSrc = "data:image/jpeg;base64," + base64String;
-                Claim rutaFotoUserLogeado = new Claim("rutaFoto", imageSrc);
-                claims.Add(rutaFotoUserLogeado);
+                Claim idClaim = new Claim("Id", userId);
+                Claim nombreUserLogeado = new Claim("nombreUsuarioLogeado", nombreUsuarioLogeado);
+                if (rutaFoto != null)
+                {
+                    System.Net.WebClient webClient = new System.Net.WebClient();
+                    byte[] imageBytes = webClient.DownloadData(rutaFoto);
+                    string base64String = System.Convert.ToBase64String(imageBytes);
+                    string imageSrc = "data:image/jpeg;base64," + base64String;
+                    Claim rutaFotoUserLogeado = new Claim("rutaFoto", imageSrc);
+                    claims.Add(rutaFotoUserLogeado);
 
+                }
+
+
+                claims.Add(idClaim);
+                claims.Add(nombreUserLogeado);
+                var usuario = await userManager.FindByEmailAsync(credenciales.Email);
+                var claimsDB = await userManager.GetClaimsAsync(usuario);
+                claims.AddRange(claimsDB);
+
+                var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["llaveJWT"]));
+                var creds = new SigningCredentials(llave, SecurityAlgorithms.HmacSha256);
+                var expiracion = DateTime.Now.AddDays(1);
+                var token = new JwtSecurityToken(issuer: null, audience: null, claims: claims, expires: expiracion, signingCredentials: creds);
+
+                return new ResponseAutenticacion()
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expiracion = expiracion,
+                };
             }
-
-
-            claims.Add(idClaim);
-            claims.Add(nombreUserLogeado);
-            var usuario = await userManager.FindByEmailAsync(credenciales.Email);
-            var claimsDB = await userManager.GetClaimsAsync(usuario);
-            claims.AddRange(claimsDB);
-
-            var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["llaveJWT"]));
-            var creds = new SigningCredentials(llave, SecurityAlgorithms.HmacSha256);
-            var expiracion = DateTime.Now.AddDays(1);
-            var token = new JwtSecurityToken(issuer: null, audience: null, claims: claims, expires: expiracion, signingCredentials: creds);
-
-            //TODO: Agregando datos al payload
-            //var claims2 = new List<Claim>
-            //           {
-            //           new Claim(ClaimTypes.Name, "John Doe"),
-            //           new Claim("CustomClaimType", "CustomClaimValue"),
-            //           };
-            //var jwtPayload = new JwtPayload(claims);
-            //var jwtToken = new JwtSecurityToken(jwtPayload);
-
-
-            return new ResponseAutenticacion()
+            catch (Exception e)
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiracion = expiracion,
-            };
+                return NotFound(e.Message);
+            }
         }
-
-        //[HttpGet("listadoUsuarios")]
-        //public async Task<ActionResult<List<usuarioDTO>>> ListadoUsuario()
-        //{
-        //    var listaUsuario = await context.Users.ToListAsync();
-        //    var listadoDeUsuariosConClaims = new List<usuarioDTO>();
-        //    foreach (var usuario in listaUsuario)
-        //    {
-        //        var claims = await userManager.GetClaimsAsync(usuario);
-        //        var roles = mapper.Map<List<roles>>(claims);
-        //        var usuarioConClaims = new usuarioDTO
-        //        {
-        //            Id = usuario.Id,
-        //            Email = usuario.Email,
-        //            //Claims = claims
-        //            Claims = roles
-        //        };
-        //        listadoDeUsuariosConClaims.Add(usuarioConClaims);
-        //    }
-        //    var response = new ResponseDto<object>()
-        //    {
-        //        statusCode = StatusCodes.Status200OK,
-        //        fechaConsulta = DateTime.Now,
-        //        codigoRespuesta = 1001,
-        //        MensajeRespuesta = "CORRECTO",
-        //        datos = listadoDeUsuariosConClaims,
-        //    };
-        //    return Ok(response);
-        //}
 
         [HttpPost("asignarRol")]
         public async Task<ActionResult> asignarRol([FromBody] string usuarioId, string rol)

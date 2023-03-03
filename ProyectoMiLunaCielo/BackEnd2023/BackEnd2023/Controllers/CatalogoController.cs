@@ -81,38 +81,44 @@ namespace BackEnd2023.Controllers
         public async Task<ActionResult<List<bd_Catalogo>>> GetNovedadCatalogo(string novedad)
         {
             List<bd_Catalogo> catalogosFiltrados = new List<bd_Catalogo>();
-
-            if (novedad != "")
+            try
             {
-                catalogosFiltrados = await context.bd_Catalogo.Where(c => c.novedad == novedad).ToListAsync();
-                if (catalogosFiltrados.Count > 0)
+                if (novedad != "")
                 {
-                    for (int i = 0; i < catalogosFiltrados.Count; i++)
+                    catalogosFiltrados = await context.bd_Catalogo.Where(c => c.novedad == novedad).ToListAsync();
+                    if (catalogosFiltrados.Count > 0)
                     {
-                        var rutaFoto = catalogosFiltrados[i].foto;
-                        if (rutaFoto != null)
+                        for (int i = 0; i < catalogosFiltrados.Count; i++)
                         {
-                            System.Net.WebClient webClient = new System.Net.WebClient();
-                            byte[] imageBytes = webClient.DownloadData(rutaFoto);
-                            string base64String = System.Convert.ToBase64String(imageBytes);
-                            string imageSrc = "data:image/jpeg;base64," + base64String;
-                            catalogosFiltrados[i].foto = imageSrc;
+                            var rutaFoto = catalogosFiltrados[i].foto;
+                            if (rutaFoto != null)
+                            {
+                                System.Net.WebClient webClient = new System.Net.WebClient();
+                                byte[] imageBytes = webClient.DownloadData(rutaFoto);
+                                string base64String = System.Convert.ToBase64String(imageBytes);
+                                string imageSrc = "data:image/jpeg;base64," + base64String;
+                                catalogosFiltrados[i].foto = imageSrc;
+                            }
                         }
                     }
+                    var response = new ResponseDto<List<bd_Catalogo>>()
+                    {
+                        statusCode = StatusCodes.Status200OK,
+                        fechaConsulta = DateTime.Now,
+                        codigoRespuesta = 1001,
+                        MensajeRespuesta = "CORRECTO",
+                        datos = catalogosFiltrados
+                    };
+                    return Ok(response);
                 }
-                var response = new ResponseDto<List<bd_Catalogo>>()
+                else
                 {
-                    statusCode = StatusCodes.Status200OK,
-                    fechaConsulta = DateTime.Now,
-                    codigoRespuesta = 1001,
-                    MensajeRespuesta = "CORRECTO",
-                    datos = catalogosFiltrados
-                };
-                return Ok(response);
+                    return NotFound("Campo re");
+                }
             }
-            else
+            catch (Exception e)
             {
-                return NotFound("Campo re");
+                return NotFound(e.Message);
             }
         }
 
