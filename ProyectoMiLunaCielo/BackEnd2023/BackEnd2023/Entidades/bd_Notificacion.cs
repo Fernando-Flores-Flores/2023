@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackEnd2023.Entidades
 {
-    [Table("notificaciones", Schema = "public")]
+    [Table("bd_notificaciones", Schema = "public")]
     public class bd_Notificacion
     {
         [Key]

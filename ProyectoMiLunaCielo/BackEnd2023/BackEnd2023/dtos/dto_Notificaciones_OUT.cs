@@ -9,6 +9,8 @@
         public DateTime? fechaleido { get; set; }
         public DateTime? fechaCreacion { get; set; }
         public string? foto { get; set; }
+        public string? nombre { get; set; }
+
 
 
     }

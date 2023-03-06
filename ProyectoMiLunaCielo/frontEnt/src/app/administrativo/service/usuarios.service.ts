@@ -13,6 +13,16 @@ export class UsuariosService {
 
   constructor(private HttpClient: HttpClient) {}
 
+  async obtenerPersona(idUsuario: string) {
+    let params = new HttpParams();
+    params = params.append('idUsuario', idUsuario);
+    return await lastValueFrom(
+      this.HttpClient.get<any>(`${environment.apiURL}/persona/listarPersonas`, {
+        params,
+      })
+    );
+  }
+
   async obtenerListaCuentas(valorRol: string = '') {
     let params = new HttpParams();
     params = params.append('rol', valorRol);

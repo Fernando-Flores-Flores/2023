@@ -17,7 +17,7 @@ namespace BackEnd2023.Controllers
             this.context = context;
         }
         [HttpGet("listaNotificaciones")]
-        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario)
+        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario,bool leido=false)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace BackEnd2023.Controllers
                 else
                 {
                     var listaNotificacionesBD = await context.bd_Notificacion
-                                .Where(x => x.idUsuarioRecibe == idUsuario)
+                                .Where(x => x.idUsuarioRecibe == idUsuario && x.leido == leido)
                                 .ToListAsync();
                     listaNotificaciones.AddRange(listaNotificacionesBD);
                 }
@@ -42,6 +42,7 @@ namespace BackEnd2023.Controllers
                         var userId = listaNotificacion.idUsuarioEnvia;
                         var personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == userId).ToListAsync();
                         var rutaFoto = personasFiltradas[0].foto;
+                        var nombre = personasFiltradas[0].nombre +" "+ personasFiltradas[0].a_paterno + " " + personasFiltradas[0].a_materno;
                         var notificaion = new dto_Notificaciones_OUT();
                         notificaion.fechaCreacion = listaNotificacion.fechaCreacion;
                         notificaion.fechaleido = listaNotificacion.fechaleido;
@@ -57,6 +58,7 @@ namespace BackEnd2023.Controllers
                             string base64String = System.Convert.ToBase64String(imageBytes);
                             string imageSrc = "data:image/jpeg;base64," + base64String;
                             notificaion.foto = imageSrc;
+                            notificaion.nombre = nombre;
                         }
                         listaNotificacionesFIN.Add(notificaion);
                     }

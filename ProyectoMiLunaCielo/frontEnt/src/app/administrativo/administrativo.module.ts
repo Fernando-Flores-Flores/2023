@@ -23,6 +23,7 @@ import { RolesPipe } from './pipes/roles.pipe';
 import { PaginaWebModule } from '../pagina-web/pagina-web.module';
 import { RegistroCatalogosComponent } from './pages/registro-catalogos/registro-catalogos.component';
 import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
+import { FechaEntendiblePipe } from './pipes/fecha-entendible.pipe';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -43,6 +44,7 @@ import { NotificacionesComponent } from './pages/notificaciones/notificaciones.c
     RolesPipe,
     RegistroCatalogosComponent,
     NotificacionesComponent,
+    FechaEntendiblePipe,
   ],
   imports: [
     CommonModule,
