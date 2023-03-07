@@ -25,12 +25,12 @@ export class NotificacionesComponent implements OnInit {
   async ngOnInit() {
     try {
       this.idUsuario = await this.loginService.obtenerCampoJWT('Id');
-      this.obtenerTodasNotificaciones(this.idUsuario);
+      this.obtenerTodasNotificaciones(this.idUsuario,false);
     } catch (error: any) {}
   }
-  async obtenerTodasNotificaciones(idUsuario: string) {
+  async obtenerTodasNotificaciones(idUsuario: string,leido:boolean) {
     let response: any =
-      await this.notificacionesService.obtenerTodasNotificaciones('all', true);
+      await this.notificacionesService.obtenerTodasNotificaciones(idUsuario,leido);
     this.listaNotificaciones = response.datos;
     console.log(this.listaNotificaciones);
     /*   if (response.statusCode == 200) {
@@ -38,10 +38,9 @@ export class NotificacionesComponent implements OnInit {
     } */
   }
 
-  async obtenerNotificacionesLeidoONO(leido: boolean, otroId = 'all') {
+  async obtenerNotificacionesLeidoONO(leido: any=null) {
     this.listaNotificaciones = [];
-    let id;
-    otroId == 'todos' ? (id = 'all') : (id = this.idUsuario);
+    let id = this.idUsuario;
     let response: any =
       await this.notificacionesService.obtenerTodasNotificaciones(id, leido);
     this.listaNotificaciones = response.datos;
