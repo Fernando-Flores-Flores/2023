@@ -17,15 +17,17 @@ namespace BackEnd2023.Controllers
             this.context = context;
         }
         [HttpGet("listaNotificaciones")]
-        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario,bool leido=false)
+        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario,bool leido)
         {
             try
             {
                 var listaNotificaciones = new List<bd_Notificacion>();
                 var listaNotificacionesFIN = new List<dto_Notificaciones_OUT>();
-                if (idUsuario == "all")
+                if (leido == null)
                 {
-                    var listaNotificacionesBD = await context.bd_Notificacion.ToListAsync();
+                    var listaNotificacionesBD = await context.bd_Notificacion
+                              .Where(x => x.idUsuarioRecibe == idUsuario)
+                              .ToListAsync();
                     listaNotificaciones.AddRange(listaNotificacionesBD);
                 }
                 else
