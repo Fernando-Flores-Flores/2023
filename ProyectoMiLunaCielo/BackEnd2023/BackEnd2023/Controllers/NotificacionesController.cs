@@ -84,7 +84,8 @@ namespace BackEnd2023.Controllers
 
 
         [HttpPost("EnviarNotificacion")]
-        public async Task<ActionResult<ResponseDto<string>>> EnviarNotificacion(string mensaje, string idUsuarioEnvia, string idUsuarioRecibe)
+        public async Task<ActionResult<ResponseDto<string>>> EnviarNotificacion(dto_enviaNotificacion body)
+         //   string mensaje, string idUsuarioEnvia, string idUsuarioRecibe)
         {
             try
             {
@@ -95,9 +96,9 @@ namespace BackEnd2023.Controllers
                 {
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,
-                    idUsuarioEnvia = idUsuarioEnvia,
-                    idUsuarioRecibe = idUsuarioRecibe,
-                    mensaje = mensaje,
+                    idUsuarioEnvia = body.idUsuarioEnvia,
+                    idUsuarioRecibe = body.idUsuarioRecibe,
+                    mensaje = body.mensaje,
                     leido = false,
                     fechaleido = null
                 };

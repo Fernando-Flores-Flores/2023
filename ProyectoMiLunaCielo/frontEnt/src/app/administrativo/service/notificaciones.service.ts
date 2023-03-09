@@ -23,4 +23,23 @@ export class NotificacionesService {
       })
     );
   }
+
+  async envioNotificaciones(
+    mensaje: string,
+    idUsuarioEnvia: string,
+    idUsuarioRecibe: string
+  ) {
+    const url = `${this.apiURL}/EnviarNotificacion`;
+    let body = {
+      mensaje: mensaje,
+      idUsuarioEnvia: idUsuarioEnvia,
+      idUsuarioRecibe: idUsuarioRecibe,
+    };
+    /*     const params = new HttpParams()
+      .set('mensaje', mensaje)
+      .set('idUsuarioEnvia', idUsuarioEnvia)
+      .set('idUsuarioRecibe', idUsuarioRecibe); */
+    const response = await this.HttpClient.post<any>(url, body).toPromise();
+    return response;
+  }
 }
