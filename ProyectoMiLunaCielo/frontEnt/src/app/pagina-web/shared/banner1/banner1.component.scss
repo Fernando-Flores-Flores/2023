@@ -22,9 +22,9 @@ a {
   overflow: hidden;
   width: 100%;
   height: 250px;
-/*   border: 1px solid #ccc; */
+  /*   border: 1px solid #ccc; */
   /*  background: url(https://img1.daumcdn.net/thumb/R1920x0/?fname=http%3A%2F%2Fcfile9.uf.tistory.com%2Fimage%2F9920BD4A5BE1186905FE3D) no-repeat center/cover; */
-/*   background: rgb(180, 101, 101);
+  /*   background: rgb(180, 101, 101);
   background: radial-gradient(
     circle,
     rgba(180, 101, 101, 1) 0%,
@@ -52,7 +52,7 @@ a {
   top: -90px;
   width: 350px;
   transition: all 0.5s 0.2s;
-  color: wheat;
+  color: #931033;
   font-weight: 600;
 }
 
@@ -156,15 +156,14 @@ a {
 .profile-card-5 .card-img-block img {
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.63);
-
 }
 
-.card-img-block:hover{
+.card-img-block:hover {
   transform: scale(1.3);
   transition: transform 1s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.63);
 }
-.card-img-block{
+.card-img-block {
   transition: transform 1s ease-in-out;
   transform: scale(1);
 }
@@ -179,7 +178,7 @@ a {
   border-color: #361e0b;
 }
 
-.card{
+.card {
   background: #d3760b;
   height: 100%;
 }

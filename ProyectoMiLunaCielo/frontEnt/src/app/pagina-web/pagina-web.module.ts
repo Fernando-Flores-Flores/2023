@@ -12,9 +12,10 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CatalogoComponent } from './pages-web/catalogo/catalogo.component';
 import { TituloComponent } from './pages-web/elementosPage/titulo/titulo.component';
 import { PromocionesComponent } from './pages-web/promociones/promociones.component';
+import { CuerpoComponent } from './shared/cuerpo/cuerpo.component';
 
 @NgModule({
-  declarations: [FooterComponent, HeaderComponent, PagesWebComponent, Banner1Component, NosotrosComponent, Banner2Component, SpinnerComponent, CatalogoComponent, TituloComponent, PromocionesComponent],
+  declarations: [FooterComponent, HeaderComponent, PagesWebComponent, Banner1Component, NosotrosComponent, Banner2Component, SpinnerComponent, CatalogoComponent, TituloComponent, PromocionesComponent, CuerpoComponent],
   imports: [CommonModule, PaginaWebRoutingModule,UtilitariosModule],
   exports:[SpinnerComponent]
 })
