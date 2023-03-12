@@ -14,8 +14,23 @@
 .navbar-toggler-icon {
   color: #feffff !important;
 }
+/*
+/*
+#be1742
+#f9ae3b
+#4b494a
+#faf4f7
+.color1 { #e6ad0f };
+.color2 { #ecc22c };
+.color3 { #f3d649 };
+.color4 { #f9eb65 };
+.color5 { #ffff82 };
+
+*/
+
+
 .menuNavBar {
-  background: linear-gradient(to bottom, #790000, #91290d 50%, #490101);
+  background: linear-gradient(to bottom, #f9ae3b,#f9ae3b 60%, #ffff82);
   margin: 2px solid black !important;
   border-radius: 30px;
   border: 1px solid rgb(255, 255, 255);
@@ -25,7 +40,7 @@ li a {
   font-size: 16px;
   border: 1px solid rgba(11, 34, 109, 0);
   padding: 15px;
-  font-weight: 700;
+  font-weight: 800;
   border-bottom: 3px solid rgba(255, 255, 255, 0);
 }
 li a:hover {

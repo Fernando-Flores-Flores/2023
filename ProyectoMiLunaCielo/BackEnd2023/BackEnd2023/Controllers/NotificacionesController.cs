@@ -17,15 +17,17 @@ namespace BackEnd2023.Controllers
             this.context = context;
         }
         [HttpGet("listaNotificaciones")]
-        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario,bool leido=false)
+        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario,bool leido)
         {
             try
             {
                 var listaNotificaciones = new List<bd_Notificacion>();
                 var listaNotificacionesFIN = new List<dto_Notificaciones_OUT>();
-                if (idUsuario == "all")
+                if (leido == null)
                 {
-                    var listaNotificacionesBD = await context.bd_Notificacion.ToListAsync();
+                    var listaNotificacionesBD = await context.bd_Notificacion
+                              .Where(x => x.idUsuarioRecibe == idUsuario)
+                              .ToListAsync();
                     listaNotificaciones.AddRange(listaNotificacionesBD);
                 }
                 else
@@ -82,7 +84,8 @@ namespace BackEnd2023.Controllers
 
 
         [HttpPost("EnviarNotificacion")]
-        public async Task<ActionResult<ResponseDto<string>>> EnviarNotificacion(string mensaje, string idUsuarioEnvia, string idUsuarioRecibe)
+        public async Task<ActionResult<ResponseDto<string>>> EnviarNotificacion(dto_enviaNotificacion body)
+         //   string mensaje, string idUsuarioEnvia, string idUsuarioRecibe)
         {
             try
             {
@@ -93,9 +96,9 @@ namespace BackEnd2023.Controllers
                 {
                     fechaCreacion = FechaCreacion,
                     fechaModificacion = FechaModificacion,
-                    idUsuarioEnvia = idUsuarioEnvia,
-                    idUsuarioRecibe = idUsuarioRecibe,
-                    mensaje = mensaje,
+                    idUsuarioEnvia = body.idUsuarioEnvia,
+                    idUsuarioRecibe = body.idUsuarioRecibe,
+                    mensaje = body.mensaje,
                     leido = false,
                     fechaleido = null
                 };

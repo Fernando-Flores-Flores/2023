@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
@@ -12,6 +9,7 @@ import { Cliente, VentasDTO } from 'src/app/Model/ventas';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../service/login.service';
 import { MetodosService } from '../../service/metodos.service';
+import { NotificacionesService } from '../../service/notificaciones.service';
 import { UsuariosService } from '../../service/usuarios.service';
 import { VentasService } from '../../service/ventas.service';
 
@@ -39,7 +37,8 @@ export class RegistroVentasComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private metodosService: MetodosService,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private notificacionesService: NotificacionesService
   ) {
     this.buildForm();
     this.dtTrigger.next();
@@ -74,6 +73,16 @@ export class RegistroVentasComponent implements OnInit {
     this.cargarRegistros(this.idTipoFormulario);
     this.cargarListadosCuentasRol(this.tipoRol);
     this.rolUsuario = await this.loginService.obtenerCampoJWT('role');
+
+
+
+
+    let mensaje =
+      'Se le asigno un trabajo con fecha de entrega el : ' +
+      this.form.get('fechaEntregaAprox')?.value.toUpperCase();
+    let idUsuarioEnvia = await this.loginService.obtenerCampoJWT('Id');
+    let idUsuarioRecibe = this.form.get('idPersonalAsignado')?.value;
+    this.envioNotificacion(mensaje, idUsuarioEnvia, 'asdasdasd');
   }
 
   async verificarInvetarios(tipo: string) {
@@ -168,13 +177,12 @@ export class RegistroVentasComponent implements OnInit {
           body
         );
         if (response.statusCode == 200) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Registro correcto',
-            confirmButtonText: 'Entendido',
-          }).then((result) => {
-            window.location.reload();
-          });
+          let mensaje =
+            'Se le asigno un trabajo con fecha de entrega el : ' +
+            this.form.get('fechaEntregaAprox')?.value.toUpperCase();
+          let idUsuarioEnvia = await this.loginService.obtenerCampoJWT('Id');
+          let idUsuarioRecibe = this.form.get('idPersonalAsignado')?.value;
+          this.envioNotificacion(mensaje, idUsuarioEnvia, idUsuarioRecibe);
         }
       } catch (errores) {
         console.log('Errores');
@@ -239,35 +247,35 @@ export class RegistroVentasComponent implements OnInit {
     this.tituloModal = 'REGISTRAR';
   }
 
-cliente1:Cliente={
-  ci_persona:         "",
-  a_paterno:          "",
-  a_materno:          "",
-  celular:            "",
-  nombre:             "",
-  direccion:          "",
-  correo_electronico: "",
-}
-  orden: VentasDTO={
-    fechaOrden:       new Date,
-    tipoTrabajo:       "",
-    descripcion:       "",
-    costo:             0,
-    fechaEntregaAprox: new Date,
-    observaciones:     "",
-    tipoPago:          "",
-    idPersonalAsignado:"",
-    cliente:    this.cliente1
+  cliente1: Cliente = {
+    ci_persona: '',
+    a_paterno: '',
+    a_materno: '',
+    celular: '',
+    nombre: '',
+    direccion: '',
+    correo_electronico: '',
   };
-  personalAsignado: PersonaInDto={
-    ci_persona:         "",
-    a_paterno:          "",
-    a_materno:          "",
-    celular:            "",
-    nombre:             "",
-    direccion:          "",
-    correo_electronico: "",
-  }
+  orden: VentasDTO = {
+    fechaOrden: new Date(),
+    tipoTrabajo: '',
+    descripcion: '',
+    costo: 0,
+    fechaEntregaAprox: new Date(),
+    observaciones: '',
+    tipoPago: '',
+    idPersonalAsignado: '',
+    cliente: this.cliente1,
+  };
+  personalAsignado: PersonaInDto = {
+    ci_persona: '',
+    a_paterno: '',
+    a_materno: '',
+    celular: '',
+    nombre: '',
+    direccion: '',
+    correo_electronico: '',
+  };
   async verOrdenCompleta(item: any) {
     console.log(item);
     let idCliente: number = item.idCliente;
@@ -308,13 +316,40 @@ cliente1:Cliente={
           response.listaPersonalAsignado[0].a_paterno +
           ' ' +
           response.listaPersonalAsignado[0].a_materno;
-        this.personalAsignado.celular = response.listaPersonalAsignado[0].celular;
+        this.personalAsignado.celular =
+          response.listaPersonalAsignado[0].celular;
         this.personalAsignado.correo_electronico =
           response.listaPersonalAsignado[0].correo_electronico;
       }
     } catch (error: any) {}
   }
 
+  async envioNotificacion(
+    mensaje: string,
+    idUsuarioEnvia: string,
+    idUsuarioRecibe: string
+  ) {
+    try {
+      let response: any = await this.notificacionesService.envioNotificaciones(
+        mensaje,
+        idUsuarioEnvia,
+        idUsuarioRecibe
+      );
+      console.log('Envio de notificacion');
+      console.log(response);
+
+      if (response.statusCode) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro correcto',
+          confirmButtonText: 'Entendido',
+        }).then((result) => {
+          //window.location.reload();
+        });
+      }
+      console.log(mensaje + ' ' + idUsuarioEnvia + ' ' + idUsuarioRecibe);
+    } catch (error) {}
+  }
   /*
   async eliminarRegsitro(item: any) {
     try {
