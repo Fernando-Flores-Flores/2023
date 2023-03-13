@@ -2,6 +2,7 @@
 {
     public class dto_Notificacion
     {
+        public int? id { get; set; }
         public string? idUsuarioEnvia { get; set; }
         public string? idUsuarioRecibe { get; set; }
         public string? mensaje { get; set; }
