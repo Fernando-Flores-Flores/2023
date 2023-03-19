@@ -24,6 +24,7 @@ import { PaginaWebModule } from '../pagina-web/pagina-web.module';
 import { RegistroCatalogosComponent } from './pages/registro-catalogos/registro-catalogos.component';
 import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
 import { FechaEntendiblePipe } from './pipes/fecha-entendible.pipe';
+import { TituloSvgAdminComponent } from './shared/titulo-svg-admin/titulo-svg-admin.component';
 @NgModule({
   declarations: [
     PagesComponent,
@@ -45,6 +46,7 @@ import { FechaEntendiblePipe } from './pipes/fecha-entendible.pipe';
     RegistroCatalogosComponent,
     NotificacionesComponent,
     FechaEntendiblePipe,
+    TituloSvgAdminComponent,
   ],
   imports: [
     CommonModule,

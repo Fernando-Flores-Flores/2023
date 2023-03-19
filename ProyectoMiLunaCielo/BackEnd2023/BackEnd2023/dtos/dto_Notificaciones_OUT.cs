@@ -2,6 +2,8 @@
 {
     public class dto_Notificaciones_OUT
     {
+        public long? id { get; set; }
+
         public string? idUsuarioEnvia { get; set; }
         public string? idUsuarioRecibe { get; set; }
         public string? mensaje { get; set; }

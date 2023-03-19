@@ -17,7 +17,7 @@ namespace BackEnd2023.Controllers
             this.context = context;
         }
         [HttpGet("listaNotificaciones")]
-        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario,bool leido)
+        public async Task<ActionResult<List<bd_Notificacion>>> GetNotificaciones(string idUsuario, bool leido)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace BackEnd2023.Controllers
                         var userId = listaNotificacion.idUsuarioEnvia;
                         var personasFiltradas = await context.bd_Persona.Where(x => x.idUsuario == userId).ToListAsync();
                         var rutaFoto = personasFiltradas[0].foto;
-                        var nombre = personasFiltradas[0].nombre +" "+ personasFiltradas[0].a_paterno + " " + personasFiltradas[0].a_materno;
+                        var nombre = personasFiltradas[0].nombre + " " + personasFiltradas[0].a_paterno + " " + personasFiltradas[0].a_materno;
                         var notificaion = new dto_Notificaciones_OUT();
                         notificaion.fechaCreacion = listaNotificacion.fechaCreacion;
                         notificaion.fechaleido = listaNotificacion.fechaleido;
@@ -52,6 +52,7 @@ namespace BackEnd2023.Controllers
                         notificaion.mensaje = listaNotificacion.mensaje;
                         notificaion.idUsuarioEnvia = listaNotificacion.idUsuarioEnvia;
                         notificaion.idUsuarioRecibe = listaNotificacion.idUsuarioRecibe;
+                        notificaion.id = listaNotificacion.id;
 
                         if (rutaFoto != null)
                         {
@@ -85,7 +86,6 @@ namespace BackEnd2023.Controllers
 
         [HttpPost("EnviarNotificacion")]
         public async Task<ActionResult<ResponseDto<string>>> EnviarNotificacion(dto_enviaNotificacion body)
-         //   string mensaje, string idUsuarioEnvia, string idUsuarioRecibe)
         {
             try
             {
@@ -120,5 +120,85 @@ namespace BackEnd2023.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        //[HttpPut("{idNotificacion:int}")]
+        //public async Task<ActionResult> Put(bool leidoPUT, int idNotificacion)
+        //{
+        //    try
+        //    {
+        //        var notifica = await context.bd_Notificacion.FindAsync(idNotificacion);
+        //        if (notifica == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        Console.Write(notifica);
+
+        //        DateTime FechaModificacion = DateTime.Now.ToUniversalTime();
+
+        //        var notificacion = new dto_Notificacion()
+        //        {
+        //            id= idNotificacion,
+        //            idUsuarioEnvia = notifica.idUsuarioEnvia,
+        //            idUsuarioRecibe = notifica.idUsuarioRecibe,
+        //            mensaje = notifica.mensaje,
+        //            leido = leidoPUT,
+        //            fechaleido = FechaModificacion,
+        //            fechaCreacion = FechaModificacion,
+        //            fechaModificacion = FechaModificacion,
+        //        };
+        //        context.Update(notificacion);
+        //        await context.SaveChangesAsync();
+
+        //        var response = new ResponseDto<dto_Notificacion>()
+        //        {
+        //            statusCode = StatusCodes.Status200OK,
+        //            fechaConsulta = DateTime.Now,
+        //            codigoRespuesta = 1001,
+        //            MensajeRespuesta = "CORRECTO",
+        //            datos = notificacion
+        //        };
+        //        return Ok(response);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return NotFound(e.Message);
+        //    }
+        //}
+
+        [HttpPut("{idNotificacion:int}")]
+        public async Task<ActionResult> Put(bool leidoPUT, int idNotificacion)
+        {
+            try
+            {
+                var notifica = await context.bd_Notificacion.FindAsync(idNotificacion);
+                if (notifica == null)
+                {
+                    return NotFound();
+                }
+
+                DateTime FechaModificacion = DateTime.Now.ToUniversalTime();
+
+                notifica.leido = leidoPUT;
+                notifica.fechaleido = FechaModificacion;
+                notifica.fechaModificacion = FechaModificacion;
+
+                await context.SaveChangesAsync();
+
+                var response = new ResponseDto<bool>()
+                {
+                    statusCode = StatusCodes.Status200OK,
+                    fechaConsulta = DateTime.Now,
+                    codigoRespuesta = 1001,
+                    MensajeRespuesta = "CORRECTO",
+                    datos = true
+                };
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
     }
 }
