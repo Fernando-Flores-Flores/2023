@@ -23,7 +23,7 @@ namespace BackEnd2023.dtos
         [Column("idpersonalasignado")]
         public string? idPersonalAsignado { get; set; }
 
-        public PersonaInDto Cliente { get; set; }
+        public empresaClienteDTO cliente { get; set; }
     
 
     }

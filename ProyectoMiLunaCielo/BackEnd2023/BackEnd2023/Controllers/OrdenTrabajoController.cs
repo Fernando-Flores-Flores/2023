@@ -23,7 +23,7 @@ namespace BackEnd2023.Controllers
         }
 
         [HttpGet("listaOrdenes")]
-        public async Task<ActionResult<List<ordenTrabajo>>> GetOrdenes(int idCliente = 0,int idOrdenTrabajo=0,string idPersonalAsignado="defecto")
+        public async Task<ActionResult<List<ordenTrabajo>>> GetOrdenes(int idCliente = 0, int idOrdenTrabajo = 0, string idPersonalAsignado = "defecto")
         {
             try
             {
@@ -31,7 +31,7 @@ namespace BackEnd2023.Controllers
                 {
                     var listaClientes = new List<persona>();
                     var listaOrdenes = new List<ordenTrabajo>();
-             
+
                     var listaPersonalAsignado = new List<persona>();
 
                     if (idCliente > 0)
@@ -100,7 +100,7 @@ namespace BackEnd2023.Controllers
                     var listaOrdenes = new List<ordenTrabajo>();
 
                     var ordenesFiltradas = await context.bd_ordentrabajo
-                                .Where(x => x.idPersonalAsignado== idPersonalAsignado)
+                                .Where(x => x.idPersonalAsignado == idPersonalAsignado)
                                 .ToListAsync();
                     foreach (var persona in ordenesFiltradas)
                     {
@@ -112,7 +112,7 @@ namespace BackEnd2023.Controllers
                         fechaConsulta = DateTime.Now,
                         codigoRespuesta = 1001,
                         MensajeRespuesta = "CORRECTO",
-                        listaOrdenes=listaOrdenes
+                        listaOrdenes = listaOrdenes
                     };
                     return Ok(response);
                 }
@@ -145,27 +145,29 @@ namespace BackEnd2023.Controllers
         {
             try
             {
-                var cliente = new persona()
-                {
-                    ci_persona = request.Cliente.ci_persona.Trim(),
-                    a_paterno = request.Cliente.a_paterno.Trim().ToUpper(),
-                    a_materno = request.Cliente.a_materno.Trim().ToUpper(),
-                    nombre = request.Cliente.nombre.Trim().ToUpper(),
-                    celular = request.Cliente.celular,
-                    direccion = request.Cliente.direccion.Trim().ToUpper(),
-                    correo_electronico = request.Cliente.correo_electronico.Trim(),
-                };
-                await context.AddAsync(cliente);
-                await context.SaveChangesAsync();
-
-                var idAsignado = context.bd_Persona.Where(c => c.ci_persona == cliente.ci_persona).Select(c => c.Id).FirstOrDefault();
-
                 DateTime FechaCreacion = DateTime.Now.ToUniversalTime();
                 DateTime FechaModificacion = DateTime.Now.ToUniversalTime();
                 DateTime FechaO = (DateTime)request.FechaOrden;
                 DateTime FechaOrden = FechaO.ToUniversalTime();
                 DateTime FechaE = (DateTime)request.FechaEntregaAprox;
                 DateTime FechaEntrega = FechaO.ToUniversalTime();
+
+                var clienteExistente = await context.bd_Cliente_Empresa
+    .FirstOrDefaultAsync(c => c.nit == request.cliente.nit);
+                if (clienteExistente == null)
+                {
+                    var cliente = new bd_Cliente_Empresas()
+                    {
+                        nombre = request.cliente.nombre.Trim().ToUpper(),
+                        nit = request.cliente.nit.Trim().ToUpper(),
+                        celular = request.cliente.celular,
+                        fechaCreacion = FechaCreacion,
+                        fechaModificacion = FechaModificacion,
+                    };
+                    await context.AddAsync(cliente);
+                    await context.SaveChangesAsync();
+                }
+                var idAsignado = context.bd_Cliente_Empresa.Where(c => c.nit== request.cliente.nit).Select(c => c.id).FirstOrDefault();
 
                 var ordenTrabajo = new ordenTrabajo()
                 {
@@ -182,7 +184,6 @@ namespace BackEnd2023.Controllers
                     fechaModificacion = FechaModificacion,
                     estado = "creado",
                     avance = 0
-
                 };
                 await context.AddAsync(ordenTrabajo);
                 await context.SaveChangesAsync();
@@ -195,9 +196,7 @@ namespace BackEnd2023.Controllers
                     MensajeRespuesta = "CORRECTO",
                     datos = ordenTrabajo
                 };
-
                 return Ok(response);
-
             }
             catch (Exception e)
             {

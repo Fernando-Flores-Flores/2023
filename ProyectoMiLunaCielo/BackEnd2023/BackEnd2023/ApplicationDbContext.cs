@@ -26,7 +26,7 @@ namespace BackEnd2023
         public DbSet<bd_Catalogo> bd_Catalogo { get; set; }
         public DbSet<bd_Notificacion> bd_Notificacion { get; set; }
 
-
+        public DbSet<bd_Cliente_Empresas> bd_Cliente_Empresa { get; set; }
 
 
         public async Task<long> GuardarUsuario(usuario usuario)

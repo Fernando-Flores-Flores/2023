@@ -1,5 +1,5 @@
 :root {
-  --cafe: #2f0b0b;
+  --cafe: #2b2323;
 }
 .bg-success {
   //background-color: #28a745 !important;
@@ -53,7 +53,7 @@
   font-weight: 500;
 }
 [class*="sidebar-dark-"] {
-  background-color: #361e0b;
+  background-color: #28221e;
 }
 //----------------------------------------------------------------------------
 .titulo {
@@ -101,12 +101,7 @@
   font-weight: 700 !important;
   color: #361e0b;
 }
-/* .input-group-text {
-  background: rgba(255, 181, 85, 0.6);
-  color: var(--cafe);
-  font-weight: 500;
-  border-radius: 0px 0px 0px 15px !important;
-} */
+
 .form-control {
   border-radius: 0px 15px 15px 0px !important;
 }
@@ -131,12 +126,12 @@
   -moz-box-shadow: 29px -2px 15px 8px rgba(0, 0, 0, 0.29);
 }
 .content-wrapper {
-  background: rgb(180, 152, 101);
+  background: rgba(125, 121, 112, 0.537);
   background: radial-gradient(
     circle,
-    rgba(180, 152, 101, 1) 0%,
-    rgba(218, 144, 96, 1) 35%,
-    rgba(246, 193, 129, 1) 100%
+    rgba(92, 87, 79, 0.725) 0%,
+    rgba(99, 91, 86, 0.564) 35%,
+    rgba(148, 143, 136, 0.486) 100%
   );
   /*  background:#c11643; */
 }
@@ -145,7 +140,7 @@
   font-weight: 600;
 }
 .fondo-cafe {
-  background-color: #361e0b;
+  background-color: #842626;
   color: #fff;
 }
 .label-norm {
@@ -158,5 +153,82 @@
   height: 100px;
 
 }
+/*========================================== INPUT ========================================== */
+$bg-color: #000000;
+$hl-color: #5a3017;
+$muted-color: mix(rgb(36, 34, 34), $bg-color, 70%);
+$trans-time: 300ms;
+$width: 100%;
+.group {
+  position: relative;
+  margin: 15px 0;
+}
 
 
+
+input,
+select,
+textarea {
+  background: none;
+  color: $muted-color;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: $width;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid $muted-color;
+  &:focus {
+    outline: none;
+  }
+  &:focus ~ .label,
+  &:valid ~ .label {
+    top: -14px;
+    font-size: 14px;
+    color: $hl-color;
+  }
+  &:focus ~ .bar:before {
+    width: $width;
+  }
+}
+
+input[type="password"] {
+  letter-spacing: 0.3em;
+}
+
+.label {
+  color: $muted-color;
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: $trans-time ease all;
+}
+.label-select {
+  color: $hl-color !important;
+  font-size: 14px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: -18px;
+  transition: $trans-time ease all;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: $width;
+  &:before {
+    content: "";
+    height: 2px;
+    width: 0;
+    bottom: 0px;
+    position: absolute;
+    background: $hl-color;
+    transition: $trans-time ease all;
+    left: 0%;
+  }
+}
