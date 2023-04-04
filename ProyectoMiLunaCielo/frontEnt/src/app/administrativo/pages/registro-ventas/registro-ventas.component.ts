@@ -74,15 +74,11 @@ export class RegistroVentasComponent implements OnInit {
     this.cargarListadosCuentasRol(this.tipoRol);
     this.rolUsuario = await this.loginService.obtenerCampoJWT('role');
 
-
-
-
     let mensaje =
       'Se le asigno un trabajo con fecha de entrega el : ' +
       this.form.get('fechaEntregaAprox')?.value.toUpperCase();
     let idUsuarioEnvia = await this.loginService.obtenerCampoJWT('Id');
     let idUsuarioRecibe = this.form.get('idPersonalAsignado')?.value;
-    this.envioNotificacion(mensaje, idUsuarioEnvia, 'asdasdasd');
   }
 
   async verificarInvetarios(tipo: string) {
@@ -130,9 +126,6 @@ export class RegistroVentasComponent implements OnInit {
       fechaEntregaAprox: ['', [Validators.required]],
       observaciones: ['', [Validators.required]],
       tipoPago: ['', [Validators.required]],
-      ci_persona: ['', [Validators.required]],
-      a_paterno: ['', []],
-      a_materno: ['', []],
       celular: [
         '',
         [
@@ -142,8 +135,7 @@ export class RegistroVentasComponent implements OnInit {
         ],
       ],
       nombre: ['', []],
-      direccion: ['', []],
-      correo_electronico: ['', [Validators.required]],
+      nit: ['', []],
       idPersonalAsignado: [''],
     });
   }
@@ -151,13 +143,9 @@ export class RegistroVentasComponent implements OnInit {
   async agregarRegistroVentas() {
     if (this.tituloModal == 'REGISTRAR') {
       let cliente: Cliente = {
-        ci_persona: this.form.get('ci_persona')?.value.toString().toUpperCase(),
-        a_paterno: this.form.get('a_paterno')?.value.toUpperCase(),
-        a_materno: this.form.get('a_materno')?.value.toUpperCase(),
+        nombre: this.form.get('nombre')?.value.toString(),
+        nit: this.form.get('nit')?.value.toString(),
         celular: this.form.get('celular')?.value,
-        nombre: this.form.get('nombre')?.value.toUpperCase(),
-        direccion: this.form.get('direccion')?.value.toUpperCase(),
-        correo_electronico: this.form.get('correo_electronico')?.value,
       };
       let body: VentasDTO = {
         fechaOrden: this.form.get('fechaOrden')?.value.toUpperCase(),
@@ -248,13 +236,9 @@ export class RegistroVentasComponent implements OnInit {
   }
 
   cliente1: Cliente = {
-    ci_persona: '',
-    a_paterno: '',
-    a_materno: '',
-    celular: '',
+    celular: 0,
     nombre: '',
-    direccion: '',
-    correo_electronico: '',
+    nit: '',
   };
   orden: VentasDTO = {
     fechaOrden: new Date(),
@@ -299,16 +283,10 @@ export class RegistroVentasComponent implements OnInit {
           response.listaOrdenes[0].fechaEntregaAprox;
         this.orden.fechaOrden = response.listaOrdenes[0].fechaOrden;
         /* cliente */
-        this.orden.cliente.nombre =
-          response.listaClientes[0].nombre +
-          ' ' +
-          response.listaClientes[0].a_paterno +
-          ' ' +
-          response.listaClientes[0].a_materno;
+        this.orden.cliente.nombre = response.listaClientes[0].nombre;
         this.orden.cliente.celular = response.listaClientes[0].celular;
-        this.orden.cliente.correo_electronico =
-          response.listaClientes[0].correo_electronico;
-        this.orden.cliente.direccion = response.listaClientes[0].direccion;
+
+        this.orden.cliente.nit = response.listaClientes[0].nit;
         /* personalAsignado */
         this.personalAsignado.nombre =
           response.listaPersonalAsignado[0].nombre +
