@@ -19,51 +19,51 @@
             </div>
           </div>
         </div>
+        <div class="col-12">
+          <div class="card-body bg-plomo-claro">
+            <table
+              datatable
+              [dtOptions]="dtOptions"
+              [dtTrigger]="dtTrigger"
+              class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10 table-striped row-border hover"
+            >
+              <thead class="bg-cardinal">
+                <tr>
+                  <th>#</th>
 
-        <div class="col-12 card-body">
-          <table
-            datatable
-            [dtOptions]="dtOptions"
-            [dtTrigger]="dtTrigger"
-            class="table table-bordered table-hover table-responsive-sm table-responsive-md font-size-10 table-striped row-border hover"
-          >
-            <thead class="fondo-cafe">
-              <tr>
-                <th>#</th>
-
-                <th>Email</th>
-                <th>Rol</th>
-                <th>Cambiar rol</th>
-                <!--     <th>Remover Admin</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of listaUsuarios; let i = index">
-                <td>
-                  {{i}}
-                </td>
-                <!--                 <td>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Cambiar rol</th>
+                  <!--     <th>Remover Admin</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listaUsuarios; let i = index">
+                  <td>
+                    {{i}}
+                  </td>
+                  <!--                 <td>
                     {{ item.nombres }} {{ item.apellidoPaterno }} {{
                     item.apellidoMaterno }}
                   </td> -->
-                <td>{{ item.email }}</td>
-                <td>
-                  <p class="" *ngFor="let item2 of item.claims ">
-                    {{item2.value|roles }}
-                  </p>
-                </td>
-                <!--<td>{{ item.rol }}</td> -->
-                <td class="py-1 text-center">
-                  <button
-                    class="btn btn-outline-info"
-                    data-toggle="modal"
-                    data-target=".bd-example-modal-xl"
-                    (click)="envioItem(item)"
-                  >
-                    <i class="fas fa-check-square"></i> Asignar rol
-                  </button>
-                </td>
-                <!--  <td class="py-1 text-center">
+                  <td>{{ item.email }}</td>
+                  <td>
+                    <p class="" *ngFor="let item2 of item.claims ">
+                      {{item2.value|roles }}
+                    </p>
+                  </td>
+                  <!--<td>{{ item.rol }}</td> -->
+                  <td class="py-1 text-center">
+                    <button
+                      class="btn btn-outline-info"
+                      data-toggle="modal"
+                      data-target=".bd-example-modal-xl"
+                      (click)="envioItem(item)"
+                    >
+                      <i class="fas fa-check-square"></i> Asignar rol
+                    </button>
+                  </td>
+                  <!--  <td class="py-1 text-center">
                     <button
                       class="btn-sm btn-danger mx-auto font-size-10"
                       type="button"
@@ -72,9 +72,10 @@
                       <i class="fas fa-eraser"></i> Remover admin
                     </button>
                   </td> -->
-              </tr>
-            </tbody>
-          </table>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
-<app-titulo [titulo]="titulo"></app-titulo>
+<app-titulo [tituloPagina]="titulo"></app-titulo>
+<!-- <app-titulo-svg-admin [tituloPagina]="titulo"></app-titulo-svg-admin> -->
 <div class="container">
-  <div class="row"  *ngIf="listaCatalogo.length > 0">
+  <div class="row" *ngIf="listaCatalogo.length > 0">
     <div class="col-md-4 mt-4 mb-3" *ngFor="let item of listaCatalogo">
       <div class="card profile-card-5 h-100">
         <div class="card-img-block contenedor-imagen">

@@ -16,7 +16,7 @@ export class RegistroCatalogosComponent implements OnInit {
   dtTrigger: any = new Subject<any>();
   @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
   listaCatalogo: any = [];
-  titulo = 'INSERTAR REGISTROS AL CATALOGO';
+  titulo = 'REGISTROS DEL CATÁLOGO';
   form: FormGroup;
   constructor(
     private formBuilder: FormBuilder,

@@ -53,21 +53,6 @@ export class HeaderComponent implements OnInit {
       icono: 'assets/dist/img/iconos/tiktok.png',
       url: 'chancePassword',
     },
-    /*     {
-      nombre: 'LOGIN',
-      icono: 'assets/dist/img/iconos/inicioSesion.png',
-      url: 'login',
-    }, */
-    /*
-    {
-      nombre: 'GENERAR O SOLICITAR PIN',
-      icono: 'fa fa-shield fa-2x',
-      url: 'generatePin',
-    },
-    {
-      nombre: 'ACTUALIZACIÓN DE INFORMACIÓN',
-      icono: 'fa fa-marker fa-2x',
-      url: 'updateInfo',
-    }, */
+
   ];
 }
