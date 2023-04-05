@@ -8133,6 +8133,7 @@ button.bg-dark:focus {
     position: sticky;
     top: 0;
     z-index: 1020;
+ 
   }
 }
 
@@ -10657,7 +10658,7 @@ a.text-dark:hover, a.text-dark:focus {
 .preloader {
   display: -ms-flexbox;
   display: flex;
-  background-color: #f4f6f9;
+  background-color: #302f2f !important;
   height: 100vh;
   width: 100%;
   transition: height 200ms linear;
@@ -10668,7 +10669,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .dark-mode .preloader {
-  background-color: #454d55 !important;
+  background-color: #302f2f !important;
   color: #fff;
 }
 

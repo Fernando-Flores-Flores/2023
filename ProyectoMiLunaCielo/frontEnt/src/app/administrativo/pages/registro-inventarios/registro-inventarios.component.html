@@ -1,3 +1,5 @@
+<app-titulo-svg-admin [tituloPagina]="titulo"></app-titulo-svg-admin>
+
 <section class="content">
   <div class="container-fluid">
     <div class="row">
@@ -6,7 +8,7 @@
           <div class="card-header">
             <div class="row">
               <div class="col-md-12 col-lg-12 col-xl-12 mb-4">
-                <h3 class="card-title font-weight-bold">{{ titulo }}</h3>
+                <h3 class="card-title font-weight-bold"></h3>
               </div>
               <div class="col-md-4 col-lg-4 col-xl-4 text-right"></div>
               <div class="col-md-4 col-lg-4 col-xl-4 text-right">
@@ -32,7 +34,7 @@
             </div>
           </div>
           <div class="col-12">
-            <div class="card-body">
+            <div class="card-body bg-plomo-claro">
               <table
                 #dataTable
                 datatable
@@ -40,7 +42,7 @@
                 [dtTrigger]="dtTrigger"
                 class="table table-bordered table-hover table-responsive-lg font-size-10 row-border hover"
               >
-                <thead class="fondo-cafe">
+                <thead class="bg-cardinal">
                   <tr>
                     <th>Código</th>
                     <!--        <th>Oficina</th> -->

@@ -8,6 +8,7 @@ import { LoginService } from '../../service/login.service';
 })
 export class HomeComponent implements OnInit {
   rolUsuario: string = '';
+  titulo: string = 'PANEL DE CONTROL';
   constructor(public loginService: LoginService) {}
 
   async ngOnInit() {

@@ -28,13 +28,20 @@
 
 */
 
-
-.menuNavBar {
-  background: linear-gradient(to bottom, #f9ae3b,#f9ae3b 60%, #ffff82);
+.sticky-top-active{
+  background: #323ea7;
   margin: 2px solid black !important;
   border-radius: 30px;
   border: 1px solid rgb(255, 255, 255);
 }
+.menuNavBar {
+  background: #bc1946;
+  margin: 2px solid black !important;
+  border-radius: 30px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+
 li a {
   color: white !important;
   font-size: 16px;
@@ -44,12 +51,12 @@ li a {
   border-bottom: 3px solid rgba(255, 255, 255, 0);
 }
 li a:hover {
-  background: #ffb75b !important;
-  color: #490101 !important;
-  border: 1px solid #bf6227;
+  background: #c06c7c !important;
+  color: #ffffff !important;
+  border: 1px solid #4a4949;
   transform: translateY(-2px);
-  border: 1px solid #490101;
-  border-bottom: 3px solid #490101;
+  border: 1px solid #bc1946;
+  border-bottom: 3px solid #bc1946;
   border-radius: 10px;
   font-weight: 700;
 }
@@ -62,11 +69,11 @@ a {
 }
 
 .submenu {
-  color: #ffda8b;
-  background: linear-gradient(#790000 80%, #ea9a48);
+  color: #ffffff;
+  background: linear-gradient(#bc1946 80%, #d5d3d4);
   font-size: 15px;
   font-weight: 500;
-  border-bottom: 1px solid #ea9a48;
+  border-bottom: 1px solid #9b9b9b;
   border-radius: 10px;
   margin: 2px;
 }
